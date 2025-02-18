@@ -1,0 +1,46 @@
+.faqs-wrapper {
+	margin-block: 100px;
+	.accordion {
+		border-bottom: 1px solid $grey-light;
+		--bs-accordion-border-width: 0px;
+		background-color: #fff;
+		.accordion-item {
+			border: none;
+			border-radius: 0px;
+			border-top: 1px solid $grey-light;
+		}
+		.accordion-header {
+			.accordion-button {
+				font-family: "Maison Neue Bold";
+				font-size: 15px;
+				border-radius: 0px;
+				border: none !important;
+				&:not(.collapsed) {
+					background-color: #fff;
+					color: inherit !important;
+				}
+				&::after {
+					display: none;
+				}
+				& .fa {
+					margin-left: auto;
+					transition: transform 0.3s ease;
+				}
+				&[aria-expanded="true"] .fa-plus {
+					display: none;
+				}
+				&[aria-expanded="true"] .fa-minus {
+					display: inline-block;
+				}
+				&[aria-expanded="false"] .fa-minus {
+					display: none;
+				}
+			}
+		}
+		.accordion-body {
+			padding-block: 0px;
+			font-family: "Maison Neue Reguler";
+			font-size: 13px;
+		}
+	}
+}

@@ -1,0 +1,17 @@
+// General & Prepare
+@import "fonts";
+@import "variables";
+@import "mixins";
+@import "base";
+
+// Templates
+@import "templates/navbar";
+@import "templates/footer";
+
+// Home
+@import "home/faqs";
+@import "home/peserta";
+@import "home/jadwal";
+@import "home/product";
+@import "home/hero";
+@import "home/welcome";

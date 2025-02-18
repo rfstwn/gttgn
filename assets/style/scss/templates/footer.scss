@@ -1,0 +1,28 @@
+// Footer
+footer {
+	color: #363636;
+	background-color: #e0e0e0;
+	padding: 50px;
+
+	.footer-wrapper {
+		@include flex(column, center, center);
+		gap: 20px;
+		justify-content: center;
+
+		img {
+			width: 90px;
+			height: auto;
+		}
+
+		span {
+			font-family: "Roboto", sans-serif;
+			font-size: 13px;
+		}
+	}
+}
+
+@include media(sm) {
+	footer {
+		padding-bottom: 100px;
+	}
+}

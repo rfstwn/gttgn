@@ -1,0 +1,23 @@
+.audience-wrapper {
+	margin-block: 100px;
+	.audience-item {
+		text-align: center;
+		h1 {
+			color: $orange;
+			font-size: 100px;
+			line-height: 125px;
+			@include reset-space;
+		}
+	}
+}
+
+@include media(sm) {
+	.audience-wrapper {
+		.audience-item {
+			h1 {
+				font-size: 65px;
+				line-height: 75px;
+			}
+		}
+	}
+}

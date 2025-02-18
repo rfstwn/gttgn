@@ -1,0 +1,81 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	position: relative;
+	background-color: #fbf7f3;
+}
+
+.button {
+	@include flex(row, flex-start, center);
+	gap: 10px;
+	padding: 10px 20px;
+	border-radius: 10px;
+	background: #fff;
+	width: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "DM Serif Display", sans-serif;
+}
+
+p,
+span {
+	font-family: "Maison Neue Light", sans-serif;
+	font-size: 15px;
+	color: $paragraph-color;
+}
+
+.text {
+	&-grey {
+		color: $grey;
+	}
+	&-grey-dark {
+		color: $grey-dark;
+	}
+	&-grey-light {
+		color: $grey-light;
+	}
+	&-green {
+		color: $green;
+	}
+	&-orange {
+		color: $orange;
+	}
+}
+
+.title {
+	&.main-title {
+		font-size: 90px;
+		line-height: 90px;
+		margin-bottom: 75px;
+	}
+	&.second-title {
+		font-size: 40px;
+		line-height: 40px;
+		margin-bottom: 50px;
+	}
+}
+
+@include media(sm) {
+	.title {
+		&.main-title {
+			font-size: 50px;
+			line-height: 50px;
+			margin-bottom: 50px;
+		}
+		&.second-title {
+			font-size: 25px;
+			line-height: 25px;
+			margin-bottom: 35px;
+		}
+	}
+}

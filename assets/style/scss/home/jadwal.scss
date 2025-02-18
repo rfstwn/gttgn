@@ -1,0 +1,132 @@
+.schedule-wrapper {
+	padding-block: 50px;
+	margin-block: 100px;
+	position: relative;
+	background-color: $schedule-background;
+	.schedule-item:last-child {
+		background-color: #ff0;
+	}
+	.schedule-item {
+		gap: 20px;
+		@include flex(row, flex-start, center);
+		padding-block: 7.5px;
+		border-top: 1px solid $grey-light;
+		&:first-child {
+			border: none;
+		}
+
+		.schedule-date {
+			@include flex(row, space-between, center);
+			gap: 10px;
+			width: 120px;
+			p {
+				font-size: 48px;
+				line-height: 1;
+				padding-top: 7px;
+				font-family: "Maison Neue Bold";
+				margin: 0px;
+				color: $orange;
+			}
+			.schedule-month {
+				@include flex(column, center, center);
+				text-align: center;
+				margin: 0px;
+				span {
+					font-size: 16px;
+					color: $orange;
+				}
+			}
+		}
+		.schedule-text {
+			flex: 1;
+			p {
+				color: #fff;
+				margin: 0;
+			}
+		}
+	}
+
+	&::before {
+		@include base-diagonal-background-schedule() {
+			background: linear-gradient(
+				to bottom left,
+				rgba(255, 255, 255, 0) 50%,
+				$schedule-background 50.5%
+			);
+			top: -100px;
+		}
+	}
+	&::after {
+		@include base-diagonal-background-schedule() {
+			background: linear-gradient(
+				to bottom left,
+				$schedule-background 50%,
+				rgba(255, 255, 255, 0) 50.5%
+			);
+			bottom: -100px;
+		}
+	}
+
+	.dots-decoration {
+		width: 100px;
+		height: auto;
+		position: absolute;
+		z-index: 2;
+
+		&.dots-top {
+			top: -75px;
+			right: 150px;
+		}
+		&.dots-bottom {
+			bottom: -75px;
+			left: 150px;
+		}
+	}
+
+	.button {
+		margin-block: 50px;
+	}
+}
+
+// Responsive
+@include media(sm) {
+	.schedule-wrapper {
+		margin-block: 50px;
+		&::before {
+			height: 50px;
+			top: -50px;
+		}
+		&::after {
+			height: 50px;
+			bottom: -50px;
+		}
+
+		.schedule-item {
+			gap: 10px;
+			.schedule-date {
+				gap: 5px;
+				width: 100px;
+				p {
+					font-size: 40px;
+				}
+				.schedule-month {
+					span {
+						font-size: 16px;
+					}
+				}
+			}
+		}
+
+		.dots-decoration {
+			width: 75px;
+			&.dots-top {
+				top: -50px;
+				right: 50px;
+			}
+			&.dots-bottom {
+				bottom: -50px;
+				left: 50px;
+			}
+		}
+	}
+}
