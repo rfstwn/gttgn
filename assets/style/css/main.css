@@ -35,8 +35,15 @@ body {
   gap: 10px;
   padding: 10px 20px;
   border-radius: 10px;
+  border: none;
   background: #fff;
   width: auto;
+  text-decoration: none;
+}
+.button-block {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
 }
 
 h1,
@@ -81,6 +88,36 @@ span {
   line-height: 40px;
   margin-bottom: 50px;
 }
+.title.page-title {
+  font-size: 50px;
+  line-height: 50px;
+  margin-bottom: 50px;
+}
+.title.page-sub-title {
+  font-size: 25px;
+  line-height: 25px;
+  margin-bottom: 25px;
+}
+
+.container.page-wrapper {
+  padding-block: 50px;
+}
+
+.pagination {
+  margin-top: 25px;
+  gap: 5px;
+}
+.pagination .page-item .page-link {
+  background: none;
+  border: none;
+  font-size: 13px;
+  line-height: 1;
+  color: #474747;
+  border-radius: 5px;
+}
+.pagination .page-item .page-link:hover, .pagination .page-item .page-link.active {
+  background: #e4e4e4;
+}
 
 @media (max-width: 768px) {
   .title.main-title {
@@ -95,15 +132,59 @@ span {
   }
 }
 nav.main-navbar {
+  background: #286061;
+}
+nav.main-navbar.not-sticky {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 15px;
+}
+nav.main-navbar.not-sticky .nav-logo img {
+  height: 50px;
+  width: auto;
+}
+nav.main-navbar.not-sticky .nav {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+nav.main-navbar.not-sticky .nav li .nav-link {
+  color: #fff;
+  font-size: 13px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 5px;
+  border-radius: 5px;
+}
+nav.main-navbar.not-sticky .nav li .nav-link span {
+  color: #fff;
+  font-size: 13px;
+}
+nav.main-navbar.not-sticky .nav li .nav-link:hover, nav.main-navbar.not-sticky .nav li .nav-link.active {
+  background-color: rgb(25.1094890511, 60.2627737226, 60.8905109489);
+}
+nav.main-navbar.is-sticky {
   position: fixed;
   z-index: 5;
   top: 0;
   right: 0;
   height: 100vh;
   width: 100px;
-  background: #286061;
 }
-nav.main-navbar .nav {
+nav.main-navbar.is-sticky .nav-logo {
+  display: none;
+}
+nav.main-navbar.is-sticky .nav {
   width: 100%;
   height: 100%;
   display: flex;
@@ -112,13 +193,13 @@ nav.main-navbar .nav {
   align-items: center;
   flex-wrap: nowrap;
 }
-nav.main-navbar .nav li {
+nav.main-navbar.is-sticky .nav li {
   flex: 1;
   height: 100%;
   width: 100%;
   position: relative;
 }
-nav.main-navbar .nav li::after {
+nav.main-navbar.is-sticky .nav li::after {
   content: "";
   position: absolute;
   background-color: #fff;
@@ -126,10 +207,10 @@ nav.main-navbar .nav li::after {
   width: 80%;
   left: 10%;
 }
-nav.main-navbar .nav li:last-child::after {
+nav.main-navbar.is-sticky .nav li:last-child::after {
   display: none;
 }
-nav.main-navbar .nav li .nav-link {
+nav.main-navbar.is-sticky .nav li .nav-link {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -139,58 +220,57 @@ nav.main-navbar .nav li .nav-link {
   height: 100%;
   text-align: center;
 }
-nav.main-navbar .nav li .nav-link:hover {
+nav.main-navbar.is-sticky .nav li .nav-link:hover {
   background: #fff;
 }
-nav.main-navbar .nav li .nav-link:hover .fa,
-nav.main-navbar .nav li .nav-link:hover span {
+nav.main-navbar.is-sticky .nav li .nav-link:hover .fa,
+nav.main-navbar.is-sticky .nav li .nav-link:hover span {
   color: #286061;
 }
-nav.main-navbar .nav li .nav-link .fa {
+nav.main-navbar.is-sticky .nav li .nav-link .fa {
   color: #fff;
   font-size: 25px;
 }
-nav.main-navbar .nav li .nav-link span {
+nav.main-navbar.is-sticky .nav li .nav-link span {
   color: #fff;
   font-family: "Maison Neue Reguler";
   font-size: 13px;
 }
 
 @media (max-width: 768px) {
-  nav.main-navbar {
+  nav.main-navbar.is-sticky {
     position: fixed;
     top: calc(100% - 75px);
     left: 0;
     height: 75px;
     width: 100vw;
-    background: #286061;
   }
-  nav.main-navbar .nav {
+  nav.main-navbar.is-sticky .nav {
     flex-direction: row;
   }
-  nav.main-navbar .nav li {
+  nav.main-navbar.is-sticky .nav li {
     flex: 1;
   }
-  nav.main-navbar .nav li::after {
+  nav.main-navbar.is-sticky .nav li::after {
     width: 1px;
     height: 80%;
     left: 0;
     top: 10%;
   }
-  nav.main-navbar .nav li:last-child::after {
+  nav.main-navbar.is-sticky .nav li:last-child::after {
     display: block;
   }
-  nav.main-navbar .nav li:first-child::after {
+  nav.main-navbar.is-sticky .nav li:first-child::after {
     display: none;
   }
-  nav.main-navbar .nav li .nav-link {
+  nav.main-navbar.is-sticky .nav li .nav-link {
     gap: 5px;
     justify-content: space-around;
   }
-  nav.main-navbar .nav li .nav-link .fa {
+  nav.main-navbar.is-sticky .nav li .nav-link .fa {
     color: #fff;
   }
-  nav.main-navbar .nav li .nav-link span {
+  nav.main-navbar.is-sticky .nav li .nav-link span {
     font-size: 12px;
   }
 }
@@ -206,7 +286,7 @@ footer .footer-wrapper {
   align-items: center;
   flex-wrap: nowrap;
   gap: 20px;
-  justify-content: center;
+  text-align: center;
 }
 footer .footer-wrapper img {
   width: 90px;
@@ -466,13 +546,19 @@ footer .footer-wrapper span {
   width: 100%;
   height: auto;
   border-radius: 10px;
+  border: 1px solid rgb(240.75, 240.75, 240.75);
+}
+.product-wrapper .product-item--header img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
 }
 .product-wrapper .product-item--body h4,
 .product-wrapper .product-item--body p {
   font-family: "Roboto";
 }
 .product-wrapper .product-item--body h4 {
-  font-size: 30px;
+  font-size: 25px;
   line-height: 30px;
   margin-bottom: 15px;
 }
@@ -634,6 +720,218 @@ footer .footer-wrapper span {
   }
   .welcome-wrapper .video-container::after {
     top: 55px;
+  }
+}
+.card-product {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 25px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 15px;
+}
+.card-product--image {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid rgb(240.75, 240.75, 240.75);
+}
+.card-product--image img {
+  aspect-ratio: 16/10;
+  width: 100%;
+  object-fit: cover;
+}
+.card-product--info h3 {
+  font-size: 25px;
+  line-height: 25px;
+}
+.card-product--info p {
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #e3bb63;
+}
+.card-product .button {
+  border: none;
+  background-color: #286061;
+  color: #fff;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+.card-product .button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transition: all 0.6s ease-in-out;
+}
+.card-product .button:hover::before {
+  left: 100%;
+}
+
+.product-detail {
+  align-items: center;
+}
+.product-detail .profile-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 15px;
+}
+.product-detail .profile-wrapper--image {
+  width: 120px;
+  height: auto;
+  border-radius: 100em;
+  overflow: hidden;
+  border: 1px solid #e4e4e4;
+  padding: 10px;
+}
+.product-detail .profile-wrapper--image img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 100em;
+  border: 1px solid rgb(240.75, 240.75, 240.75);
+}
+.product-detail .profile-wrapper--info {
+  flex: 1;
+}
+.product-detail .profile-wrapper--info table {
+  width: 100%;
+}
+.product-detail .profile-wrapper--info table tr {
+  font-size: 13px;
+  color: #5d5d5d;
+}
+.product-detail .profile-wrapper--info table tr td {
+  padding: 2.5px;
+}
+.product-detail .profile-wrapper--info table tr td:first-child {
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.product-detail .profile-wrapper--info table tr td:first-child i {
+  width: 25px;
+}
+.product-detail .visitor-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.product-detail .visitor-wrapper--content {
+  width: auto;
+  padding: 10px 25px;
+  text-align: center;
+  border: 1px solid #474747;
+  color: #5d5d5d;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.product-detail .visitor-wrapper--content span {
+  font-size: 13px;
+}
+.product-detail .image-detail-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+.product-detail .image-detail-wrapper .swiper-button-next,
+.product-detail .image-detail-wrapper .swiper-button-prev {
+  height: 35px;
+  width: auto;
+}
+.product-detail .image-detail-wrapper--main {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+}
+.product-detail .image-detail-wrapper--main #mainImage {
+  aspect-ratio: 16/10;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.product-detail .image-detail-wrapper--main #mainImage:hover {
+  cursor: zoom-in;
+}
+.product-detail .image-detail-wrapper--thumb {
+  width: 100%;
+  height: auto;
+}
+.product-detail .image-detail-wrapper--thumb #thumbnailContainer img {
+  aspect-ratio: 16/10;
+  width: 100%;
+  object-fit: cover;
+}
+.product-detail .image-detail-wrapper--thumb #thumbnailContainer img:hover {
+  cursor: pointer;
+}
+.product-detail .info-wrapper {
+  width: 100%;
+}
+.product-detail .info-wrapper h1 {
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.product-detail .info-wrapper span.product-location {
+  color: #e3bb63;
+  text-transform: uppercase;
+  font-family: "Maison Neue Regular";
+  font-size: 15px;
+  line-height: 1;
+}
+.product-detail .info-wrapper--button {
+  margin-top: 25px;
+  gap: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.product-detail .info-wrapper--button .button {
+  background-color: rgb(219.2391304348, 168.152173913, 55.7608695652);
+  color: #fff;
+}
+.product-detail .deskripsi-wrapper p {
+  text-align: justify;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .product-detail .visitor-wrapper--content {
+    width: 100%;
+    margin-block: 15px;
+  }
+  .info-wrapper {
+    margin-top: 25px;
+  }
+  .info-wrapper h1 {
+    font-size: 30px !important;
   }
 }
 

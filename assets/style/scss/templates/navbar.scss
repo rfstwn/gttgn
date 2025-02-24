@@ -1,57 +1,97 @@
 nav.main-navbar {
-	position: fixed;
-	z-index: 5;
-	top: 0;
-	right: 0;
-	height: 100vh;
-	width: 100px;
 	background: #286061;
-
-	.nav {
-		width: 100%;
-		height: 100%;
-		@include flex(column, center, center);
-		li {
-			flex: 1;
-			height: 100%;
-			width: 100%;
-			position: relative;
-			&::after {
-				content: "";
-				position: absolute;
-				background-color: #fff;
-				height: 1px;
-				width: 80%;
-				left: 10%;
+	&.not-sticky {
+		@include flex(row, space-between, center);
+		padding: 15px;
+		.nav-logo {
+			img {
+				height: 50px;
+				width: auto;
 			}
-			&:last-child {
-				&::after {
-					display: none;
+		}
+
+		.nav {
+			width: auto;
+			@include flex(row, flex-end, center);
+			gap: 10px;
+			li {
+				.nav-link {
+					color: #fff;
+					font-size: 13px;
+					@include flex(row, center, center);
+					gap: 5px;
+					border-radius: 5px;
+					span {
+						color: #fff;
+						font-size: 13px;
+					}
+					&:hover,
+					&.active {
+						background-color: darken(#286061, 10%);
+					}
 				}
 			}
+		}
+	}
 
-			.nav-link {
-				@include flex(column, center, center);
-				gap: 10px;
+	&.is-sticky {
+		.nav-logo {
+			display: none;
+		}
+
+		position: fixed;
+		z-index: 5;
+		top: 0;
+		right: 0;
+		height: 100vh;
+		width: 100px;
+
+		.nav {
+			width: 100%;
+			height: 100%;
+			@include flex(column, center, center);
+			li {
+				flex: 1;
 				height: 100%;
-				text-align: center;
-
-				&:hover {
-					background: #fff;
-					.fa,
-					span {
-						color: #286061;
+				width: 100%;
+				position: relative;
+				&::after {
+					content: "";
+					position: absolute;
+					background-color: #fff;
+					height: 1px;
+					width: 80%;
+					left: 10%;
+				}
+				&:last-child {
+					&::after {
+						display: none;
 					}
 				}
 
-				.fa {
-					color: #fff;
-					font-size: 25px;
-				}
-				span {
-					color: #fff;
-					font-family: "Maison Neue Reguler";
-					font-size: 13px;
+				.nav-link {
+					@include flex(column, center, center);
+					gap: 10px;
+					height: 100%;
+					text-align: center;
+
+					&:hover {
+						background: #fff;
+						.fa,
+						span {
+							color: #286061;
+						}
+					}
+
+					.fa {
+						color: #fff;
+						font-size: 25px;
+					}
+					span {
+						color: #fff;
+						font-family: "Maison Neue Reguler";
+						font-size: 13px;
+					}
 				}
 			}
 		}
@@ -60,42 +100,43 @@ nav.main-navbar {
 
 @include media(sm) {
 	nav.main-navbar {
-		position: fixed;
-		top: calc(100% - 75px);
-		left: 0;
-		height: 75px;
-		width: 100vw;
-		background: #286061;
+		&.is-sticky {
+			position: fixed;
+			top: calc(100% - 75px);
+			left: 0;
+			height: 75px;
+			width: 100vw;
 
-		.nav {
-			flex-direction: row;
-			li {
-				flex: 1;
-				&::after {
-					width: 1px;
-					height: 80%;
-					left: 0;
-					top: 10%;
-				}
-				&:last-child {
+			.nav {
+				flex-direction: row;
+				li {
+					flex: 1;
 					&::after {
-						display: block;
+						width: 1px;
+						height: 80%;
+						left: 0;
+						top: 10%;
 					}
-				}
-				&:first-child {
-					&::after {
-						display: none;
+					&:last-child {
+						&::after {
+							display: block;
+						}
 					}
-				}
+					&:first-child {
+						&::after {
+							display: none;
+						}
+					}
 
-				.nav-link {
-					gap: 5px;
-					justify-content: space-around;
-					.fa {
-						color: #fff;
-					}
-					span {
-						font-size: 12px;
+					.nav-link {
+						gap: 5px;
+						justify-content: space-around;
+						.fa {
+							color: #fff;
+						}
+						span {
+							font-size: 12px;
+						}
 					}
 				}
 			}

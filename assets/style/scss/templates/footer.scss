@@ -7,7 +7,7 @@ footer {
 	.footer-wrapper {
 		@include flex(column, center, center);
 		gap: 20px;
-		justify-content: center;
+		text-align: center;
 
 		img {
 			width: 90px;

@@ -1,0 +1,144 @@
+.product-detail {
+	align-items: center;
+	.profile-wrapper {
+		@include flex(row, flex-start, center);
+		gap: 15px;
+		&--image {
+			width: 120px;
+			height: auto;
+			border-radius: 100em;
+			overflow: hidden;
+			border: 1px solid $grey-light;
+			padding: 10px;
+			img {
+				width: 100%;
+				aspect-ratio: 1/1;
+				object-fit: cover;
+				border-radius: 100em;
+				border: 1px solid lighten($grey-light, 5%);
+			}
+		}
+		&--info {
+			flex: 1;
+			table {
+				width: 100%;
+				tr {
+					font-size: 13px;
+					color: $paragraph-color;
+					td {
+						padding: 2.5px;
+					}
+					td:first-child {
+						font-weight: bold;
+						@include flex(row, flex-start, center);
+						i {
+							width: 25px;
+						}
+					}
+				}
+			}
+		}
+	}
+	.visitor-wrapper {
+		width: 100%;
+		@include flex(row, flex-end, center);
+		&--content {
+			width: auto;
+			padding: 10px 25px;
+			text-align: center;
+			border: 1px solid $grey-dark;
+			color: $paragraph-color;
+			background-color: #fff;
+			border-radius: 5px;
+			span {
+				font-size: 13px;
+			}
+		}
+	}
+	.image-detail-wrapper {
+		@include flex(column, flex-start, center);
+		gap: 10px;
+		.swiper-button-next,
+		.swiper-button-prev {
+			height: 35px;
+			width: auto;
+		}
+
+		&--main {
+			width: 100%;
+			padding: 5px;
+			border: 1px solid $grey-light;
+			border-radius: 5px;
+			#mainImage {
+				aspect-ratio: 16/10;
+				width: 100%;
+				object-fit: cover;
+				border-radius: 5px;
+				&:hover {
+					cursor: zoom-in;
+				}
+			}
+		}
+		&--thumb {
+			width: 100%;
+			height: auto;
+			#thumbnailContainer {
+				img {
+					aspect-ratio: 16/10;
+					width: 100%;
+					object-fit: cover;
+					&:hover {
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+	.info-wrapper {
+		width: 100%;
+		h1 {
+			line-height: 1;
+			margin-bottom: 5px;
+		}
+		span.product-location {
+			color: $orange;
+			text-transform: uppercase;
+			font-family: "Maison Neue Regular";
+			font-size: 15px;
+			line-height: 1;
+		}
+		&--button {
+			margin-top: 25px;
+			gap: 15px;
+			@include flex(row, flex-start, center);
+			.button {
+				background-color: darken($orange, 10%);
+				color: #fff;
+			}
+		}
+	}
+	.deskripsi-wrapper {
+		p {
+			text-align: justify;
+			line-height: 1.5;
+		}
+	}
+}
+
+@include media(sm) {
+	.product-detail {
+		.visitor-wrapper {
+			&--content {
+				width: 100%;
+				margin-block: 15px;
+			}
+		}
+	}
+
+	.info-wrapper {
+		margin-top: 25px;
+		h1 {
+			font-size: 30px !important;
+		}
+	}
+}

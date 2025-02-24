@@ -14,8 +14,15 @@ body {
 	gap: 10px;
 	padding: 10px 20px;
 	border-radius: 10px;
+	border: none;
 	background: #fff;
 	width: auto;
+	text-decoration: none;
+	&-block {
+		width: 100%;
+		justify-content: center;
+		text-align: center;
+	}
 }
 
 h1,
@@ -62,6 +69,40 @@ span {
 		font-size: 40px;
 		line-height: 40px;
 		margin-bottom: 50px;
+	}
+	&.page-title {
+		font-size: 50px;
+		line-height: 50px;
+		margin-bottom: 50px;
+	}
+
+	&.page-sub-title {
+		font-size: 25px;
+		line-height: 25px;
+		margin-bottom: 25px;
+	}
+}
+.container.page-wrapper {
+	padding-block: 50px;
+}
+
+.pagination {
+	margin-top: 25px;
+	gap: 5px;
+	.page-item {
+		.page-link {
+			background: none;
+			border: none;
+			font-size: 13px;
+			line-height: 1;
+			color: $grey-dark;
+			border-radius: 5px;
+
+			&:hover,
+			&.active {
+				background: $grey-light;
+			}
+		}
 	}
 }
 

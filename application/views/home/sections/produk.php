@@ -7,20 +7,22 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-10">
                 <div class="owl-carousel">
-                    <?php foreach ($products as $product): ?>
-                        <div class="product-item">
+                    <?php $duration = 500;
+                    foreach ($products as $product): ?>
+                        <div class="product-item" data-aos="flip-right" data-aos-duration="<?= $duration ?>">
                             <div class="product-item--header">
                                 <img src="<?= $product['image'] ?>" alt="<?= $product['title'] ?>">
                             </div>
                             <div class="product-item--body">
                                 <h4><?= $product['title'] ?></h4>
-                                <p><?= substr($product['description'],0, 120) ?></p>
+                                <p><?= truncate($product['description'], 100) ?></p>
                             </div>
                             <div class="product-item--footer">
                                 <button><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                    <?php $duration += 500;
+                    endforeach; ?>
                 </div>
             </div>
         </div>
