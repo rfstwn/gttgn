@@ -9,7 +9,7 @@
                 <div class="owl-carousel">
                     <?php $duration = 500;
                     foreach ($products as $product): ?>
-                        <div class="product-item" data-aos="flip-right" data-aos-duration="<?= $duration ?>">
+                        <div class="product-item" data-aos="fade-up" data-aos-duration="<?= $duration ?>">
                             <div class="product-item--header">
                                 <img src="<?= $product['image'] ?>" alt="<?= $product['title'] ?>">
                             </div>

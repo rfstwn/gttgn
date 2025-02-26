@@ -37,6 +37,10 @@
 		@include flex(column, flex-start);
 		gap: 10px;
 
+		&:hover {
+			@include hover-up;
+		}
+
 		&--header {
 			overflow: hidden;
 			width: 100%;

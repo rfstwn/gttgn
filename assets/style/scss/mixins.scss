@@ -47,3 +47,10 @@
 	position: absolute;
 	@content;
 }
+
+@mixin hover-up($duration: 0.3s, $distance: -5px) {
+	transition: transform $duration ease;
+	&:hover {
+		transform: translateY($distance);
+	}
+}
