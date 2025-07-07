@@ -1,4 +1,4 @@
-<div class="schedule-wrapper">
+<div class="schedule-wrapper" id="rundown">
     <div class="container">
         <h2 class="title main-title text-grey-light">Jadwal<br />Kegiatan</h2>
         <div class="row justify-content-center">

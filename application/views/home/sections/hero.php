@@ -4,7 +4,7 @@
             <img src="<?= base_url('assets/image/gttgn-logo.png') ?>" alt="gttgn-logo" />
         </div>
         <div class="actions">
-            <button class="button">
+            <button class="button" id="loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
                 <i class="fa fa-circle-user"></i>Login Peserta
             </button>
         </div>

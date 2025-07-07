@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // General & Prepare
 @import "fonts";
 @import "variables";
@@ -19,3 +21,6 @@
 // Produk
 @import "product/card";
 @import "product/detail";
+
+// Auth
+@import "auth/auth";

@@ -1,3 +1,30 @@
+    <!-- Login Modal -->
+    <div class="modal modal-md fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3 class="second-title title text-green">Login</h3>
+                    <button type="button" class="btn-close btn-close-registrationLogin" data-bs-dismiss="modal"></button>
+                    <form id="loginForm" action="<?= base_url('auth/login') ?>" method="post">
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Password" class="form-control" id="password" name="password" required>
+                        </div>
+                        
+                        <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                        <div class="text-center">
+                            <span><small>Belum punya akun? <a href="#" id="openRegistration" class="text-decoration-none">Daftar disini</a></small></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="container-fluid">
         <div class="container">
@@ -139,7 +166,44 @@
 
             observer.observe(body);
         });
+        // Registration panel functionality
+        $(document).ready(function() {
+            // Open registration panel when clicking on registration menu item
+            $('a[href="#registrasi"]').on('click', function(e) {
+                e.preventDefault();
+                $('#registrationPanel').addClass('open');
+                $('body').addClass('registration-open');
+            });
+
+            // Open registration from login modal
+            $('#openRegistration').on('click', function(e) {
+                e.preventDefault();
+                $('#loginModal').modal('hide');
+                setTimeout(function() {
+                    $('#registrationPanel').addClass('open');
+                    $('body').addClass('registration-open');
+                }, 300);
+            });
+
+            // Close registration panel
+            $('#closeRegistration').on('click', function() {
+                $('#registrationPanel').removeClass('open');
+                $('body').removeClass('registration-open');
+            });
+
+            // Close registration panel when clicking outside
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('#registrationPanel').length && 
+                    !$(e.target).closest('a[href="#registrasi"]').length && 
+                    $('#registrationPanel').hasClass('open')) {
+                    $('#registrationPanel').removeClass('open');
+                    $('body').removeClass('registration-open');
+                }
+            });
+        });
     </script>
+    
+    <?php ci()->load->view('/templates/registration_form'); ?>
     </body>
 
     </html>

@@ -940,5 +940,125 @@ footer .footer-wrapper span {
     font-size: 30px !important;
   }
 }
+#loginModal .modal-content {
+  position: relative;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+#loginModal .modal-body {
+  padding: 1.5rem;
+}
+
+.registration-panel {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100vh;
+  background-color: #fff;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 1050;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+}
+
+.registration-panel.open {
+  right: 0;
+}
+
+body.registration-open {
+  overflow: hidden;
+}
+
+.close-registration {
+  background: none;
+  border: none;
+  color: #e4e4e4;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.registration-body {
+  position: relative;
+  padding: 20px;
+}
+
+.registration-type {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 0;
+  margin-bottom: 15px;
+  font-size: 12px;
+  color: #474747;
+}
+
+@media (max-width: 576px) {
+  .registration-panel {
+    width: 100%;
+    right: -100%;
+  }
+}
+#loginForm input.form-control,
+#registrationForm input.form-control {
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  font-size: 13px;
+  color: #474747;
+}
+#loginForm input.form-control::placeholder,
+#registrationForm input.form-control::placeholder {
+  color: #b4b4b4;
+  font-size: 13px;
+}
+#loginForm input.form-control:focus,
+#registrationForm input.form-control:focus {
+  border-color: #286061;
+  box-shadow: none;
+}
+#loginForm .form-group,
+#registrationForm .form-group {
+  margin-bottom: 15px;
+}
+#loginForm .btn-primary,
+#registrationForm .btn-primary {
+  width: 100%;
+  background-color: #286061;
+  border-color: #286061;
+  border-radius: 100em;
+  padding: 10px;
+  font-weight: 500;
+}
+#loginForm .btn-primary:hover,
+#registrationForm .btn-primary:hover {
+  background-color: rgb(25.1094890511, 60.2627737226, 60.8905109489);
+  border-color: rgb(25.1094890511, 60.2627737226, 60.8905109489);
+}
+
+.btn-close.btn-close-registrationLogin {
+  position: absolute;
+  padding: 7.5px;
+  right: 1rem;
+  top: 1rem;
+  z-index: 1050;
+  transform: scale(0.7);
+  border-radius: 100%;
+  background-color: #286061;
+  color: #fff;
+  cursor: pointer;
+}
+.btn-close.btn-close-registrationLogin:hover {
+  background-color: rgb(54.8905109489, 131.7372262774, 133.1094890511);
+}
 
 /*# sourceMappingURL=main.css.map */
