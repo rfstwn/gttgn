@@ -19,7 +19,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
 
     <!-- Custom CSS -->
+    <style>
+        #main-page {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+    </style>
     <link rel='stylesheet' href="<?= base_url('assets/style/css/main.css') ?>" />
 </head>
 
 <body>
+    <div id="main-page">
+        

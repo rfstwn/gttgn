@@ -26,6 +26,22 @@ body {
   background-color: #fbf7f3;
 }
 
+#main-page {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#main-page.page-loaded {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+#main-page.page-leave {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
 .button {
   display: flex;
   flex-direction: row;

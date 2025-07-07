@@ -1,3 +1,15 @@
+        <!-- Footer -->
+        <footer class="container-fluid">
+            <div class="container">
+                <div class="footer-wrapper">
+                    <img src="<?= base_url('assets/image/bappeda-logo.png') ?>" alt="Logo-Bappeda">
+                    <h4>Bappeda Kota Cilegon</h4>
+                    <p>JL. Maulana Yusuf RT. 06 RW. 01, Citangkil, Cilegon, Banten, <br />Jl. Maulana Yusuf, Citangkil, Cilegon, Banten 42441</p>
+                    <span>Copyright &copy; Perencanaan Pembangunan Penelitian dan Pengembangan Kota Cilegon Kota Cilegon - All Right Reserved.</span>
+                </div>
+            </div>
+        </footer>
+    </div>
     <!-- Login Modal -->
     <div class="modal modal-md fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -24,18 +36,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="container-fluid">
-        <div class="container">
-            <div class="footer-wrapper">
-                <img src="<?= base_url('assets/image/bappeda-logo.png') ?>" alt="Logo-Bappeda">
-                <h4>Bappeda Kota Cilegon</h4>
-                <p>JL. Maulana Yusuf RT. 06 RW. 01, Citangkil, Cilegon, Banten, <br />Jl. Maulana Yusuf, Citangkil, Cilegon, Banten 42441</p>
-                <span>Copyright &copy; Perencanaan Pembangunan Penelitian dan Pengembangan Kota Cilegon Kota Cilegon - All Right Reserved.</span>
-            </div>
-        </div>
-    </footer>
 
 
     <!-- Script of Library JS -->
@@ -200,9 +200,23 @@
                     $('body').removeClass('registration-open');
                 }
             });
+            
+            //Animation for page transition
+            $('#main-page').addClass('page-loaded');
+
+            $('a').not('[target="_blank"]').click(function (e) {
+                const link = $(this).attr('href');
+                if (link && !link.startsWith('#') && !link.startsWith('javascript')) {
+                    e.preventDefault();
+                    $('#main-page').removeClass('page-loaded').addClass('page-leave');
+                    setTimeout(() => {
+                        window.location.href = link;
+                    }, 500);
+                }
+            });
         });
     </script>
-    
+
     <?php ci()->load->view('/templates/registration_form'); ?>
     </body>
 
