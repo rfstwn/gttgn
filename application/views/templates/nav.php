@@ -20,9 +20,9 @@ $menu = [
     ],
     [
         'title' => 'Informasi',
-        'url' => '#informasi',
+        'url' => base_url('/informasi'),
         'icon' => 'fa fa-bullhorn',
-        'isActive' => ''
+        'isActive' => ($menu_segments == 'informasi') ? 'active' : ''
     ],
     [
         'title' => 'Produk',
@@ -32,25 +32,33 @@ $menu = [
     ],
     [
         'title' => 'Kontak',
-        'url' => '#kontak',
+        'url' => base_url('/kontak'),
         'icon' => 'fa fa-address-book',
-        'isActive' => ''
+        'isActive' => ($menu_segments == 'kontak') ? 'active' : ''
     ]
 ]
 ?>
 
 <nav class="main-navbar <?= isset($isSticky) ? 'is-sticky' : 'not-sticky' ?>">
     <a class="nav-logo" href="<?= base_url() ?>">
-        <img src="<?= base_url('assets/image/gttgn-logo.png') ?>" alt="gttgn-logo" />
+        <img src="<?= base_url(isset($isSticky) ? 'assets/image/gttgn-logo.png' : 'assets/image/gttgn-logo-black.png') ?>" alt="gttgn-logo" />
     </a>
     <ul class="nav">
         <?php foreach ($menu as $key => $value) : ?>
             <li class="nav-item">
                 <a class="nav-link <?= $value['isActive'] ?>" href="<?= $value['url'] ?>">
-                    <i class="<?= $value['icon'] ?>"></i>
+                    <i class="<?= $value['icon'] ?> nav-icon"></i>
                     <span><?= $value['title'] ?></span>
                 </a>
             </li>
         <?php endforeach; ?>
+
+        <?php if (!isset($isSticky)) : ?>
+            <li class="nav-item">
+                <button class="button botton-login-on-nav" id="loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    <i class="fa fa-circle-user"></i>Login Peserta
+                </button>
+            </li>
+        <?php endif; ?>
     </ul>
 </nav>
