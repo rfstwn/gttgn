@@ -15,19 +15,21 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h3 class="second-title title text-green">Login</h3>
-                    <button type="button" class="btn-close btn-close-registrationLogin" data-bs-dismiss="modal"></button>
-                    <form id="loginForm" action="<?= base_url('auth/login') ?>" method="post">
+                    <div class="mb-4">
+                    <h3 class="page-sub-title title text-green mb-2">Login</h3>
+                    <p class="text-grey"><small>Masukkan email dan password Anda</small></p>
+                    </div>
+                    <button type="button" class="btn-close btn-close-modal" data-bs-dismiss="modal"></button>
+                    <form class="form-wrapper" id="loginForm" action="<?= base_url('auth/login') ?>" method="post">
                         <div class="form-group">
+                            <label for="email">Email</label>
                             <input type="email" placeholder="Email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="form-group">
+                            <label for="password">Password</label>
                             <input type="password" placeholder="Password" class="form-control" id="password" name="password" required>
                         </div>
-                        
-                        <div class="form-group mt-5">
-                            <button type="submit" class="btn btn-primary">Login</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Login</button>
                         <div class="text-center">
                             <span><small>Belum punya akun? <a href="#" id="openRegistration" class="text-decoration-none">Daftar disini</a></small></span>
                         </div>

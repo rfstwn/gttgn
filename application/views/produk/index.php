@@ -3,7 +3,7 @@ ci()->load->view("templates/header", ['title' => 'Produk']);
 ci()->load->view('templates/nav');
 ?>
 <div class="container page-wrapper">
-    <h1 class="title text-center text-green page-title">Produk Inovasi</h1>
+    <h1 class="title main-title text-grey">Produk Inovasi</h1>
 
     <div class="row">
         <?php foreach ($products as $p) : ?>

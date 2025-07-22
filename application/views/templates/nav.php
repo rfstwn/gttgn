@@ -14,9 +14,9 @@ $menu = [
     ],
     [
         'title' => 'Hotel',
-        'url' => '#hotel',
+        'url' => base_url('/hotel'),
         'icon' => 'fa fa-hotel',
-        'isActive' => ''
+        'isActive' => ($menu_segments == 'hotel') ? 'active' : ''
     ],
     [
         'title' => 'Informasi',
