@@ -1,0 +1,149 @@
+// Transportation Section Styling
+
+.transportation-tabs-menu {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 20px;
+
+	.transport-icon-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		cursor: pointer;
+		transition: all 0.3s ease;
+
+		.icon-container {
+			width: 75px;
+			height: 75px;
+			border-radius: 10px;
+			background-color: $transport-tab-inactive;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 5px;
+			transition: all 0.3s ease;
+			color: #fff;
+		}
+
+		p {
+			font-size: 14px;
+			color: $paragraph-color;
+			margin: 0;
+			transition: all 0.3s ease;
+		}
+
+		&.active {
+			.icon-container {
+				background-color: $transport-tab-active;
+			}
+
+			p {
+				color: $transport-tab-active;
+				font-weight: bold;
+			}
+		}
+
+		&:hover {
+			.icon-container {
+				transform: translateY(-5px);
+			}
+		}
+	}
+}
+
+.transportation-content {
+	position: relative;
+	.transport-content-item {
+		display: none;
+		background-color: #fff;
+		border-radius: $transport-border-radius;
+		box-shadow: $transport-shadow;
+		overflow: hidden;
+
+		&.active {
+			display: flex;
+			flex-direction: row;
+
+			@include media(sm) {
+				flex-direction: column;
+			}
+		}
+
+		.transport-image {
+			flex: 1;
+			min-height: 300px;
+			max-width: 50%;
+			border-right: 1px solid #f0f0f0;
+
+			@include media(sm) {
+				max-width: 100%;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		.transport-info {
+			flex: 1;
+			padding: 30px;
+
+			h3 {
+				color: $green;
+				font-size: 24px;
+				margin-bottom: 20px;
+			}
+
+			p {
+				color: $paragraph-color;
+				margin-bottom: 15px;
+				line-height: 1.6;
+			}
+
+			.schedule-note {
+				margin-top: 20px;
+				padding: 10px;
+				background-color: #f0f0f0;
+				border-radius: 5px;
+				font-size: 14px;
+				position: relative;
+
+				p {
+					margin: 0;
+				}
+
+				.link {
+					color: $green;
+					text-decoration: underline;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}
+
+// Responsive styles
+@include media(sm) {
+	.transportation-tabs-menu {
+		gap: 20px;
+		flex-direction: row;
+		.transport-icon-item {
+			.icon-container {
+				width: 60px;
+				height: 60px;
+
+				img {
+					width: 30px;
+					height: 30px;
+				}
+			}
+
+			p {
+				font-size: 14px;
+			}
+		}
+	}
+}

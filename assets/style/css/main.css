@@ -1204,4 +1204,130 @@ body.registration-open {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
+.transportation-tabs-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+.transportation-tabs-menu .transport-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.transportation-tabs-menu .transport-icon-item .icon-container {
+  width: 75px;
+  height: 75px;
+  border-radius: 10px;
+  background-color: #e4e4e4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+  color: #fff;
+}
+.transportation-tabs-menu .transport-icon-item p {
+  font-size: 14px;
+  color: #5d5d5d;
+  margin: 0;
+  transition: all 0.3s ease;
+}
+.transportation-tabs-menu .transport-icon-item.active .icon-container {
+  background-color: #286061;
+}
+.transportation-tabs-menu .transport-icon-item.active p {
+  color: #286061;
+  font-weight: bold;
+}
+.transportation-tabs-menu .transport-icon-item:hover .icon-container {
+  transform: translateY(-5px);
+}
+
+.transportation-content {
+  position: relative;
+}
+.transportation-content .transport-content-item {
+  display: none;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.transportation-content .transport-content-item.active {
+  display: flex;
+  flex-direction: row;
+}
+@media (max-width: 768px) {
+  .transportation-content .transport-content-item.active {
+    flex-direction: column;
+  }
+}
+.transportation-content .transport-content-item .transport-image {
+  flex: 1;
+  min-height: 300px;
+  max-width: 50%;
+  border-right: 1px solid #f0f0f0;
+}
+@media (max-width: 768px) {
+  .transportation-content .transport-content-item .transport-image {
+    max-width: 100%;
+  }
+}
+.transportation-content .transport-content-item .transport-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.transportation-content .transport-content-item .transport-info {
+  flex: 1;
+  padding: 30px;
+}
+.transportation-content .transport-content-item .transport-info h3 {
+  color: #286061;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.transportation-content .transport-content-item .transport-info p {
+  color: #5d5d5d;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+.transportation-content .transport-content-item .transport-info .schedule-note {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  font-size: 14px;
+  position: relative;
+}
+.transportation-content .transport-content-item .transport-info .schedule-note p {
+  margin: 0;
+}
+.transportation-content .transport-content-item .transport-info .schedule-note .link {
+  color: #286061;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .transportation-tabs-menu {
+    gap: 20px;
+    flex-direction: row;
+  }
+  .transportation-tabs-menu .transport-icon-item .icon-container {
+    width: 60px;
+    height: 60px;
+  }
+  .transportation-tabs-menu .transport-icon-item .icon-container img {
+    width: 30px;
+    height: 30px;
+  }
+  .transportation-tabs-menu .transport-icon-item p {
+    font-size: 14px;
+  }
+}
+
 /*# sourceMappingURL=main.css.map */
