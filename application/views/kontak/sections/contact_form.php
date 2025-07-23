@@ -2,7 +2,7 @@
     <div class="container">
         <h1 class="title main-title text-grey mb-4">Kontak Kami</h1>
         <div class="row align-items-start">
-            <div class="col-lg-6 mb-sm-4" data-aos="fade-right" data-aos-duration="1000">
+            <div class="col-lg-6 mb-4 mb-md-0" data-aos="fade-right" data-aos-duration="1000">
                 <div class="contact-cards">
                     <div class="contact-card">
                         <div class="contact-card-title">

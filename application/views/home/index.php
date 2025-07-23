@@ -1,6 +1,7 @@
 <?php
 ci()->load->view('templates/header', ['title' => 'Home']);
 //-- Home Content --
+ci()->load->view('/templates/nav', ['isSticky' => true]);
 ci()->load->view('home/sections/hero');
 ci()->load->view('home/sections/welcome');
 ci()->load->view('home/sections/peserta');

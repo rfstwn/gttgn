@@ -77,8 +77,8 @@ $hotels = [
                                 <img src="<?= base_url($hotel['image']) ?>" alt="<?= $hotel['name'] ?>" onerror="this.src='<?= base_url('assets/image/placeholder.jpg') ?>'">
 
                                 <div class="hotel-card__image__star">
-                                    <?php for ($i = 1; $i <= $hotel['star']; $i++) : ?>
-                                        <i class="fas fa-star"></i>
+                                    <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                        <i class="fas fa-star <?= $i <= $hotel['star'] ? 'hotel-card__image__star-active' : 'hotel-card__image__star-inactive' ?> "></i>
                                     <?php endfor; ?>
                                 </div>
                             </div>
