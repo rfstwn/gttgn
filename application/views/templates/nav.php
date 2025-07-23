@@ -8,31 +8,31 @@ $menu = [
     ],
     [
         'title' => 'Rundown',
-        'url' => '#rundown',
+        'url' => $menu_segments == 'home' || $menu_segments == '' ? '#rundown' : base_url('/home#rundown'),
         'icon' => 'fa fa-calendar-alt',
         'isActive' => ''
     ],
     [
         'title' => 'Hotel',
-        'url' => base_url('/hotel'),
+        'url' => $menu_segments == 'hotel' ? '#' : base_url('/hotel'),
         'icon' => 'fa fa-hotel',
         'isActive' => ($menu_segments == 'hotel') ? 'active' : ''
     ],
     [
         'title' => 'Informasi',
-        'url' => base_url('/informasi'),
+        'url' => $menu_segments == 'informasi' ? '#' : base_url('/informasi'),
         'icon' => 'fa fa-bullhorn',
         'isActive' => ($menu_segments == 'informasi') ? 'active' : ''
     ],
     [
         'title' => 'Produk',
-        'url' => base_url('/produk'),
+        'url' => $menu_segments == 'produk' ? '#' : base_url('/produk'),
         'icon' => 'fa fa-star',
         'isActive' => ($menu_segments == 'produk') ? 'active' : ''
     ],
     [
         'title' => 'Kontak',
-        'url' => base_url('/kontak'),
+        'url' => $menu_segments == 'kontak' ? '#' : base_url('/kontak'),
         'icon' => 'fa fa-address-book',
         'isActive' => ($menu_segments == 'kontak') ? 'active' : ''
     ]
