@@ -1,0 +1,60 @@
+@use "sass:color";
+
+// General & Prepare
+@import "fonts";
+@import "variables";
+@import "mixins";
+@import "base";
+
+$color_1: #fff;
+$background-color_1: #343a40;
+$background-color_2: #23272b;
+$background-color_3: #fff;
+
+.sidebar {
+	min-height: 100vh;
+	background-color: $background-color_1;
+	color: $color_1;
+	position: fixed;
+	width: 250px;
+}
+.sidebar-header {
+	padding: 20px;
+	background-color: $background-color_2;
+}
+.sidebar-menu {
+	padding: 0;
+	list-style: none;
+	li {
+		padding: 10px 20px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		a {
+			color: $color_1;
+			text-decoration: none;
+		}
+		&:hover {
+			background-color: $background-color_2;
+		}
+	}
+}
+.content {
+	margin-left: 250px;
+	padding: 20px;
+}
+.navbar {
+	background-color: $background-color_3;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.user-info {
+	display: flex;
+	align-items: center;
+	i {
+		margin-right: 5px;
+	}
+}
+.table-responsive {
+	margin-top: 20px;
+}
+.btn-action {
+	margin-right: 5px;
+}

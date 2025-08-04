@@ -20,7 +20,7 @@
                     <p class="text-grey"><small>Masukkan email dan password Anda</small></p>
                     </div>
                     <button type="button" class="btn-close btn-close-modal" data-bs-dismiss="modal"></button>
-                    <form class="form-wrapper" id="loginForm" action="<?= base_url('auth/login') ?>" method="post">
+                    <form class="form-wrapper" id="loginForm" action="<?= base_url('user/login') ?>" method="post">
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" placeholder="Email" class="form-control" id="email" name="email" required>
@@ -49,8 +49,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
+        <?php if($this->session->flashdata('success')): ?>
+            toastr.success("<?= $this->session->flashdata('success') ?>");
+        <?php endif; ?>
+
+        <?php if($this->session->flashdata('error')): ?>
+            toastr.error("<?= $this->session->flashdata('error') ?>");
+        <?php endif; ?>
+
         $(document).ready(function() {
             AOS.init();
 

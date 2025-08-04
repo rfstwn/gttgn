@@ -4,7 +4,8 @@
 	"description": "To manage plugin, for now use to compile the scss",
 	"main": "index.js",
 	"scripts": {
-		"scss": "sass --watch assets/style/scss/main.scss:assets/style/css/main.css"
+		"scss": "sass --watch assets/style/scss/main.scss:assets/style/css/main.css",
+		"scss-admin": "sass --watch assets/style/scss/main-admin.scss:assets/style/css/main-admin.css"
 	},
 	"author": "",
 	"license": "ISC"
