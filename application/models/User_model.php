@@ -43,6 +43,11 @@ class User_model extends CI_Model {
         $query = $this->db->get('user');
         return $query->result();
     }
+
+    public function count_all() {
+        $query = $this->db->get('user');
+        return $query->num_rows();
+    }
     
     /**
      * Get user by ID

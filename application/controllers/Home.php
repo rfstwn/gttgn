@@ -3,39 +3,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Home extends MY_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('rundown_model');
+        $this->load->model('faq_model');
+    }
+    
     public function index()
     {
-        $data['faqs'] = [
-            [
-                'question' => 'Apa itu Gelar Teknologi Tepat Guna Nasional ?',
-                'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque non ligula interdum tempus. Mauris porta commodo velit, in interdum quam imperdiet venenatis. Vestibulum ac commodo felis, nec fringilla arcu. Pellentesque congue lacus nibh, at bibendum erat tempor vel'
-            ],
-            [
-                'question' => 'Bagaimana cara daftar Gelar Teknologi Tepat Guna Nasional ?',
-                'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque non ligula interdum tempus. Mauris porta commodo velit, in interdum quam imperdiet venenatis. Vestibulum ac commodo felis, nec fringilla arcu.'
-            ],
-            [
-                'question' => 'Siapa saja peserta Gelar Teknologi Tepat Guna Nasional ?',
-                'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque non ligula interdum tempus.'
-            ],
-            [
-                'question' => 'Dimana lokasi Gelar Teknologi Tepat Guna Nasional ?',
-                'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque non ligula interdum tempus. Mauris porta commodo velit, in interdum quam imperdiet venenatis. Vestibulum ac commodo felis, nec fringilla arcu.'
-            ],
-            [
-                'question' => 'Apa manfaat Gelar Teknologi Tepat Guna Nasional ?',
-                'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            ]
-        ];
-
-        $data['schedule'] = [
-            ['date' => '20', 'month' => 'Juni', 'year' => '2025', 'event' => 'Pembukaan pendaftaran peserta'],
-            ['date' => '30', 'month' => 'Juni', 'year' => '2025', 'event' => 'Penutupan pendaftaran'],
-            ['date' => '14', 'month' => 'Juli', 'year' => '2025', 'event' => 'Opening Ceremony dan Gala Dinner'],
-            ['date' => '15', 'month' => 'Juli', 'year' => '2025', 'event' => 'Pameran Teknologi Tepat Guna'],
-            ['date' => '16', 'month' => 'Juli', 'year' => '2025', 'event' => 'Sinergitas kebijakan pemerintah pusat dan daerah'],
-            ['date' => '17', 'month' => 'Juli', 'year' => '2025', 'event' => 'Penutupan acara dan Penyerahan hadiah atau penghargaan kepada pemenang lomba atau inovator terbaik']
-        ];
+        // Get dynamic FAQ data from database
+        $data['faqs'] = $this->faq_model->get_formatted_faqs();
+        
+        // Get dynamic schedule/rundown data from database
+        $data['schedule'] = $this->rundown_model->get_formatted_rundown();
 
         $data['products'] = [
             [

@@ -3,63 +3,7 @@ ci()->load->view('templates/header', ['title' => 'Hotel']);
 ci()->load->view('templates/nav');
 //-- End Informasi Content --
 
-// Sample hotel data - in a real application, this would come from a database
-$hotels = [
-    [
-        'name' => 'Grand Hotel Gatteng',
-        'image' => 'assets/image/hotel/hotel-1.jpg', // Placeholder image path
-        'address' => 'Jl. Raya Gatteng No. 123, Gatteng',
-        'phone' => '+62 123-456-7890',
-        'star' => '5',
-        'latitude' => '-7.123456',
-        'longitude' => '110.123456'
-    ],
-    [
-        'name' => 'Gatteng Boutique Hotel',
-        'image' => 'assets/image/hotel/hotel-2.jpg', // Placeholder image path
-        'address' => 'Jl. Pemuda No. 45, Gatteng',
-        'phone' => '+62 123-456-7891',
-        'star' => '4',
-        'latitude' => '-7.234567',
-        'longitude' => '110.234567'
-    ],
-    [
-        'name' => 'Gatteng Resort & Spa',
-        'image' => 'assets/image/hotel/hotel-3.jpg', // Placeholder image path
-        'address' => 'Jl. Pantai Indah No. 78, Gatteng',
-        'phone' => '+62 123-456-7892',
-        'star' => '4',
-        'latitude' => '-7.345678',
-        'longitude' => '110.345678'
-    ],
-    [
-        'name' => 'Gatteng Inn',
-        'image' => 'assets/image/hotel/hotel-4.jpg', // Placeholder image path
-        'address' => 'Jl. Pahlawan No. 56, Gatteng',
-        'phone' => '+62 123-456-7893',
-        'star' => '3',
-        'latitude' => '-7.456789',
-        'longitude' => '110.456789'
-    ],
-    [
-        'name' => 'Sartika Hotel',
-        'image' => 'assets/image/hotel/hotel-5.jpg', // Placeholder image path
-        'address' => 'Jl. Bumi Bintan No. 56, Bintan',
-        'phone' => '+62 123-456-7893',
-        'star' => '4',
-        'latitude' => '-7.456789',
-        'longitude' => '110.456789'
-    ],
-    [
-        'name' => 'Bintan Hotel',
-        'image' => 'assets/image/hotel/hotel-6.jpg', // Placeholder image path
-        'address' => 'Jl. Serpong No. 56, Serpong',
-        'phone' => '+62 123-456-7893',
-        'star' => '5',
-        'latitude' => '-7.456789',
-        'longitude' => '110.456789'
-    ]
-];
+// Hotel data is now provided by the controller from database
 ?>
 <div class="hero-wrapper-general">
     <img src="<?= base_url('assets/image/hero-hotel.jpg') ?>" alt="Hotel Hero">

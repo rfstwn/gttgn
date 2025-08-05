@@ -335,6 +335,10 @@ span {
   color: #fff;
   text-decoration: none;
 }
+.sidebar__menu li a i {
+  width: 20px;
+  text-align: left;
+}
 .sidebar__menu li:hover {
   background-color: #23272b;
 }
@@ -399,6 +403,28 @@ span {
   border-radius: 10px;
   background-color: #fff;
   border: 1px solid #d4d4d4;
+}
+
+.shortcut-dashboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  gap: 2%;
+}
+.shortcut-dashboard .card {
+  width: 32%;
+  margin-bottom: 20px;
+}
+.shortcut-dashboard .card small {
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  display: block;
+  color: #5d5d5d;
+  margin-bottom: 15px;
 }
 
 /*# sourceMappingURL=main-admin.css.map */

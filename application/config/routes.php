@@ -67,6 +67,42 @@ $route['admin/auth/logout'] = '4dm1n/Auth/logout';
 // Dashboard routes
 $route['admin/dashboard'] = '4dm1n/Dashboard';
 
+// Contact Info routes
+$route['admin/contact-info'] = '4dm1n/Dashboard/Contact_Info';
+
+// Hotel Management routes
+$route['admin/hotels'] = '4dm1n/Dashboard/hotels';
+$route['admin/hotels/add'] = '4dm1n/Dashboard/add_hotel';
+$route['admin/hotels/save'] = '4dm1n/Dashboard/save_hotel';
+$route['admin/hotels/edit/(:num)'] = '4dm1n/Dashboard/edit_hotel/$1';
+$route['admin/hotels/update/(:num)'] = '4dm1n/Dashboard/update_hotel/$1';
+$route['admin/hotels/delete/(:num)'] = '4dm1n/Dashboard/delete_hotel/$1';
+
+// Rundown Management routes
+$route['admin/rundown'] = '4dm1n/Dashboard/rundown';
+$route['admin/rundown/add'] = '4dm1n/Dashboard/add_rundown';
+$route['admin/rundown/save'] = '4dm1n/Dashboard/save_rundown';
+$route['admin/rundown/edit/(:num)'] = '4dm1n/Dashboard/edit_rundown/$1';
+$route['admin/rundown/update/(:num)'] = '4dm1n/Dashboard/update_rundown/$1';
+$route['admin/rundown/delete/(:num)'] = '4dm1n/Dashboard/delete_rundown/$1';
+
+// FAQ Management routes
+$route['admin/faq'] = '4dm1n/Dashboard/faq';
+$route['admin/faq/add'] = '4dm1n/Dashboard/add_faq';
+$route['admin/faq/save'] = '4dm1n/Dashboard/save_faq';
+$route['admin/faq/edit/(:num)'] = '4dm1n/Dashboard/edit_faq/$1';
+$route['admin/faq/update/(:num)'] = '4dm1n/Dashboard/update_faq/$1';
+$route['admin/faq/delete/(:num)'] = '4dm1n/Dashboard/delete_faq/$1';
+
+// Contact Submissions routes
+$route['admin/contact-submissions'] = '4dm1n/Dashboard/contact_submissions';
+$route['admin/contact-submissions/view/(:num)'] = '4dm1n/Dashboard/view_submission/$1';
+$route['admin/contact-submissions/status/(:num)/(:alpha)'] = '4dm1n/Dashboard/update_submission_status/$1/$2';
+$route['admin/contact-submissions/delete/(:num)'] = '4dm1n/Dashboard/delete_submission/$1';
+
+// Contact form submission
+$route['kontak/submit'] = 'kontak/submit';
+
 // User Admin routes
 $route['admin/user-admin'] = '4dm1n/UserAdmin';
 $route['admin/user-admin/add'] = '4dm1n/UserAdmin/add';

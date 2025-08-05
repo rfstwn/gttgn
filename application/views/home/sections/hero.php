@@ -12,7 +12,7 @@
 
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="<?= base_url('assets/image/slider/slider-1.png') ?>" alt="Slide 1"></div>
+            <div class="swiper-slide"><img src="<?= base_url('assets/image/slider/slider-1.jpg') ?>" alt="Slide 1"></div>
             <div class="swiper-slide"><img src="<?= base_url('assets/image/slider/slider-2.png') ?>" alt="Slide 2"></div>
         </div>
     </div>

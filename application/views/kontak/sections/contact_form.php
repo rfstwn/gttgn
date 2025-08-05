@@ -40,18 +40,23 @@
                         <h2 class="page-sub-title title text-green mb-2"><?= $contact_form['title'] ?></h2>
                         <p class="text-grey"><small><?= $contact_form['description'] ?></small></p>
                     </div>
-                    <form class="form-wrapper">
+                    
+                    
+                    
+                    <form class="form-wrapper" method="post" action="<?= base_url('kontak/submit') ?>">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">Nama Lengkap</label>
-                                    <input type="text" id="name" name="name" class="form-control" required>
+                                    <input type="text" id="name" name="name" class="form-control" 
+                                           value="<?= $this->session->flashdata('form_data')['name'] ?? '' ?>" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" class="form-control" required>
+                                    <input type="email" id="email" name="email" class="form-control" 
+                                           value="<?= $this->session->flashdata('form_data')['email'] ?? '' ?>" required>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +64,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="phone">Telepon</label>
-                                    <input type="tel" id="phone" name="phone" class="form-control">
+                                    <input type="tel" id="phone" name="phone" class="form-control" 
+                                           value="<?= $this->session->flashdata('form_data')['phone'] ?? '' ?>">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -67,18 +73,18 @@
                                     <label for="subject">Subjek</label>
                                     <select id="subject" name="subject" class="form-control" required>
                                         <option value="">Pilih Subjek</option>
-                                        <option value="Informasi Umum">Informasi Umum</option>
-                                        <option value="Pendaftaran">Pendaftaran</option>
-                                        <option value="Sponsorship">Sponsorship</option>
-                                        <option value="Media">Media</option>
-                                        <option value="Lainnya">Lainnya</option>
+                                        <option value="Informasi Umum" <?= ($this->session->flashdata('form_data')['subject'] ?? '') == 'Informasi Umum' ? 'selected' : '' ?>>Informasi Umum</option>
+                                        <option value="Pendaftaran" <?= ($this->session->flashdata('form_data')['subject'] ?? '') == 'Pendaftaran' ? 'selected' : '' ?>>Pendaftaran</option>
+                                        <option value="Sponsorship" <?= ($this->session->flashdata('form_data')['subject'] ?? '') == 'Sponsorship' ? 'selected' : '' ?>>Sponsorship</option>
+                                        <option value="Media" <?= ($this->session->flashdata('form_data')['subject'] ?? '') == 'Media' ? 'selected' : '' ?>>Media</option>
+                                        <option value="Lainnya" <?= ($this->session->flashdata('form_data')['subject'] ?? '') == 'Lainnya' ? 'selected' : '' ?>>Lainnya</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="message">Pesan</label>
-                            <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
+                            <textarea id="message" name="message" rows="5" class="form-control" required><?= $this->session->flashdata('form_data')['message'] ?? '' ?></textarea>
                         </div>
                         <div class="form-check">
                             <input type="checkbox" id="privacy" name="privacy" class="form-check-input" required>
