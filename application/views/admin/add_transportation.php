@@ -94,19 +94,20 @@
                                     </div>
                                     <div class="card-body">
                                         <h6>Icon FontAwesome:</h6>
-                                        <ul class="small">
-                                            <li><code>fa-solid fa-car fa-2xl</code> - Mobil</li>
-                                            <li><code>fa-solid fa-bus fa-2xl</code> - Bus</li>
-                                            <li><code>fa-solid fa-train fa-2xl</code> - Kereta</li>
-                                            <li><code>fa-solid fa-plane fa-2xl</code> - Pesawat</li>
-                                            <li><code>fa-solid fa-ship fa-2xl</code> - Kapal</li>
+                                        <ul class="small list-unstyled">
+                                            <li>- <code>fa-car</code> - Mobil</li>
+                                            <li>- <code>fa-bus</code> - Bus</li>
+                                            <li>- <code>fa-train</code> - Kereta</li>
+                                            <li>- <code>fa-plane</code> - Pesawat</li>
+                                            <li>- <code>fa-ship</code> - Kapal</li>
+                                            <li>or visit : <a href="https://fontawesome.com/v6/search?ic=free&o=r" target="_blank">Icon List</a></li>
                                         </ul>
                                         
+                                        
                                         <h6 class="mt-3">Format Gambar:</h6>
-                                        <ul class="small">
-                                            <li>Format: JPG, PNG, WebP</li>
-                                            <li>Ukuran optimal: 400x300px</li>
-                                            <li>Simpan di: <code>assets/image/</code></li>
+                                        <ul class="small list-unstyled">
+                                            <li>- Format: JPG, PNG, WebP</li>
+                                            <li>- Ukuran optimal: 400x300px</li>
                                         </ul>
                                         
                                         <h6 class="mt-3">Catatan:</h6>

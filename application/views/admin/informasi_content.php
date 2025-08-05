@@ -71,8 +71,7 @@
                                             <td><?= $index + 1 ?></td>
                                             <td><?= htmlspecialchars($item['name']) ?></td>
                                             <td>
-                                                <i class="<?= htmlspecialchars($item['icon']) ?>"></i>
-                                                <small class="d-block text-muted"><?= htmlspecialchars($item['icon']) ?></small>
+                                                <i class="fa <?= htmlspecialchars($item['icon']) ?>"></i>
                                             </td>
                                             <td>
                                                 <img src="<?= base_url('assets/image/' . $item['image']) ?>" 

@@ -90,36 +90,33 @@
                             <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="mb-0">Preview</h5>
+                                        <h5 class="mb-0">Panduan</h5>
                                     </div>
                                     <div class="card-body">
-                                        <div class="text-center mb-3">
-                                            <div class="mb-2">
-                                                <i class="<?= htmlspecialchars($transportation['icon']) ?>"></i>
-                                            </div>
-                                            <h6><?= htmlspecialchars($transportation['name']) ?></h6>
-                                        </div>
+                                        <h6>Icon FontAwesome:</h6>
+                                        <ul class="small list-unstyled">
+                                            <li>- <code>fa-car</code> - Mobil</li>
+                                            <li>- <code>fa-bus</code> - Bus</li>
+                                            <li>- <code>fa-train</code> - Kereta</li>
+                                            <li>- <code>fa-plane</code> - Pesawat</li>
+                                            <li>- <code>fa-ship</code> - Kapal</li>
+                                            <li>or visit : <a href="https://fontawesome.com/v6/search?ic=free&o=r" target="_blank">Icon List</a></li>
+                                        </ul>
                                         
-                                        <div class="mb-3">
-                                            <img src="<?= base_url('assets/image/' . $transportation['image']) ?>" 
-                                                 alt="<?= htmlspecialchars($transportation['name']) ?>" 
-                                                 class="img-fluid rounded">
-                                        </div>
                                         
-                                        <p class="small"><?= htmlspecialchars($transportation['description_1']) ?></p>
+                                        <h6 class="mt-3">Format Gambar:</h6>
+                                        <ul class="small list-unstyled">
+                                            <li>- Format: JPG, PNG, WebP</li>
+                                            <li>- Ukuran optimal: 400x300px</li>
+                                        </ul>
                                         
-                                        <?php if (!empty($transportation['description_2'])): ?>
-                                            <p class="small"><?= htmlspecialchars($transportation['description_2']) ?></p>
-                                        <?php endif; ?>
-                                        
-                                        <?php if (!empty($transportation['schedule_note'])): ?>
-                                            <div class="small text-muted">
-                                                <?= $transportation['schedule_note'] ?>
-                                            </div>
-                                        <?php endif; ?>
+                                        <h6 class="mt-3">Catatan:</h6>
+                                        <p class="small text-muted">
+                                            Transportasi yang ditambahkan akan langsung aktif dan tampil di halaman informasi.
+                                        </p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="card mt-3">
                                     <div class="card-header">
                                         <h5 class="mb-0">Status</h5>
