@@ -15,7 +15,7 @@ class User extends CI_Controller {
      */
     public function register() {
         // Set validation rules
-$this->form_validation->set_error_delimiters('', '');
+        $this->form_validation->set_error_delimiters('', '');
         $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required|trim');
         $this->form_validation->set_rules('no_whatsapp', 'No Whatsapp', 'required|trim|numeric');
         $this->form_validation->set_rules('asal_daerah', 'Asal Daerah', 'required|trim');

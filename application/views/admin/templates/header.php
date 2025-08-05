@@ -11,24 +11,22 @@
 </head>
 <body>
     <div class="sidebar">
-        <div class="sidebar-header">
-            <h4>GTTGN Admin</h4>
+        <div class="sidebar__header">
+            <h4 class="title page-sub-title">GTTGN Admin</h4>
         </div>
-        <ul class="sidebar-menu">
+        <ul class="sidebar__menu">
             <li><a href="<?php echo base_url('admin/dashboard'); ?>"><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</a></li>
             <li><a href="<?php echo base_url('admin/user-admin'); ?>"><i class="fas fa-users-cog mr-2"></i> Manajemen Admin</a></li>
             <li><a href="<?php echo base_url('admin/user-data'); ?>"><i class="fas fa-users mr-2"></i> Data Registrasi User</a></li>
-            <li class="divider"></li>
-            <li><a href="<?php echo base_url('admin/auth/logout'); ?>"><i class="fas fa-sign-out-alt mr-2"></i> Logout</a></li>
         </ul>
+        <a class="sidebar__logout" href="<?php echo base_url('admin/auth/logout'); ?>"><i class="fas fa-sign-out-alt mr-2"></i> Logout</a>
     </div>
     
     <div class="content">
         <nav class="navbar navbar-expand-lg navbar-light mb-4">
-            <h4 class="mb-0"><?php echo $title; ?></h4>
+            <h4 class="mb-0 title page-sub-title"><?php echo $title; ?></h4>
             <div class="ml-auto user-info">
-                <i class="fas fa-user"></i>
-                <span>Selamat datang, <?php echo $admin_name; ?></span>
+                <span>Hi, <?php echo $admin_name; ?></span>
             </div>
         </nav>
         
