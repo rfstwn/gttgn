@@ -94,6 +94,11 @@ $route['admin/faq/edit/(:num)'] = '4dm1n/Dashboard/edit_faq/$1';
 $route['admin/faq/update/(:num)'] = '4dm1n/Dashboard/update_faq/$1';
 $route['admin/faq/delete/(:num)'] = '4dm1n/Dashboard/delete_faq/$1';
 
+// Informasi Management routes
+$route['admin/informasi'] = '4dm1n/dashboard/informasi_content';
+$route['admin/informasi/add-transportasi'] = '4dm1n/dashboard/add_transportation';
+$route['admin/informasi/edit-transportasi/(:num)'] = '4dm1n/dashboard/edit_transportation/$1';
+
 // Contact Submissions routes
 $route['admin/contact-submissions'] = '4dm1n/Dashboard/contact_submissions';
 $route['admin/contact-submissions/view/(:num)'] = '4dm1n/Dashboard/view_submission/$1';

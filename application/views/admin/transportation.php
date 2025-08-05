@@ -13,7 +13,7 @@
                     
                     
                     <div class="mb-3">
-                        <a href="<?= base_url('4dm1n/dashboard/informasi_content') ?>" class="btn btn-info">
+                        <a href="<?= base_url('admin/informasi') ?>" class="btn btn-info">
                             <i class="fas fa-edit"></i> Kelola Konten Informasi
                         </a>
                     </div>

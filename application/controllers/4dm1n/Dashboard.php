@@ -449,7 +449,7 @@ class Dashboard extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal memperbarui konten informasi!');
             }
             
-            redirect('4dm1n/dashboard/informasi_content');
+            redirect('admin/informasi');
         }
     }
     
@@ -494,7 +494,7 @@ class Dashboard extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal menambahkan transportasi!');
             }
             
-            redirect('4dm1n/dashboard/informasi_content');
+            redirect('admin/informasi');
         }
     }
     
@@ -507,7 +507,7 @@ class Dashboard extends MY_Controller {
         
         if (!$data['transportation']) {
             $this->session->set_flashdata('error', 'Transportasi tidak ditemukan!');
-            redirect('4dm1n/dashboard/informasi_content');
+            redirect('admin/informasi');
         }
         
         $this->load_admin_view('admin/edit_transportation', $data);
@@ -544,7 +544,7 @@ class Dashboard extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal memperbarui transportasi!');
             }
             
-            redirect('4dm1n/dashboard/informasi_content');
+            redirect('admin/informasi');
         }
     }
     
@@ -558,7 +558,7 @@ class Dashboard extends MY_Controller {
             $this->session->set_flashdata('error', 'Gagal menghapus transportasi!');
         }
         
-        redirect('4dm1n/dashboard/informasi_content');
+        redirect('admin/informasi');
     }
     
     /**
@@ -571,7 +571,7 @@ class Dashboard extends MY_Controller {
             $this->session->set_flashdata('error', 'Gagal mengubah status transportasi!');
         }
         
-        redirect('4dm1n/dashboard/informasi_content');
+        redirect('admin/informasi');
     }
     
     // ==================== CONTACT SUBMISSIONS ====================

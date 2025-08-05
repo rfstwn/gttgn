@@ -38,7 +38,7 @@
             <div class="card">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Kelola Transportasi</h5>
-                    <a href="<?= base_url('4dm1n/dashboard/add_transportation') ?>" class="btn btn-light btn-sm">
+                    <a href="<?= base_url('admin/informasi/add-transportasi') ?>" class="btn btn-light btn-sm">
                         <i class="fas fa-plus"></i> Tambah Transportasi
                     </a>
                 </div>
@@ -97,7 +97,7 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="<?= base_url('4dm1n/dashboard/edit_transportation/' . $item['id']) ?>" 
+                                                    <a href="<?= base_url('admin/informasi/edit-transportasi/' . $item['id']) ?>" 
                                                        class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>

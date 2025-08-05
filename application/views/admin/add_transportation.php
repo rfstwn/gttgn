@@ -78,7 +78,7 @@
                                 </div>
                                 
                                 <div class="d-flex justify-content-between">
-                                    <a href="<?= base_url('4dm1n/dashboard/informasi_content') ?>" class="btn btn-secondary">
+                                    <a href="<?= base_url('admin/informasi') ?>" class="btn btn-secondary">
                                         <i class="fas fa-arrow-left"></i> Kembali
                                     </a>
                                     <button type="submit" class="btn btn-primary">

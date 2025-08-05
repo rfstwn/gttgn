@@ -63,7 +63,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Kelola Informasi</h5>
                                 <small class="card-text">Kelola konten halaman informasi dan transportasi</small>
-                                <a href="<?= base_url('4dm1n/dashboard/informasi_content') ?>" class="btn btn-light">Kelola Informasi</a>
+                                <a href="<?= base_url('admin/informasi') ?>" class="btn btn-light">Kelola Informasi</a>
                             </div>
                         </div>
                     </div>
