@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Daftar User Admin</h5>
-                    <a href="<?php echo base_url('admin/add_user'); ?>" class="btn btn-light btn-sm">
+                    <a href="<?php echo base_url('admin-gttgn/add_user'); ?>" class="btn btn-light btn-sm">
                         <i class="fas fa-plus"></i> Tambah User
                     </a>
                 </div>
@@ -29,10 +29,10 @@
                                             <td><?php echo $user->email; ?></td>
                                             <td><?php echo date('d-m-Y H:i', strtotime($user->created_at)); ?></td>
                                             <td>
-                                                <a href="<?php echo base_url('admin/edit_user/'.$user->id); ?>" class="btn btn-sm btn-info btn-action">
+                                                <a href="<?php echo base_url('admin-gttgn/edit_user/'.$user->id); ?>" class="btn btn-sm btn-info btn-action">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
-                                                <a href="<?php echo base_url('admin/delete_user/'.$user->id); ?>" class="btn btn-sm btn-danger btn-action delete-confirm">
+                                                <a href="<?php echo base_url('admin-gttgn/delete_user/'.$user->id); ?>" class="btn btn-sm btn-danger btn-action delete-confirm">
                                                     <i class="fas fa-trash"></i> Hapus
                                                 </a>
                                             </td>

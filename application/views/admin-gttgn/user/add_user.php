@@ -6,7 +6,7 @@
                     <h5 class="mb-0">Tambah User Admin</h5>
                 </div>
                 <div class="card-body">
-                    <?php echo form_open('admin/save_user'); ?>
+                    <?php echo form_open('admin-gttgn/save_user'); ?>
                         <div class="form-group">
                             <label for="name">Nama</label>
                             <input type="text" name="name" id="name" class="form-control" value="<?php echo set_value('name'); ?>" required>
@@ -33,7 +33,7 @@
                         
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Simpan</button>
-                            <a href="<?php echo base_url('admin/users'); ?>" class="btn btn-secondary">Kembali</a>
+                            <a href="<?php echo base_url('admin-gttgn/users'); ?>" class="btn btn-secondary">Kembali</a>
                         </div>
                     <?php echo form_close(); ?>
                 </div>

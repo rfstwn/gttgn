@@ -124,13 +124,27 @@ $background-color_3: #fff;
 	.card {
 		width: 32%;
 		margin-bottom: 20px;
-		small {
-			background-color: #fff;
-			padding: 5px;
-			border-radius: 5px;
-			display: block;
-			color: $paragraph-color;
-			margin-bottom: 15px;
+		padding: 0px !important;
+		.card-body {
+			padding: 10px;
+			.card-title {
+				font-family: "Maison Neue Bold";
+				margin: 0;
+				margin-bottom: 10px;
+				padding-bottom: 5px;
+				border-bottom: 1px solid #d4d4d4;
+			}
+			span {
+				display: block;
+				font-size: 35px;
+				font-family: "Maison Neue Bold";
+				margin: 0;
+				line-height: 1;
+				small {
+					font-size: 16px;
+					font-family: "Maison Neue Reguler";
+				}
+			}
 		}
 	}
 }

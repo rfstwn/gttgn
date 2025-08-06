@@ -27,9 +27,10 @@ class Dashboard extends MY_Controller {
     public function index() {
         $data['title'] = 'Dashboard Admin';
         $data['user_count'] = $this->user_model->count_all();
+        $data['new_contact_submission_count'] = $this->contact_submission_model->count_by_status('new');
         
         // Load the dashboard view with header and footer
-        $this->load_admin_view('admin/dashboard', $data);
+        $this->load_admin_view('admin-gttgn/dashboard', $data);
     }
     
     /**
@@ -40,7 +41,7 @@ class Dashboard extends MY_Controller {
         $data['contact_info'] = $this->contact_model->get_contact_info();
         
         // Load the contact info view
-        $this->load_admin_view('admin/contact_info', $data);
+        $this->load_admin_view('admin-gttgn/contact_info', $data);
     }
     
     /**
@@ -79,7 +80,7 @@ class Dashboard extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal memperbarui informasi kontak!');
             }
             
-            redirect('4dm1n/dashboard/contact_info');
+            redirect('admin-gttgn/dashboard/contact_info');
         }
     }
     
@@ -91,7 +92,7 @@ class Dashboard extends MY_Controller {
         $data['hotels'] = $this->hotel_model->get_all_hotels();
         
         // Load the hotels management view
-        $this->load_admin_view('admin/hotels', $data);
+        $this->load_admin_view('admin-gttgn/hotels', $data);
     }
     
     /**
@@ -101,7 +102,7 @@ class Dashboard extends MY_Controller {
         $data['title'] = 'Tambah Hotel';
         
         // Load the add hotel view
-        $this->load_admin_view('admin/add_hotel', $data);
+        $this->load_admin_view('admin-gttgn/add_hotel', $data);
     }
     
     /**
@@ -138,7 +139,7 @@ class Dashboard extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal menambahkan hotel!');
             }
             
-            redirect('4dm1n/dashboard/hotels');
+            redirect('admin-gttgn/dashboard/hotels');
         }
     }
     
@@ -151,11 +152,11 @@ class Dashboard extends MY_Controller {
         
         if (!$data['hotel']) {
             $this->session->set_flashdata('error', 'Hotel tidak ditemukan!');
-            redirect('4dm1n/dashboard/hotels');
+            redirect('admin-gttgn/dashboard/hotels');
         }
         
         // Load the edit hotel view
-        $this->load_admin_view('admin/edit_hotel', $data);
+        $this->load_admin_view('admin-gttgn/edit_hotel', $data);
     }
     
     /**
@@ -192,7 +193,7 @@ class Dashboard extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal memperbarui hotel!');
             }
             
-            redirect('4dm1n/dashboard/hotels');
+            redirect('admin-gttgn/dashboard/hotels');
         }
     }
     
@@ -206,7 +207,7 @@ class Dashboard extends MY_Controller {
             $this->session->set_flashdata('error', 'Gagal menghapus hotel!');
         }
         
-        redirect('4dm1n/dashboard/hotels');
+        redirect('admin-gttgn/dashboard/hotels');
     }
     
     // ==================== RUNDOWN MANAGEMENT ====================
@@ -218,7 +219,7 @@ class Dashboard extends MY_Controller {
         $data['title'] = 'Kelola Jadwal Kegiatan';
         $data['rundown'] = $this->rundown_model->get_all_rundown();
         
-        $this->load_admin_view('admin/rundown', $data);
+        $this->load_admin_view('admin-gttgn/rundown', $data);
     }
     
     /**
@@ -227,7 +228,7 @@ class Dashboard extends MY_Controller {
     public function add_rundown() {
         $data['title'] = 'Tambah Jadwal Kegiatan';
         
-        $this->load_admin_view('admin/add_rundown', $data);
+        $this->load_admin_view('admin-gttgn/add_rundown', $data);
     }
     
     /**
@@ -253,7 +254,7 @@ class Dashboard extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal menambahkan jadwal kegiatan!');
             }
             
-            redirect('4dm1n/dashboard/rundown');
+            redirect('admin-gttgn/dashboard/rundown');
         }
     }
     
@@ -266,10 +267,10 @@ class Dashboard extends MY_Controller {
         
         if (!$data['rundown']) {
             $this->session->set_flashdata('error', 'Jadwal kegiatan tidak ditemukan!');
-            redirect('4dm1n/dashboard/rundown');
+            redirect('admin-gttgn/dashboard/rundown');
         }
         
-        $this->load_admin_view('admin/edit_rundown', $data);
+        $this->load_admin_view('admin-gttgn/edit_rundown', $data);
     }
     
     /**
@@ -295,7 +296,7 @@ class Dashboard extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal memperbarui jadwal kegiatan!');
             }
             
-            redirect('4dm1n/dashboard/rundown');
+            redirect('admin-gttgn/dashboard/rundown');
         }
     }
     
@@ -309,7 +310,7 @@ class Dashboard extends MY_Controller {
             $this->session->set_flashdata('error', 'Gagal menghapus jadwal kegiatan!');
         }
         
-        redirect('4dm1n/dashboard/rundown');
+        redirect('admin-gttgn/dashboard/rundown');
     }
     
     // ==================== FAQ MANAGEMENT ====================
@@ -321,7 +322,7 @@ class Dashboard extends MY_Controller {
         $data['title'] = 'Kelola FAQ';
         $data['faqs'] = $this->faq_model->get_all_faqs();
         
-        $this->load_admin_view('admin/faq', $data);
+        $this->load_admin_view('admin-gttgn/faq', $data);
     }
     
     /**
@@ -330,7 +331,7 @@ class Dashboard extends MY_Controller {
     public function add_faq() {
         $data['title'] = 'Tambah FAQ';
         
-        $this->load_admin_view('admin/add_faq', $data);
+        $this->load_admin_view('admin-gttgn/add_faq', $data);
     }
     
     /**
@@ -356,7 +357,7 @@ class Dashboard extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal menambahkan FAQ!');
             }
             
-            redirect('4dm1n/dashboard/faq');
+            redirect('admin-gttgn/dashboard/faq');
         }
     }
     
@@ -369,10 +370,10 @@ class Dashboard extends MY_Controller {
         
         if (!$data['faq']) {
             $this->session->set_flashdata('error', 'FAQ tidak ditemukan!');
-            redirect('4dm1n/dashboard/faq');
+            redirect('admin-gttgn/dashboard/faq');
         }
         
-        $this->load_admin_view('admin/edit_faq', $data);
+        $this->load_admin_view('admin-gttgn/edit_faq', $data);
     }
     
     /**
@@ -398,7 +399,7 @@ class Dashboard extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal memperbarui FAQ!');
             }
             
-            redirect('4dm1n/dashboard/faq');
+            redirect('admin-gttgn/dashboard/faq');
         }
     }
     
@@ -412,7 +413,7 @@ class Dashboard extends MY_Controller {
             $this->session->set_flashdata('error', 'Gagal menghapus FAQ!');
         }
         
-        redirect('4dm1n/dashboard/faq');
+        redirect('admin-gttgn/dashboard/faq');
     }
     
     // ==================== INFORMASI MANAGEMENT ====================
@@ -425,7 +426,7 @@ class Dashboard extends MY_Controller {
         $data['content'] = $this->informasi_model->get_content();
         $data['transportation'] = $this->informasi_model->get_all_transportation();
         
-        $this->load_admin_view('admin/informasi_content', $data);
+        $this->load_admin_view('admin-gttgn/informasi_content', $data);
     }
     
     /**
@@ -449,7 +450,7 @@ class Dashboard extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal memperbarui konten informasi!');
             }
             
-            redirect('admin/informasi');
+            redirect('admin-gttgn/informasi');
         }
     }
     
@@ -459,7 +460,7 @@ class Dashboard extends MY_Controller {
     public function add_transportation() {
         $data['title'] = 'Tambah Transportasi';
         
-        $this->load_admin_view('admin/add_transportation', $data);
+        $this->load_admin_view('admin-gttgn/add_transportation', $data);
     }
     
     /**
@@ -494,7 +495,7 @@ class Dashboard extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal menambahkan transportasi!');
             }
             
-            redirect('admin/informasi');
+            redirect('admin-gttgn/informasi');
         }
     }
     
@@ -507,10 +508,10 @@ class Dashboard extends MY_Controller {
         
         if (!$data['transportation']) {
             $this->session->set_flashdata('error', 'Transportasi tidak ditemukan!');
-            redirect('admin/informasi');
+            redirect('admin-gttgn/informasi');
         }
         
-        $this->load_admin_view('admin/edit_transportation', $data);
+        $this->load_admin_view('admin-gttgn/edit_transportation', $data);
     }
     
     /**
@@ -544,7 +545,7 @@ class Dashboard extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal memperbarui transportasi!');
             }
             
-            redirect('admin/informasi');
+            redirect('admin-gttgn/informasi');
         }
     }
     
@@ -558,7 +559,7 @@ class Dashboard extends MY_Controller {
             $this->session->set_flashdata('error', 'Gagal menghapus transportasi!');
         }
         
-        redirect('admin/informasi');
+        redirect('admin-gttgn/informasi');
     }
     
     /**
@@ -571,7 +572,7 @@ class Dashboard extends MY_Controller {
             $this->session->set_flashdata('error', 'Gagal mengubah status transportasi!');
         }
         
-        redirect('admin/informasi');
+        redirect('admin-gttgn/informasi');
     }
     
     // ==================== CONTACT SUBMISSIONS ====================
@@ -583,7 +584,7 @@ class Dashboard extends MY_Controller {
         $data['title'] = 'Pesan Kontak';
         $data['submissions'] = $this->contact_submission_model->get_all_submissions();
         
-        $this->load_admin_view('admin/contact_submissions', $data);
+        $this->load_admin_view('admin-gttgn/contact_submissions', $data);
     }
     
     /**
@@ -595,7 +596,7 @@ class Dashboard extends MY_Controller {
         
         if (!$data['submission']) {
             $this->session->set_flashdata('error', 'Pesan tidak ditemukan!');
-            redirect('4dm1n/dashboard/contact_submissions');
+            redirect('admin-gttgn/dashboard/contact_submissions');
         }
         
         // Mark as read if not already
@@ -603,7 +604,7 @@ class Dashboard extends MY_Controller {
             $this->contact_submission_model->update_status($id, 'read');
         }
         
-        $this->load_admin_view('admin/view_submission', $data);
+        $this->load_admin_view('admin-gttgn/view_submission', $data);
     }
     
     /**
@@ -616,7 +617,7 @@ class Dashboard extends MY_Controller {
             $this->session->set_flashdata('error', 'Gagal memperbarui status pesan!');
         }
         
-        redirect('4dm1n/dashboard/contact_submissions');
+        redirect('admin-gttgn/dashboard/contact_submissions');
     }
     
     /**
@@ -629,6 +630,6 @@ class Dashboard extends MY_Controller {
             $this->session->set_flashdata('error', 'Gagal menghapus pesan!');
         }
         
-        redirect('4dm1n/dashboard/contact_submissions');
+        redirect('admin-gttgn/dashboard/contact_submissions');
     }
 }

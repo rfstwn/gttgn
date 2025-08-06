@@ -3,19 +3,19 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Kelola Hotel</h5>
-                    <a href="<?= base_url('4dm1n/dashboard/add_hotel') ?>" class="btn btn-light btn-sm">
-                        <i class="fas fa-plus"></i> Tambah Hotel
+                    <h5 class="mb-0">Kelola Jadwal Kegiatan</h5>
+                    <a href="<?= base_url('admin-gttgn/dashboard/add_rundown') ?>" class="btn btn-light btn-sm">
+                        <i class="fas fa-plus"></i> Tambah Jadwal
                     </a>
                 </div>
                 <div class="card-body">
                     
                     
-                    <?php if (empty($hotels)): ?>
+                    <?php if (empty($rundown)): ?>
                         <div class="text-center py-5">
-                            <i class="fas fa-hotel fa-3x text-muted mb-3"></i>
-                            <h5 class="text-muted">Belum ada data hotel</h5>
-                            <p class="text-muted">Klik tombol "Tambah Hotel" untuk menambahkan hotel pertama.</p>
+                            <i class="fas fa-calendar-alt fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Belum ada jadwal kegiatan</h5>
+                            <p class="text-muted">Klik tombol "Tambah Jadwal" untuk menambahkan jadwal pertama.</p>
                         </div>
                     <?php else: ?>
                         <div class="table-responsive">
@@ -23,49 +23,35 @@
                                 <thead class="table-dark">
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Hotel</th>
-                                        <th>Alamat</th>
-                                        <th>Telepon</th>
-                                        <th>Rating</th>
-                                        <th>Koordinat</th>
+                                        <th>Tanggal</th>
+                                        <th>Judul Kegiatan</th>
+                                        <th>Deskripsi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($hotels as $index => $hotel): ?>
+                                    <?php foreach ($rundown as $index => $item): ?>
                                         <tr>
                                             <td><?= $index + 1 ?></td>
                                             <td>
-                                                <strong><?= htmlspecialchars($hotel->name) ?></strong>
-                                            </td>
-                                            <td><?= htmlspecialchars($hotel->address) ?></td>
-                                            <td><?= htmlspecialchars($hotel->phone) ?></td>
-                                            <td>
-                                                <div class="stars">
-                                                    <?php for ($i = 1; $i <= 5; $i++): ?>
-                                                        <i class="fas fa-star <?= $i <= $hotel->stars ? 'text-warning' : 'text-muted' ?>"></i>
-                                                    <?php endfor; ?>
-                                                    <span class="ms-1">(<?= $hotel->stars ?>)</span>
-                                                </div>
+                                                <span class="badge bg-info">
+                                                    <?= date('d M Y', strtotime($item->event_date)) ?>
+                                                </span>
                                             </td>
                                             <td>
-                                                <small>
-                                                    Lat: <?= $hotel->latitude ?><br>
-                                                    Lng: <?= $hotel->longitude ?>
-                                                </small>
+                                                <strong><?= htmlspecialchars($item->event_title) ?></strong>
+                                            </td>
+                                            <td>
+                                                <?= !empty($item->description) ? htmlspecialchars(substr($item->description, 0, 100)) . '...' : '<em>Tidak ada deskripsi</em>' ?>
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="<?= base_url('4dm1n/dashboard/edit_hotel/' . $hotel->id) ?>" 
+                                                    <a href="<?= base_url('admin-gttgn/dashboard/edit_rundown/' . $item->id) ?>" 
                                                        class="btn btn-sm btn-outline-primary" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="https://www.google.com/maps/dir/?api=1&destination=<?= $hotel->latitude ?>,<?= $hotel->longitude ?>" 
-                                                       class="btn btn-sm btn-outline-info" title="Lihat di Maps" target="_blank">
-                                                        <i class="fas fa-map-marker-alt"></i>
-                                                    </a>
                                                     <button type="button" class="btn btn-sm btn-outline-danger" 
-                                                            onclick="confirmDelete(<?= $hotel->id ?>, '<?= htmlspecialchars($hotel->name) ?>')" title="Hapus">
+                                                            onclick="confirmDelete(<?= $item->id ?>, '<?= htmlspecialchars($item->event_title) ?>')" title="Hapus">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -91,7 +77,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <p>Apakah Anda yakin ingin menghapus hotel <strong id="hotelName"></strong>?</p>
+                <p>Apakah Anda yakin ingin menghapus jadwal kegiatan <strong id="eventTitle"></strong>?</p>
                 <p class="text-danger"><small>Tindakan ini tidak dapat dibatalkan.</small></p>
             </div>
             <div class="modal-footer">
@@ -103,9 +89,9 @@
 </div>
 
 <script>
-function confirmDelete(id, name) {
-    document.getElementById('hotelName').textContent = name;
-    document.getElementById('deleteLink').href = '<?= base_url('4dm1n/dashboard/delete_hotel/') ?>' + id;
+function confirmDelete(id, title) {
+    document.getElementById('eventTitle').textContent = title;
+    document.getElementById('deleteLink').href = '<?= base_url('admin-gttgn/dashboard/delete_rundown/') ?>' + id;
     new bootstrap.Modal(document.getElementById('deleteModal')).show();
 }
 </script>

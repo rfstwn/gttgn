@@ -22,7 +22,7 @@ class UserAdmin extends MY_Controller {
         $data['users'] = $this->admin_model->get_all_users();
         
         // Load the users view with header and footer
-        $this->load_admin_view('admin/user/users', $data);
+        $this->load_admin_view('admin-gttgn/user/users', $data);
     }
     
     /**
@@ -32,7 +32,7 @@ class UserAdmin extends MY_Controller {
         $data['title'] = 'Tambah User Admin';
         
         // Load the add user view with header and footer
-        $this->load_admin_view('admin/user/add_user', $data);
+        $this->load_admin_view('admin-gttgn/user/add_user', $data);
     }
     
     /**
@@ -49,7 +49,7 @@ class UserAdmin extends MY_Controller {
             // Validation failed, return to form with errors
             $data['title'] = 'Tambah User Admin';
             
-            $this->load_admin_view('admin/user/add_user', $data);
+            $this->load_admin_view('admin-gttgn/user/add_user', $data);
         } else {
             // Hash password
             $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
@@ -70,7 +70,7 @@ class UserAdmin extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal menambahkan user');
             }
             
-            redirect('admin/user-admin');
+            redirect('admin-gttgn/user-admin');
         }
     }
     
@@ -83,10 +83,10 @@ class UserAdmin extends MY_Controller {
         
         if (!$data['user']) {
             $this->session->set_flashdata('error', 'User tidak ditemukan');
-            redirect('admin/user-admin');
+            redirect('admin-gttgn/user-admin');
         }
         
-        $this->load_admin_view('admin/user/edit_user', $data);
+        $this->load_admin_view('admin-gttgn/user/edit_user', $data);
     }
     
     /**
@@ -98,7 +98,7 @@ class UserAdmin extends MY_Controller {
         
         if (!$current_user) {
             $this->session->set_flashdata('error', 'User tidak ditemukan');
-            redirect('admin/user-admin');
+            redirect('admin-gttgn/user-admin');
         }
         
         // Check if email is changed
@@ -123,7 +123,7 @@ class UserAdmin extends MY_Controller {
             $data['title'] = 'Edit User Admin';
             $data['user'] = $current_user;
             
-            $this->load_admin_view('admin/user/edit_user', $data);
+            $this->load_admin_view('admin-gttgn/user/edit_user', $data);
         } else {
             // Prepare data
             $data = array(
@@ -145,7 +145,7 @@ class UserAdmin extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal mengupdate user');
             }
             
-            redirect('admin/user-admin');
+            redirect('admin-gttgn/user-admin');
         }
     }
     
@@ -158,13 +158,13 @@ class UserAdmin extends MY_Controller {
         
         if (!$user) {
             $this->session->set_flashdata('error', 'User tidak ditemukan');
-            redirect('admin/user-admin');
+            redirect('admin-gttgn/user-admin');
         }
         
         // Cannot delete yourself
         if ($id == $this->session->userdata('admin_id')) {
             $this->session->set_flashdata('error', 'Anda tidak dapat menghapus akun Anda sendiri');
-            redirect('admin/user-admin');
+            redirect('admin-gttgn/user-admin');
         }
         
         // Delete user
@@ -176,6 +176,6 @@ class UserAdmin extends MY_Controller {
             $this->session->set_flashdata('error', 'Gagal menghapus user');
         }
         
-        redirect('admin/user-admin');
+        redirect('admin-gttgn/user-admin');
     }
 }

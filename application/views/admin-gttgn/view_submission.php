@@ -77,13 +77,13 @@
                     <hr>
                     
                     <div class="d-flex justify-content-between align-items-center">
-                        <a href="<?= base_url('4dm1n/dashboard/contact_submissions') ?>" class="btn btn-secondary">
+                        <a href="<?= base_url('admin-gttgn/dashboard/contact_submissions') ?>" class="btn btn-secondary">
                             <i class="fas fa-arrow-left"></i> Kembali ke Daftar
                         </a>
                         
                         <div class="btn-group">
                             <?php if ($submission->status == 'new'): ?>
-                                <a href="<?= base_url('4dm1n/dashboard/update_submission_status/' . $submission->id . '/read') ?>" 
+                                <a href="<?= base_url('admin-gttgn/dashboard/update_submission_status/' . $submission->id . '/read') ?>" 
                                    class="btn btn-info">
                                     <i class="fas fa-eye"></i> Tandai Dibaca
                                 </a>
@@ -114,7 +114,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <a href="<?= base_url('4dm1n/dashboard/delete_submission/' . $submission->id) ?>" 
+                <a href="<?= base_url('admin-gttgn/dashboard/delete_submission/' . $submission->id) ?>" 
                    class="btn btn-danger">Ya, Hapus</a>
             </div>
         </div>
@@ -125,7 +125,7 @@
 function markAsReplied(submissionId) {
     // Mark submission as replied when email link is clicked
     setTimeout(function() {
-        window.location.href = '<?= base_url('4dm1n/dashboard/mark_submission_replied/') ?>' + submissionId;
+        window.location.href = '<?= base_url('admin-gttgn/dashboard/mark_submission_replied/') ?>' + submissionId;
     }, 1000);
 }
 </script>

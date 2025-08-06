@@ -58,7 +58,7 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="<?= base_url('4dm1n/dashboard/view_submission/' . $submission->id) ?>" 
+                                                    <a href="<?= base_url('admin-gttgn/dashboard/view_submission/' . $submission->id) ?>" 
                                                        class="btn btn-sm btn-outline-primary" title="Lihat Detail">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
@@ -103,7 +103,7 @@
 <script>
 function confirmDelete(id, name) {
     document.getElementById('senderName').textContent = name;
-    document.getElementById('deleteLink').href = '<?= base_url('4dm1n/dashboard/delete_submission/') ?>' + id;
+    document.getElementById('deleteLink').href = '<?= base_url('admin-gttgn/dashboard/delete_submission/') ?>' + id;
     new bootstrap.Modal(document.getElementById('deleteModal')).show();
 }
 </script>

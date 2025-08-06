@@ -17,21 +17,15 @@ class Auth extends CI_Controller {
         $this->load->helper('security');
     }
     
-    /**
-     * Login page
-     */
     public function index() {
         // Check if already logged in
         if ($this->session->userdata('admin_logged_in')) {
-            redirect('admin/dashboard');
+            redirect('admin-gttgn/dashboard');
         }
         
-        $this->load->view('admin/login');
+        $this->load->view('admin-gttgn/login');
     }
     
-    /**
-     * Process login form
-     */
     public function login() {
         // Set validation rules
         $this->form_validation->set_error_delimiters('', '');
@@ -41,7 +35,7 @@ class Auth extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             // Validation failed, return to login form with errors
             $this->session->set_flashdata('error', validation_errors());
-            redirect('admin/auth');
+            redirect('admin-gttgn/auth');
         } else {
             // Get form data
             $email = $this->input->post('email');
@@ -66,19 +60,16 @@ class Auth extends CI_Controller {
                     $this->session->unset_userdata('redirect_url');
                     redirect($redirect_url);
                 } else {
-                    redirect('admin/dashboard');
+                    redirect('admin-gttgn/dashboard');
                 }
             } else {
                 // Login failed
                 $this->session->set_flashdata('error', 'Email atau password salah');
-                redirect('admin/auth');
+                redirect('admin-gttgn/auth');
             }
         }
     }
     
-    /**
-     * Logout function
-     */
     public function logout() {
         // Unset admin session data
         $this->session->unset_userdata('admin_id');
@@ -87,6 +78,6 @@ class Auth extends CI_Controller {
         $this->session->unset_userdata('admin_logged_in');
         
         $this->session->set_flashdata('success', 'Anda telah berhasil logout');
-        redirect('admin/auth');
+        redirect('admin-gttgn/auth');
     }
 }

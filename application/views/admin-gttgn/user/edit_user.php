@@ -6,7 +6,7 @@
                     <h5 class="mb-0">Edit User Admin</h5>
                 </div>
                 <div class="card-body">
-                    <?php echo form_open('admin/update_user'); ?>
+                    <?php echo form_open('admin-gttgn/update_user'); ?>
                         <input type="hidden" name="id" value="<?php echo $user->id; ?>">
                         
                         <div class="form-group">
@@ -35,7 +35,7 @@
                         
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Update</button>
-                            <a href="<?php echo base_url('admin/users'); ?>" class="btn btn-secondary">Kembali</a>
+                            <a href="<?php echo base_url('admin-gttgn/users'); ?>" class="btn btn-secondary">Kembali</a>
                         </div>
                     <?php echo form_close(); ?>
                 </div>

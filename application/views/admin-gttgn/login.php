@@ -12,7 +12,7 @@
     <div class="login-container">
         <div class="card-login">
             <h4 class="title page-sub-title">GTTGN Admin Login</h4>
-            <form action="<?php echo base_url('admin/auth/login'); ?>" method="post" class="form-wrapper">
+            <form action="<?php echo base_url('admin-gttgn/auth/login'); ?>" method="post" class="form-wrapper">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" class="form-control" required>

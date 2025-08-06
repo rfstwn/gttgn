@@ -22,7 +22,7 @@ class UserData extends MY_Controller {
         $data['users'] = $this->user_model->get_all_users();
         
         // Load the user data view with header and footer
-        $this->load_admin_view('admin/user_data/list', $data);
+        $this->load_admin_view('admin-gttgn/user_data/list', $data);
     }
     
     /**

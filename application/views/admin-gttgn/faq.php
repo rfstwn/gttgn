@@ -3,55 +3,52 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Kelola Jadwal Kegiatan</h5>
-                    <a href="<?= base_url('4dm1n/dashboard/add_rundown') ?>" class="btn btn-light btn-sm">
-                        <i class="fas fa-plus"></i> Tambah Jadwal
+                    <h5 class="mb-0">Kelola FAQ (Frequently Asked Questions)</h5>
+                    <a href="<?= base_url('admin-gttgn/dashboard/add_faq') ?>" class="btn btn-light btn-sm">
+                        <i class="fas fa-plus"></i> Tambah FAQ
                     </a>
                 </div>
                 <div class="card-body">
                     
                     
-                    <?php if (empty($rundown)): ?>
+                    <?php if (empty($faqs)): ?>
                         <div class="text-center py-5">
-                            <i class="fas fa-calendar-alt fa-3x text-muted mb-3"></i>
-                            <h5 class="text-muted">Belum ada jadwal kegiatan</h5>
-                            <p class="text-muted">Klik tombol "Tambah Jadwal" untuk menambahkan jadwal pertama.</p>
+                            <i class="fas fa-question-circle fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Belum ada FAQ</h5>
+                            <p class="text-muted">Klik tombol "Tambah FAQ" untuk menambahkan pertanyaan pertama.</p>
                         </div>
                     <?php else: ?>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th>No</th>
-                                        <th>Tanggal</th>
-                                        <th>Judul Kegiatan</th>
-                                        <th>Deskripsi</th>
+                                        <th>Urutan</th>
+                                        <th>Pertanyaan</th>
+                                        <th>Jawaban</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($rundown as $index => $item): ?>
+                                    <?php foreach ($faqs as $faq): ?>
                                         <tr>
-                                            <td><?= $index + 1 ?></td>
                                             <td>
-                                                <span class="badge bg-info">
-                                                    <?= date('d M Y', strtotime($item->event_date)) ?>
-                                                </span>
+                                                <span class="badge bg-secondary"><?= $faq->display_order ?></span>
                                             </td>
                                             <td>
-                                                <strong><?= htmlspecialchars($item->event_title) ?></strong>
+                                                <strong><?= htmlspecialchars($faq->question) ?></strong>
                                             </td>
                                             <td>
-                                                <?= !empty($item->description) ? htmlspecialchars(substr($item->description, 0, 100)) . '...' : '<em>Tidak ada deskripsi</em>' ?>
+                                                <?= htmlspecialchars(substr($faq->answer, 0, 100)) ?>
+                                                <?= strlen($faq->answer) > 100 ? '...' : '' ?>
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="<?= base_url('4dm1n/dashboard/edit_rundown/' . $item->id) ?>" 
+                                                    <a href="<?= base_url('admin-gttgn/dashboard/edit_faq/' . $faq->id) ?>" 
                                                        class="btn btn-sm btn-outline-primary" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" class="btn btn-sm btn-outline-danger" 
-                                                            onclick="confirmDelete(<?= $item->id ?>, '<?= htmlspecialchars($item->event_title) ?>')" title="Hapus">
+                                                            onclick="confirmDelete(<?= $faq->id ?>, '<?= htmlspecialchars($faq->question) ?>')" title="Hapus">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -77,7 +74,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <p>Apakah Anda yakin ingin menghapus jadwal kegiatan <strong id="eventTitle"></strong>?</p>
+                <p>Apakah Anda yakin ingin menghapus FAQ <strong id="faqQuestion"></strong>?</p>
                 <p class="text-danger"><small>Tindakan ini tidak dapat dibatalkan.</small></p>
             </div>
             <div class="modal-footer">
@@ -89,9 +86,9 @@
 </div>
 
 <script>
-function confirmDelete(id, title) {
-    document.getElementById('eventTitle').textContent = title;
-    document.getElementById('deleteLink').href = '<?= base_url('4dm1n/dashboard/delete_rundown/') ?>' + id;
+function confirmDelete(id, question) {
+    document.getElementById('faqQuestion').textContent = question.substring(0, 50) + '...';
+    document.getElementById('deleteLink').href = '<?= base_url('admin-gttgn/dashboard/delete_faq/') ?>' + id;
     new bootstrap.Modal(document.getElementById('deleteModal')).show();
 }
 </script>

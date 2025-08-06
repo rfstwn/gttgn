@@ -12,7 +12,7 @@
                         </div>
                     <?php endif; ?>
                     
-                    <form method="post" action="<?= base_url('4dm1n/dashboard/update_hotel/' . $hotel->id) ?>">
+                    <form method="post" action="<?= base_url('admin-gttgn/dashboard/update_hotel/' . $hotel->id) ?>">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -87,7 +87,7 @@
                         </div>
                         
                         <div class="d-flex justify-content-between">
-                            <a href="<?= base_url('4dm1n/dashboard/hotels') ?>" class="btn btn-secondary">
+                            <a href="<?= base_url('admin-gttgn/dashboard/hotels') ?>" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i> Kembali
                             </a>
                             <button type="submit" class="btn btn-warning">

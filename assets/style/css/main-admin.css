@@ -417,14 +417,28 @@ span {
 .shortcut-dashboard .card {
   width: 32%;
   margin-bottom: 20px;
+  padding: 0px !important;
 }
-.shortcut-dashboard .card small {
-  background-color: #fff;
-  padding: 5px;
-  border-radius: 5px;
+.shortcut-dashboard .card .card-body {
+  padding: 10px;
+}
+.shortcut-dashboard .card .card-body .card-title {
+  font-family: "Maison Neue Bold";
+  margin: 0;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #d4d4d4;
+}
+.shortcut-dashboard .card .card-body span {
   display: block;
-  color: #5d5d5d;
-  margin-bottom: 15px;
+  font-size: 35px;
+  font-family: "Maison Neue Bold";
+  margin: 0;
+  line-height: 1;
+}
+.shortcut-dashboard .card .card-body span small {
+  font-size: 16px;
+  font-family: "Maison Neue Reguler";
 }
 
 /*# sourceMappingURL=main-admin.css.map */

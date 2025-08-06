@@ -3,52 +3,69 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Kelola FAQ (Frequently Asked Questions)</h5>
-                    <a href="<?= base_url('4dm1n/dashboard/add_faq') ?>" class="btn btn-light btn-sm">
-                        <i class="fas fa-plus"></i> Tambah FAQ
+                    <h5 class="mb-0">Kelola Hotel</h5>
+                    <a href="<?= base_url('admin-gttgn/dashboard/add_hotel') ?>" class="btn btn-light btn-sm">
+                        <i class="fas fa-plus"></i> Tambah Hotel
                     </a>
                 </div>
                 <div class="card-body">
                     
                     
-                    <?php if (empty($faqs)): ?>
+                    <?php if (empty($hotels)): ?>
                         <div class="text-center py-5">
-                            <i class="fas fa-question-circle fa-3x text-muted mb-3"></i>
-                            <h5 class="text-muted">Belum ada FAQ</h5>
-                            <p class="text-muted">Klik tombol "Tambah FAQ" untuk menambahkan pertanyaan pertama.</p>
+                            <i class="fas fa-hotel fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Belum ada data hotel</h5>
+                            <p class="text-muted">Klik tombol "Tambah Hotel" untuk menambahkan hotel pertama.</p>
                         </div>
                     <?php else: ?>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th>Urutan</th>
-                                        <th>Pertanyaan</th>
-                                        <th>Jawaban</th>
+                                        <th>No</th>
+                                        <th>Nama Hotel</th>
+                                        <th>Alamat</th>
+                                        <th>Telepon</th>
+                                        <th>Rating</th>
+                                        <th>Koordinat</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($faqs as $faq): ?>
+                                    <?php foreach ($hotels as $index => $hotel): ?>
                                         <tr>
+                                            <td><?= $index + 1 ?></td>
                                             <td>
-                                                <span class="badge bg-secondary"><?= $faq->display_order ?></span>
+                                                <strong><?= htmlspecialchars($hotel->name) ?></strong>
+                                            </td>
+                                            <td><?= htmlspecialchars($hotel->address) ?></td>
+                                            <td><?= htmlspecialchars($hotel->phone) ?></td>
+                                            <td>
+                                                <div class="stars">
+                                                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                                                        <i class="fas fa-star <?= $i <= $hotel->stars ? 'text-warning' : 'text-muted' ?>"></i>
+                                                    <?php endfor; ?>
+                                                    <span class="ms-1">(<?= $hotel->stars ?>)</span>
+                                                </div>
                                             </td>
                                             <td>
-                                                <strong><?= htmlspecialchars($faq->question) ?></strong>
-                                            </td>
-                                            <td>
-                                                <?= htmlspecialchars(substr($faq->answer, 0, 100)) ?>
-                                                <?= strlen($faq->answer) > 100 ? '...' : '' ?>
+                                                <small>
+                                                    Lat: <?= $hotel->latitude ?><br>
+                                                    Lng: <?= $hotel->longitude ?>
+                                                </small>
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="<?= base_url('4dm1n/dashboard/edit_faq/' . $faq->id) ?>" 
+                                                    <a href="<?= base_url('admin-gttgn/dashboard/edit_hotel/' . $hotel->id) ?>" 
                                                        class="btn btn-sm btn-outline-primary" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
+                                                    <a href="https://www.google.com/maps/dir/?api=1&destination=<?= $hotel->latitude ?>,<?= $hotel->longitude ?>" 
+                                                       class="btn btn-sm btn-outline-info" title="Lihat di Maps" target="_blank">
+                                                        <i class="fas fa-map-marker-alt"></i>
+                                                    </a>
                                                     <button type="button" class="btn btn-sm btn-outline-danger" 
-                                                            onclick="confirmDelete(<?= $faq->id ?>, '<?= htmlspecialchars($faq->question) ?>')" title="Hapus">
+                                                            onclick="confirmDelete(<?= $hotel->id ?>, '<?= htmlspecialchars($hotel->name) ?>')" title="Hapus">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -74,7 +91,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <p>Apakah Anda yakin ingin menghapus FAQ <strong id="faqQuestion"></strong>?</p>
+                <p>Apakah Anda yakin ingin menghapus hotel <strong id="hotelName"></strong>?</p>
                 <p class="text-danger"><small>Tindakan ini tidak dapat dibatalkan.</small></p>
             </div>
             <div class="modal-footer">
@@ -86,9 +103,9 @@
 </div>
 
 <script>
-function confirmDelete(id, question) {
-    document.getElementById('faqQuestion').textContent = question.substring(0, 50) + '...';
-    document.getElementById('deleteLink').href = '<?= base_url('4dm1n/dashboard/delete_faq/') ?>' + id;
+function confirmDelete(id, name) {
+    document.getElementById('hotelName').textContent = name;
+    document.getElementById('deleteLink').href = '<?= base_url('admin-gttgn/dashboard/delete_hotel/') ?>' + id;
     new bootstrap.Modal(document.getElementById('deleteModal')).show();
 }
 </script>

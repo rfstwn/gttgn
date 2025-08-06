@@ -7,7 +7,7 @@
                 </div>
                 
                 <div class="card-body">
-                    <form action="<?= base_url('4dm1n/dashboard/update_transportation/' . $transportation['id']) ?>" method="post">
+                    <form action="<?= base_url('admin-gttgn/dashboard/update_transportation/' . $transportation['id']) ?>" method="post">
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="mb-3">
@@ -78,7 +78,7 @@
                                 </div>
                                 
                                 <div class="d-flex justify-content-between">
-                                    <a href="<?= base_url('admin/informasi') ?>" class="btn btn-secondary">
+                                    <a href="<?= base_url('admin-gttgn/informasi') ?>" class="btn btn-secondary">
                                         <i class="fas fa-arrow-left"></i> Kembali
                                     </a>
                                     <button type="submit" class="btn btn-primary">

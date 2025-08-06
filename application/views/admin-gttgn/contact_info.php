@@ -14,7 +14,7 @@
                         </div>
                     <?php endif; ?>
                     
-                    <form method="post" action="<?= base_url('4dm1n/dashboard/update_contact_info') ?>">
+                    <form method="post" action="<?= base_url('admin-gttgn/dashboard/update_contact_info') ?>">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -70,7 +70,7 @@
                         </div>
                         
                         <div class="d-flex justify-content-between">
-                            <a href="<?= base_url('4dm1n/dashboard') ?>" class="btn btn-secondary">
+                            <a href="<?= base_url('admin-gttgn/dashboard') ?>" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i> Kembali
                             </a>
                             <button type="submit" class="btn btn-primary">
