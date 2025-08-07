@@ -37,7 +37,7 @@ class Hotel extends MY_Controller {
     /**
      * Save new hotel
      */
-    public function add_process() {
+    public function save() {
         // Set validation rules
         $this->form_validation->set_rules('name', 'Nama Hotel', 'required|trim');
         $this->form_validation->set_rules('address', 'Alamat', 'required|trim');
@@ -46,9 +46,29 @@ class Hotel extends MY_Controller {
         $this->form_validation->set_rules('latitude', 'Latitude', 'required|numeric');
         $this->form_validation->set_rules('longitude', 'Longitude', 'required|numeric');
         
+        // Handle file upload
+        $image_path = 'assets/image/hotel/default.jpg'; // Default image
+        if (!empty($_FILES['image_file']['name'])) {
+            $config['upload_path'] = './assets/image/hotel/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = 2048; // 2MB
+            $config['encrypt_name'] = TRUE;
+            
+            $this->load->library('upload', $config);
+            
+            if ($this->upload->do_upload('image_file')) {
+                $upload_data = $this->upload->data();
+                $image_path = 'assets/image/hotel/' . $upload_data['file_name'];
+            } else {
+                $this->session->set_flashdata('error', 'Error upload gambar: ' . $this->upload->display_errors());
+                $this->add();
+                return;
+            }
+        }
+        
         if ($this->form_validation->run() == FALSE) {
             // Validation failed, reload form with errors
-            $this->add_hotel();
+            $this->add();
         } else {
             // Prepare data for insert
             $data = [
@@ -58,7 +78,7 @@ class Hotel extends MY_Controller {
                 'stars' => $this->input->post('stars'),
                 'latitude' => $this->input->post('latitude'),
                 'longitude' => $this->input->post('longitude'),
-                'image' => $this->input->post('image') ?: 'assets/image/hotel/default.jpg'
+                'image' => $image_path
             ];
             
             // Save hotel
@@ -91,7 +111,7 @@ class Hotel extends MY_Controller {
     /**
      * Update hotel
      */
-    public function edit_process($id) {
+    public function update($id) {
         // Set validation rules
         $this->form_validation->set_rules('name', 'Nama Hotel', 'required|trim');
         $this->form_validation->set_rules('address', 'Alamat', 'required|trim');
@@ -100,9 +120,35 @@ class Hotel extends MY_Controller {
         $this->form_validation->set_rules('latitude', 'Latitude', 'required|numeric');
         $this->form_validation->set_rules('longitude', 'Longitude', 'required|numeric');
         
+        // Handle file upload
+        $image_path = $this->input->post('current_image'); // Keep current image by default
+        if (!empty($_FILES['image_file']['name'])) {
+            $config['upload_path'] = './assets/image/hotel/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = 2048; // 2MB
+            $config['encrypt_name'] = TRUE;
+            
+            $this->load->library('upload', $config);
+            
+            if ($this->upload->do_upload('image_file')) {
+                $upload_data = $this->upload->data();
+                $image_path = 'assets/image/hotel/' . $upload_data['file_name'];
+                
+                // Delete old image if exists and different from new one
+                $old_image = $this->input->post('current_image');
+                if (!empty($old_image) && $old_image !== 'assets/image/hotel/default.jpg' && file_exists('./' . $old_image)) {
+                    unlink('./' . $old_image);
+                }
+            } else {
+                $this->session->set_flashdata('error', 'Error upload gambar: ' . $this->upload->display_errors());
+                $this->edit($id);
+                return;
+            }
+        }
+        
         if ($this->form_validation->run() == FALSE) {
             // Validation failed, reload form with errors
-            $this->edit_hotel($id);
+            $this->edit($id);
         } else {
             // Prepare data for update
             $data = [
@@ -112,7 +158,7 @@ class Hotel extends MY_Controller {
                 'stars' => $this->input->post('stars'),
                 'latitude' => $this->input->post('latitude'),
                 'longitude' => $this->input->post('longitude'),
-                'image' => $this->input->post('image') ?: 'assets/image/hotel/default.jpg'
+                'image' => $image_path
             ];
             
             // Update hotel

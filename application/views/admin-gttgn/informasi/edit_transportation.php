@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-body">
-            <form action="<?= base_url('admin-gttgn/informasi/edit_transportation_process/' . $transportation['id']) ?>" method="post">
+            <form action="<?= base_url('admin-gttgn/informasi/edit_transportation_process/' . $transportation['id']) ?>" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="mb-3">
@@ -24,13 +24,36 @@
                         </div>
                         
                         <div class="mb-3">
-                            <label for="image" class="form-label">Nama File Gambar <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control <?= form_error('image') ? 'is-invalid' : '' ?>" 
-                                    id="image" name="image" value="<?= set_value('image', $transportation['image']) ?>" placeholder="Contoh: rute-pribadi.png">
-                            <div class="form-text">Nama file gambar (tanpa path). File harus ada di folder assets/image/</div>
-                            <?php if (form_error('image')): ?>
-                                <div class="invalid-feedback"><?= form_error('image') ?></div>
+                            <label for="image_file" class="form-label">Upload Gambar</label>
+                            <input type="file" class="form-control <?= form_error('image_file') ? 'is-invalid' : '' ?>" 
+                                    id="image_file" name="image_file" accept="image/*" onchange="previewImage(this)">
+                            <div class="form-text">Upload gambar baru (JPG, PNG, GIF). Biarkan kosong jika tidak ingin mengubah gambar.</div>
+                            <?php if (form_error('image_file')): ?>
+                                <div class="invalid-feedback"><?= form_error('image_file') ?></div>
                             <?php endif; ?>
+                            
+                            <!-- Current image display -->
+                            <?php if (!empty($transportation['image'])): ?>
+                            <div class="mt-2">
+                                <label class="form-label">Gambar Saat Ini:</label>
+                                <div>
+                                    <img src="<?= base_url('assets/image/transportation/' . $transportation['image']) ?>" 
+                                         alt="Current Image" class="img-thumbnail" style="max-width: 200px; max-height: 150px;">
+                                    <p class="text-muted small mt-1">File: <?= $transportation['image'] ?></p>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                            
+                            <!-- Image preview -->
+                            <div class="mt-2" id="image_preview" style="display: none;">
+                                <label class="form-label">Preview Gambar Baru:</label>
+                                <div>
+                                    <img id="preview_img" src="" alt="Preview" class="img-thumbnail" style="max-width: 200px; max-height: 150px;">
+                                </div>
+                            </div>
+                            
+                            <!-- Hidden field to store current image name -->
+                            <input type="hidden" name="current_image" value="<?= $transportation['image'] ?>">
                         </div>
                         
                         <div class="mb-3">
@@ -138,3 +161,23 @@
         </div>
     </div>
 </div>
+
+<script>
+function previewImage(input) {
+    const preview = document.getElementById('image_preview');
+    const previewImg = document.getElementById('preview_img');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            preview.style.display = 'block';
+        };
+        
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.style.display = 'none';
+    }
+}
+</script>

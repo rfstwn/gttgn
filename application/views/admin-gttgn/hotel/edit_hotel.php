@@ -7,7 +7,7 @@
                 </div>
             <?php endif; ?>
             
-            <form method="post" action="<?= base_url('admin-gttgn/hotel/edit_process/' . $hotel->id) ?>">
+            <form action="<?= base_url('admin-gttgn/hotel/update/' . $hotel->id) ?>" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -61,13 +61,36 @@
                 </div>
                 
                 <div class="mb-3">
-                    <label for="image" class="form-label">Path Gambar</label>
-                    <input type="text" class="form-control" id="image" name="image" 
-                            value="<?= set_value('image', $hotel->image) ?>" 
-                            placeholder="assets/image/hotel/hotel-name.jpg">
-                    <div class="form-text">
-                        Masukkan path gambar hotel. Jika kosong, akan menggunakan gambar default.
+                    <label for="image_file" class="form-label">Upload Gambar Hotel</label>
+                    <input type="file" class="form-control <?= form_error('image_file') ? 'is-invalid' : '' ?>" 
+                            id="image_file" name="image_file" accept="image/*" onchange="previewImage(this)">
+                    <div class="form-text">Upload gambar baru (JPG, PNG, GIF). Biarkan kosong jika tidak ingin mengubah gambar.</div>
+                    <?php if (form_error('image_file')): ?>
+                        <div class="invalid-feedback"><?= form_error('image_file') ?></div>
+                    <?php endif; ?>
+                    
+                    <!-- Current image display -->
+                    <?php if (!empty($hotel->image)): ?>
+                    <div class="mt-2">
+                        <label class="form-label">Gambar Saat Ini:</label>
+                        <div>
+                            <img src="<?= base_url($hotel->image) ?>" 
+                                 alt="Current Image" class="img-thumbnail" style="max-width: 300px; max-height: 200px;">
+                            <p class="text-muted small mt-1">File: <?= basename($hotel->image) ?></p>
+                        </div>
                     </div>
+                    <?php endif; ?>
+                    
+                    <!-- Image preview -->
+                    <div class="mt-2" id="image_preview" style="display: none;">
+                        <label class="form-label">Preview Gambar Baru:</label>
+                        <div>
+                            <img id="preview_img" src="" alt="Preview" class="img-thumbnail" style="max-width: 300px; max-height: 200px;">
+                        </div>
+                    </div>
+                    
+                    <!-- Hidden field to store current image path -->
+                    <input type="hidden" name="current_image" value="<?= $hotel->image ?>">
                 </div>
                 
                 <div class="alert alert-info">
@@ -93,3 +116,23 @@
         </div>
     </div>
 </div>
+
+<script>
+function previewImage(input) {
+    const preview = document.getElementById('image_preview');
+    const previewImg = document.getElementById('preview_img');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            preview.style.display = 'block';
+        };
+        
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.style.display = 'none';
+    }
+}
+</script>

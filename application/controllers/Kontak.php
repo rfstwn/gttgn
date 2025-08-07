@@ -69,7 +69,7 @@ class Kontak extends MY_Controller
                 'phone' => $this->input->post('phone'),
                 'subject' => $this->input->post('subject'),
                 'message' => $this->input->post('message'),
-                'status' => 'unread'
+                'status' => 'new'
             ];
             
             // Save contact submission

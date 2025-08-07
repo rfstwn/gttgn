@@ -67,7 +67,7 @@
                                         <i class="fa <?= htmlspecialchars($item['icon']) ?>"></i>
                                     </td>
                                     <td>
-                                        <img src="<?= base_url('assets/image/' . $item['image']) ?>" 
+                                        <img src="<?= base_url('assets/image/transportation/' . $item['image']) ?>" 
                                                 alt="<?= htmlspecialchars($item['name']) ?>" 
                                                 class="img-thumbnail" style="max-width: 60px; max-height: 60px;">
                                         <small class="d-block text-muted"><?= htmlspecialchars($item['image']) ?></small>

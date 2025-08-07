@@ -17,7 +17,7 @@
             <?php foreach ($transportation_list as $index => $transport): ?>
             <div class="transport-content-item <?= $index === 0 ? 'active' : '' ?>" id="transport-<?= $transport['id'] ?>">
                 <div class="transport-image">
-                    <img src="<?= base_url('assets/image/' . $transport['image']) ?>" alt="<?= htmlspecialchars($transport['name']) ?>">
+                    <img src="<?= base_url('assets/image/transportation/' . $transport['image']) ?>" alt="<?= htmlspecialchars($transport['name']) ?>">
                 </div>
                 <div class="transport-info">
                     <h3><?= htmlspecialchars($transport['name']) ?></h3>
