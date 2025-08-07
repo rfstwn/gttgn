@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * 
  * Handles admin user management functionality
  */
-class UserAdmin extends MY_Controller {
+class Administrator extends MY_Controller {
     
     public function __construct() {
         parent::__construct();
@@ -22,7 +22,7 @@ class UserAdmin extends MY_Controller {
         $data['users'] = $this->admin_model->get_all_users();
         
         // Load the users view with header and footer
-        $this->load_admin_view('admin-gttgn/user/users', $data);
+        $this->load_admin_view('admin-gttgn/administrator/users', $data);
     }
     
     /**
@@ -32,13 +32,13 @@ class UserAdmin extends MY_Controller {
         $data['title'] = 'Tambah User Admin';
         
         // Load the add user view with header and footer
-        $this->load_admin_view('admin-gttgn/user/add_user', $data);
+        $this->load_admin_view('admin-gttgn/administrator/add_user', $data);
     }
     
     /**
      * Process add user form
      */
-    public function save() {
+    public function add_process() {
         // Set validation rules
         $this->form_validation->set_rules('name', 'Nama', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user_admin.email]');
@@ -49,7 +49,7 @@ class UserAdmin extends MY_Controller {
             // Validation failed, return to form with errors
             $data['title'] = 'Tambah User Admin';
             
-            $this->load_admin_view('admin-gttgn/user/add_user', $data);
+            $this->load_admin_view('admin-gttgn/administrator/add_user', $data);
         } else {
             // Hash password
             $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
@@ -70,7 +70,7 @@ class UserAdmin extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal menambahkan user');
             }
             
-            redirect('admin-gttgn/user-admin');
+            redirect('admin-gttgn/administrator');
         }
     }
     
@@ -83,22 +83,22 @@ class UserAdmin extends MY_Controller {
         
         if (!$data['user']) {
             $this->session->set_flashdata('error', 'User tidak ditemukan');
-            redirect('admin-gttgn/user-admin');
+            redirect('admin-gttgn/administrator');
         }
         
-        $this->load_admin_view('admin-gttgn/user/edit_user', $data);
+        $this->load_admin_view('admin-gttgn/administrator/edit_user', $data);
     }
     
     /**
      * Process edit user form
      */
-    public function update() {
+    public function edit_process() {
         $user_id = $this->input->post('id');
         $current_user = $this->admin_model->get_user_by_id($user_id);
         
         if (!$current_user) {
             $this->session->set_flashdata('error', 'User tidak ditemukan');
-            redirect('admin-gttgn/user-admin');
+            redirect('admin-gttgn/administrator');
         }
         
         // Check if email is changed
@@ -123,7 +123,7 @@ class UserAdmin extends MY_Controller {
             $data['title'] = 'Edit User Admin';
             $data['user'] = $current_user;
             
-            $this->load_admin_view('admin-gttgn/user/edit_user', $data);
+            $this->load_admin_view('admin-gttgn/administrator/edit_user', $data);
         } else {
             // Prepare data
             $data = array(
@@ -145,7 +145,7 @@ class UserAdmin extends MY_Controller {
                 $this->session->set_flashdata('error', 'Gagal mengupdate user');
             }
             
-            redirect('admin-gttgn/user-admin');
+            redirect('admin-gttgn/administrator');
         }
     }
     
@@ -158,13 +158,13 @@ class UserAdmin extends MY_Controller {
         
         if (!$user) {
             $this->session->set_flashdata('error', 'User tidak ditemukan');
-            redirect('admin-gttgn/user-admin');
+            redirect('admin-gttgn/administrator');
         }
         
         // Cannot delete yourself
         if ($id == $this->session->userdata('admin_id')) {
             $this->session->set_flashdata('error', 'Anda tidak dapat menghapus akun Anda sendiri');
-            redirect('admin-gttgn/user-admin');
+            redirect('admin-gttgn/administrator');
         }
         
         // Delete user
@@ -176,6 +176,6 @@ class UserAdmin extends MY_Controller {
             $this->session->set_flashdata('error', 'Gagal menghapus user');
         }
         
-        redirect('admin-gttgn/user-admin');
+        redirect('admin-gttgn/administrator');
     }
 }

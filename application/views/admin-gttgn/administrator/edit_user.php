@@ -6,7 +6,7 @@
                     <h5 class="mb-0">Edit User Admin</h5>
                 </div>
                 <div class="card-body">
-                    <?php echo form_open('admin-gttgn/update_user'); ?>
+                    <?php echo form_open('admin-gttgn/administrator/edit_process'); ?>
                         <input type="hidden" name="id" value="<?php echo $user->id; ?>">
                         
                         <div class="form-group">

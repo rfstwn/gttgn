@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Kelola FAQ (Frequently Asked Questions)</h5>
-                    <a href="<?= base_url('admin-gttgn/dashboard/add_faq') ?>" class="btn btn-light btn-sm">
+                    <a href="<?= base_url('admin-gttgn/faq/add') ?>" class="btn btn-light btn-sm">
                         <i class="fas fa-plus"></i> Tambah FAQ
                     </a>
                 </div>
@@ -43,7 +43,7 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="<?= base_url('admin-gttgn/dashboard/edit_faq/' . $faq->id) ?>" 
+                                                    <a href="<?= base_url('admin-gttgn/faq/edit/' . $faq->id) ?>" 
                                                        class="btn btn-sm btn-outline-primary" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
@@ -88,7 +88,7 @@
 <script>
 function confirmDelete(id, question) {
     document.getElementById('faqQuestion').textContent = question.substring(0, 50) + '...';
-    document.getElementById('deleteLink').href = '<?= base_url('admin-gttgn/dashboard/delete_faq/') ?>' + id;
+    document.getElementById('deleteLink').href = '<?= base_url('admin-gttgn/faq/delete/') ?>' + id;
     new bootstrap.Modal(document.getElementById('deleteModal')).show();
 }
 </script>

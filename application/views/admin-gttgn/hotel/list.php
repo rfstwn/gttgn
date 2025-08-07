@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Kelola Hotel</h5>
-                    <a href="<?= base_url('admin-gttgn/dashboard/add_hotel') ?>" class="btn btn-light btn-sm">
+                    <a href="<?= base_url('admin-gttgn/hotel/add') ?>" class="btn btn-light btn-sm">
                         <i class="fas fa-plus"></i> Tambah Hotel
                     </a>
                 </div>
@@ -56,7 +56,7 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="<?= base_url('admin-gttgn/dashboard/edit_hotel/' . $hotel->id) ?>" 
+                                                    <a href="<?= base_url('admin-gttgn/hotel/edit/' . $hotel->id) ?>" 
                                                        class="btn btn-sm btn-outline-primary" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
@@ -105,7 +105,7 @@
 <script>
 function confirmDelete(id, name) {
     document.getElementById('hotelName').textContent = name;
-    document.getElementById('deleteLink').href = '<?= base_url('admin-gttgn/dashboard/delete_hotel/') ?>' + id;
+    document.getElementById('deleteLink').href = '<?= base_url('admin-gttgn/hotel/delete/') ?>' + id;
     new bootstrap.Modal(document.getElementById('deleteModal')).show();
 }
 </script>

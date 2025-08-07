@@ -6,7 +6,7 @@
                     <h5 class="mb-0">Tambah User Admin</h5>
                 </div>
                 <div class="card-body">
-                    <?php echo form_open('admin-gttgn/save_user'); ?>
+                    <?php echo form_open('admin-gttgn/administrator/add_process'); ?>
                         <div class="form-group">
                             <label for="name">Nama</label>
                             <input type="text" name="name" id="name" class="form-control" value="<?php echo set_value('name'); ?>" required>

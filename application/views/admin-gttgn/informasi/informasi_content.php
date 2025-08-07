@@ -7,7 +7,7 @@
                 </div>
                 
                 <div class="card-body">
-                    <form action="<?= base_url('admin-gttgn/dashboard/update_informasi_content') ?>" method="post">
+                    <form action="<?= base_url('admin-gttgn/informasi/edit_informasi_process') ?>" method="post">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="mb-3">
@@ -38,7 +38,7 @@
             <div class="card">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Kelola Transportasi</h5>
-                    <a href="<?= base_url('admin-gttgn/informasi/add-transportasi') ?>" class="btn btn-light btn-sm">
+                    <a href="<?= base_url('admin-gttgn/informasi/add_transportation') ?>" class="btn btn-light btn-sm">
                         <i class="fas fa-plus"></i> Tambah Transportasi
                     </a>
                 </div>
@@ -96,17 +96,17 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="<?= base_url('admin-gttgn/informasi/edit-transportasi/' . $item['id']) ?>" 
+                                                    <a href="<?= base_url('admin-gttgn/informasi/edit_transportation/' . $item['id']) ?>" 
                                                        class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="<?= base_url('admin-gttgn/dashboard/toggle_transportation/' . $item['id']) ?>" 
+                                                    <a href="<?= base_url('admin-gttgn/informasi/toggle_transportation/' . $item['id']) ?>" 
                                                        class="btn btn-sm <?= $item['is_active'] ? 'btn-secondary' : 'btn-success' ?>" 
                                                        title="<?= $item['is_active'] ? 'Nonaktifkan' : 'Aktifkan' ?>"
                                                        onclick="return confirm('Yakin ingin mengubah status transportasi ini?')">
                                                         <i class="fas fa-<?= $item['is_active'] ? 'eye-slash' : 'eye' ?>"></i>
                                                     </a>
-                                                    <a href="<?= base_url('admin-gttgn/dashboard/delete_transportation/' . $item['id']) ?>" 
+                                                    <a href="<?= base_url('admin-gttgn/informasi/delete_transportation/' . $item['id']) ?>" 
                                                        class="btn btn-sm btn-danger" title="Hapus"
                                                        onclick="return confirm('Yakin ingin menghapus transportasi ini?')">
                                                         <i class="fas fa-trash"></i>

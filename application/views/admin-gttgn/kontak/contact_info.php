@@ -14,7 +14,7 @@
                         </div>
                     <?php endif; ?>
                     
-                    <form method="post" action="<?= base_url('admin-gttgn/dashboard/update_contact_info') ?>">
+                    <form method="post" action="<?= base_url('admin-gttgn/kontak/edit_kontak_process') ?>">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -70,9 +70,6 @@
                         </div>
                         
                         <div class="d-flex justify-content-between">
-                            <a href="<?= base_url('admin-gttgn/dashboard') ?>" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> Kembali
-                            </a>
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save"></i> Simpan Perubahan
                             </button>

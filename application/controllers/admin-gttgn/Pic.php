@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * 
  * Handles user registration data display and export
  */
-class UserData extends MY_Controller {
+class Pic extends MY_Controller {
     
     public function __construct() {
         parent::__construct();
@@ -22,7 +22,7 @@ class UserData extends MY_Controller {
         $data['users'] = $this->user_model->get_all_users();
         
         // Load the user data view with header and footer
-        $this->load_admin_view('admin-gttgn/user_data/list', $data);
+        $this->load_admin_view('admin-gttgn/pic/list', $data);
     }
     
     /**

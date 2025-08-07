@@ -7,7 +7,7 @@
             <?php foreach ($transportation_list as $index => $transport): ?>
             <div class="transport-icon-item <?= $index === 0 ? 'active' : '' ?>" data-target="transport-<?= $transport['id'] ?>" data-aos="zoom-in" data-aos-duration="1000">
                 <div class="icon-container">
-                    <i class="<?= htmlspecialchars($transport['icon']) ?>"></i>
+                    <i class="fa-solid fa-2xl <?= htmlspecialchars($transport['icon']) ?>"></i>
                 </div>
                 <p><?= htmlspecialchars($transport['name']) ?></p>
             </div>

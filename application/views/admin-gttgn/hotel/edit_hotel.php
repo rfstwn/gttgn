@@ -12,7 +12,7 @@
                         </div>
                     <?php endif; ?>
                     
-                    <form method="post" action="<?= base_url('admin-gttgn/dashboard/update_hotel/' . $hotel->id) ?>">
+                    <form method="post" action="<?= base_url('admin-gttgn/hotel/edit_process/' . $hotel->id) ?>">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">

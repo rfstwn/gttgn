@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Data Registrasi User</h5>
-                    <a href="<?php echo base_url('admin-gttgn/user-data/export'); ?>" class="btn btn-light btn-sm">
+                    <a href="<?php echo base_url('admin-gttgn/pic/export'); ?>" class="btn btn-light btn-sm">
                         <i class="fas fa-file-excel"></i> Export Excel
                     </a>
                 </div>

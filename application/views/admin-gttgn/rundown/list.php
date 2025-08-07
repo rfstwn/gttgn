@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Kelola Jadwal Kegiatan</h5>
-                    <a href="<?= base_url('admin-gttgn/dashboard/add_rundown') ?>" class="btn btn-light btn-sm">
+                    <a href="<?= base_url('admin-gttgn/rundown/add') ?>" class="btn btn-light btn-sm">
                         <i class="fas fa-plus"></i> Tambah Jadwal
                     </a>
                 </div>
@@ -46,7 +46,7 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="<?= base_url('admin-gttgn/dashboard/edit_rundown/' . $item->id) ?>" 
+                                                    <a href="<?= base_url('admin-gttgn/rundown/edit/' . $item->id) ?>" 
                                                        class="btn btn-sm btn-outline-primary" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
@@ -91,7 +91,7 @@
 <script>
 function confirmDelete(id, title) {
     document.getElementById('eventTitle').textContent = title;
-    document.getElementById('deleteLink').href = '<?= base_url('admin-gttgn/dashboard/delete_rundown/') ?>' + id;
+    document.getElementById('deleteLink').href = '<?= base_url('admin-gttgn/rundown/delete/') ?>' + id;
     new bootstrap.Modal(document.getElementById('deleteModal')).show();
 }
 </script>

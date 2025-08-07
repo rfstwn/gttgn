@@ -12,7 +12,7 @@
                         </div>
                     <?php endif; ?>
                     
-                    <form method="post" action="<?= base_url('admin-gttgn/dashboard/save_hotel') ?>">
+                    <form method="post" action="<?= base_url('admin-gttgn/hotel/add_process') ?>">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
