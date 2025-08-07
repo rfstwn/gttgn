@@ -13,8 +13,12 @@ class Hotel extends MY_Controller {
      * Hotel management page
      */
     public function index() {
-        $data['title'] = 'Kelola Hotel';
+        $data['title'] = 'Hotel';
         $data['hotels'] = $this->hotel_model->get_all_hotels();
+        $data['button_title'] = [
+            'url' => base_url('admin-gttgn/hotel/add'),
+            'title' => 'Tambah Hotel'
+        ];
         
         // Load the hotels management view
         $this->load_admin_view('admin-gttgn/hotel/list', $data);

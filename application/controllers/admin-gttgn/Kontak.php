@@ -10,7 +10,7 @@ class Kontak extends MY_Controller {
     }
 
     public function index() {
-        $data['title'] = 'Kelola Informasi Kontak';
+        $data['title'] = 'Kontak Informasi';
         $data['contact_info'] = $this->contact_model->get_contact_info();
         
         // Load the contact info view

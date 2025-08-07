@@ -1,81 +1,72 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Pesan Kontak dari Website</h5>
+    <div class="card">
+        <div class="card-body">
+            <?php if (empty($submissions)): ?>
+                <div class="text-center py-5">
+                    <i class="fas fa-envelope fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">Belum ada pesan masuk</h5>
+                    <p class="text-muted">Pesan dari formulir kontak akan muncul di sini.</p>
                 </div>
-                <div class="card-body">
-                    
-                    
-                    <?php if (empty($submissions)): ?>
-                        <div class="text-center py-5">
-                            <i class="fas fa-envelope fa-3x text-muted mb-3"></i>
-                            <h5 class="text-muted">Belum ada pesan masuk</h5>
-                            <p class="text-muted">Pesan dari formulir kontak akan muncul di sini.</p>
-                        </div>
-                    <?php else: ?>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th>Status</th>
-                                        <th>Tanggal</th>
-                                        <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Subjek</th>
-                                        <th>Pesan</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($submissions as $submission): ?>
-                                        <tr class="<?= $submission->status == 'unread' ? 'table-warning' : '' ?>">
-                                            <td>
-                                                <?php
-                                                $status_class = [
-                                                    'new' => 'bg-primary',
-                                                    'read' => 'bg-info',
-                                                ];
-                                                $status_text = [
-                                                    'new' => 'Baru',
-                                                    'read' => 'Dibaca',
-                                                ];
-                                                ?>
-                                                <span class="badge <?= $status_class[$submission->status] ?>">
-                                                    <?= $status_text[$submission->status] ?>
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <small><?= date('d/m/Y H:i', strtotime($submission->created_at)) ?></small>
-                                            </td>
-                                            <td><?= htmlspecialchars($submission->name) ?></td>
-                                            <td><?= htmlspecialchars($submission->email) ?></td>
-                                            <td><?= htmlspecialchars($submission->subject) ?></td>
-                                            <td>
-                                                <?= htmlspecialchars(substr($submission->message, 0, 50)) ?>
-                                                <?= strlen($submission->message) > 50 ? '...' : '' ?>
-                                            </td>
-                                            <td>
-                                                <div class="btn-group" role="group">
-                                                    <a href="<?= base_url('admin-gttgn/kontak/submission_detail/' . $submission->id) ?>" 
-                                                       class="btn btn-sm btn-outline-primary" title="Lihat Detail">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger" 
-                                                            onclick="confirmDelete(<?= $submission->id ?>, '<?= htmlspecialchars($submission->name) ?>')" title="Hapus">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    <?php endif; ?>
+            <?php else: ?>
+                <div class="table-responsive mt-0">
+                    <table class="table table-bordered table-hover mb-0">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Status</th>
+                                <th>Tanggal</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Subjek</th>
+                                <th>Pesan</th>
+                                <th width="150px" style="text-align:center;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($submissions as $submission): ?>
+                                <tr class="<?= $submission->status == 'unread' ? 'table-warning' : '' ?>">
+                                    <td>
+                                        <?php
+                                        $status_class = [
+                                            'new' => 'bg-primary',
+                                            'read' => 'bg-info',
+                                        ];
+                                        $status_text = [
+                                            'new' => 'Baru',
+                                            'read' => 'Dibaca',
+                                        ];
+                                        ?>
+                                        <span class="badge text-white <?= $status_class[$submission->status] ?>">
+                                            <?= $status_text[$submission->status] ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <small><?= date('d/m/Y H:i', strtotime($submission->created_at)) ?></small>
+                                    </td>
+                                    <td><?= htmlspecialchars($submission->name) ?></td>
+                                    <td><?= htmlspecialchars($submission->email) ?></td>
+                                    <td><?= htmlspecialchars($submission->subject) ?></td>
+                                    <td>
+                                        <?= htmlspecialchars(substr($submission->message, 0, 50)) ?>
+                                        <?= strlen($submission->message) > 50 ? '...' : '' ?>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <div class="btn-group" role="group">
+                                            <a href="<?= base_url('admin-gttgn/kontak/submission_detail/' . $submission->id) ?>" 
+                                                class="btn btn-sm btn-outline-primary" title="Lihat Detail">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-sm btn-outline-danger" 
+                                                    onclick="confirmDelete(<?= $submission->id ?>, '<?= htmlspecialchars($submission->name) ?>')" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

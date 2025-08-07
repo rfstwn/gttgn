@@ -1,11 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * Admin User Data Controller
- * 
- * Handles user registration data display and export
- */
 class Pic extends MY_Controller {
     
     public function __construct() {
@@ -18,8 +13,12 @@ class Pic extends MY_Controller {
      * User data listing page
      */
     public function index() {
-        $data['title'] = 'Data Registrasi User';
+        $data['title'] = 'User PIC';
         $data['users'] = $this->user_model->get_all_users();
+        $data['button_title'] = [
+            'url' => base_url('admin-gttgn/pic/export'),
+            'title' => 'Export Data'
+        ];
         
         // Load the user data view with header and footer
         $this->load_admin_view('admin-gttgn/pic/list', $data);

@@ -18,8 +18,12 @@ class Administrator extends MY_Controller {
      * User management page
      */
     public function index() {
-        $data['title'] = 'Manajemen User Admin';
+        $data['title'] = 'User Administrator';
         $data['users'] = $this->admin_model->get_all_users();
+        $data['button_title'] = [
+            'url' => base_url('admin-gttgn/administrator/add'),
+            'title' => 'Tambah'
+        ];
         
         // Load the users view with header and footer
         $this->load_admin_view('admin-gttgn/administrator/users', $data);
@@ -29,7 +33,7 @@ class Administrator extends MY_Controller {
      * Add user form
      */
     public function add() {
-        $data['title'] = 'Tambah User Admin';
+        $data['title'] = 'Tambah User Administrator';
         
         // Load the add user view with header and footer
         $this->load_admin_view('admin-gttgn/administrator/add_user', $data);
@@ -47,7 +51,7 @@ class Administrator extends MY_Controller {
         
         if ($this->form_validation->run() == FALSE) {
             // Validation failed, return to form with errors
-            $data['title'] = 'Tambah User Admin';
+            $data['title'] = 'Tambah User Administrator';
             
             $this->load_admin_view('admin-gttgn/administrator/add_user', $data);
         } else {
@@ -78,7 +82,7 @@ class Administrator extends MY_Controller {
      * Edit user form
      */
     public function edit($id) {
-        $data['title'] = 'Edit User Admin';
+        $data['title'] = 'Edit User Administrator';
         $data['user'] = $this->admin_model->get_user_by_id($id);
         
         if (!$data['user']) {
@@ -120,7 +124,7 @@ class Administrator extends MY_Controller {
         
         if ($this->form_validation->run() == FALSE) {
             // Validation failed, return to form with errors
-            $data['title'] = 'Edit User Admin';
+            $data['title'] = 'Edit User Administrator';
             $data['user'] = $current_user;
             
             $this->load_admin_view('admin-gttgn/administrator/edit_user', $data);

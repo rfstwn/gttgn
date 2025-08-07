@@ -328,19 +328,21 @@ span {
   list-style: none;
 }
 .sidebar__menu li {
-  padding: 10px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .sidebar__menu li a {
   color: #fff;
   text-decoration: none;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
 }
 .sidebar__menu li a i {
   width: 20px;
   text-align: left;
 }
-.sidebar__menu li:hover {
-  background-color: #23272b;
+.sidebar__menu li:hover, .sidebar__menu li.active {
+  background-color: #474747;
 }
 .sidebar__logout {
   width: 100%;

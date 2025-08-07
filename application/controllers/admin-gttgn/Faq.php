@@ -9,8 +9,12 @@ class Faq extends MY_Controller {
     }
 
     public function index() {
-        $data['title'] = 'Kelola FAQ';
+        $data['title'] = 'FAQ (Frequently Asked Questions)';
         $data['faqs'] = $this->faq_model->get_all_faqs();
+        $data['button_title'] = [
+            'url' => base_url('admin-gttgn/faq/add'),
+            'title' => 'Tambah FAQ'
+        ];
         
         $this->load_admin_view('admin-gttgn/faq/list', $data);
     }

@@ -16,13 +16,13 @@ class Dashboard extends MY_Controller {
             [
                 'title' => 'User PIC',
                 'count' => $this->user_model->count_all(),
-                'description' => 'User',
+                'description' => 'User PIC terdaftar',
                 'link' => base_url('admin-gttgn/pic'),
             ],
             [
                 'title' => 'Pesan Kontak',
                 'count' => $this->contact_submission_model->count_by_status('new'),
-                'description' => 'Pesan',
+                'description' => 'Pesan kontak baru',
                 'link' => base_url('admin-gttgn/kontak/submission')
             ]
         ];

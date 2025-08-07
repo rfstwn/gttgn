@@ -9,14 +9,18 @@ class Rundown extends MY_Controller {
     }
 
     public function index() {
-        $data['title'] = 'Kelola Jadwal Kegiatan';
+        $data['title'] = 'Rundown';
         $data['rundown'] = $this->rundown_model->get_all_rundown();
+        $data['button_title'] = [
+            'url' => base_url('admin-gttgn/rundown/add'),
+            'title' => 'Tambah Rundown'
+        ];
         
         $this->load_admin_view('admin-gttgn/rundown/list', $data);
     }
     
     public function add() {
-        $data['title'] = 'Tambah Jadwal Kegiatan';
+        $data['title'] = 'Tambah Rundown';
         
         $this->load_admin_view('admin-gttgn/rundown/add_rundown', $data);
     }
@@ -46,11 +50,11 @@ class Rundown extends MY_Controller {
     }
     
     public function edit($id) {
-        $data['title'] = 'Edit Jadwal Kegiatan';
+        $data['title'] = 'Edit Rundown';
         $data['rundown'] = $this->rundown_model->get_rundown_by_id($id);
         
         if (!$data['rundown']) {
-            $this->session->set_flashdata('error', 'Jadwal kegiatan tidak ditemukan!');
+            $this->session->set_flashdata('error', 'Rundown tidak ditemukan!');
             redirect('admin-gttgn/rundown');
         }
         
@@ -72,9 +76,9 @@ class Rundown extends MY_Controller {
             ];
             
             if ($this->rundown_model->update_rundown($id, $data)) {
-                $this->session->set_flashdata('success', 'Jadwal kegiatan berhasil diperbarui!');
+                $this->session->set_flashdata('success', 'Rundown berhasil diperbarui!');
             } else {
-                $this->session->set_flashdata('error', 'Gagal memperbarui jadwal kegiatan!');
+                $this->session->set_flashdata('error', 'Gagal memperbarui rundown!');
             }
             
             redirect('admin-gttgn/rundown');
@@ -83,9 +87,9 @@ class Rundown extends MY_Controller {
     
     public function delete($id) {
         if ($this->rundown_model->delete_rundown($id)) {
-            $this->session->set_flashdata('success', 'Jadwal kegiatan berhasil dihapus!');
+            $this->session->set_flashdata('success', 'Rundown berhasil dihapus!');
         } else {
-            $this->session->set_flashdata('error', 'Gagal menghapus jadwal kegiatan!');
+            $this->session->set_flashdata('error', 'Gagal menghapus rundown!');
         }
         
         redirect('admin-gttgn/rundown');

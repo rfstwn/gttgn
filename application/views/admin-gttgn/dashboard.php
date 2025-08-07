@@ -1,8 +1,5 @@
 <div class="container-fluid">
     <div class="card">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Dashboard</h5>
-        </div>
         <div class="card-body">
             <h5 class="mb-0">Selamat datang di GTTGN Admin CMS</h5>
             <p><small>Gunakan sidebar menu untuk mengelola konten website, dan berikut adalah beberapa informasi sederhana.</small></p>
@@ -14,7 +11,7 @@
                         <h5 class="card-title"><?php echo $shortcut['title']; ?></h5>
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="card-text"><?php echo $shortcut['count']; ?> <small><?php echo $shortcut['description']; ?></small></span>
-                            <a href="<?php echo $shortcut['link']; ?>" class="btn btn-primary">
+                            <a href="<?php echo $shortcut['link']; ?>" class="btn btn-primary btn-sm">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>

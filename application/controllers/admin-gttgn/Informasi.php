@@ -13,7 +13,7 @@ class Informasi extends MY_Controller {
      * Informasi content management page
      */
     public function index() {
-        $data['title'] = 'Kelola Konten Informasi';
+        $data['title'] = 'Informasi';
         $data['content'] = $this->informasi_model->get_content();
         $data['transportation'] = $this->informasi_model->get_all_transportation();
         
