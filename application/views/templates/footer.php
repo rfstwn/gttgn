@@ -17,13 +17,13 @@
                 <div class="modal-body">
                     <div class="mb-4">
                     <h3 class="page-sub-title title text-green mb-2">Login</h3>
-                    <p class="text-grey"><small>Masukkan email dan password Anda</small></p>
+                    <p class="text-grey"><small>Masukkan no. whatsapp dan password Anda</small></p>
                     </div>
                     <button type="button" class="btn-close btn-close-modal" data-bs-dismiss="modal"></button>
                     <form class="form-wrapper" id="loginForm" action="<?= base_url('user/login') ?>" method="post">
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" placeholder="Email" class="form-control" id="email" name="email" required>
+                            <label for="no_whatsapp">No. Whatsapp</label>
+                            <input type="number" placeholder="No. Whatsapp" class="form-control" id="no_whatsapp" name="no_whatsapp" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
