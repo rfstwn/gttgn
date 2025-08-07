@@ -65,4 +65,73 @@ class User_model extends CI_Model {
         
         return FALSE;
     }
+    
+    /**
+     * Authenticate user login
+     * 
+     * @param string $no_whatsapp WhatsApp number
+     * @param string $password Password
+     * @return object|bool User object if authenticated, FALSE otherwise
+     */
+    public function authenticate($no_whatsapp, $password) {
+        $this->db->where('no_whatsapp', $no_whatsapp);
+        $query = $this->db->get('user');
+        
+        if ($query->num_rows() == 1) {
+            $user = $query->row();
+            if (password_verify($password, $user->password)) {
+                return $user;
+            }
+        }
+        
+        return FALSE;
+    }
+    
+    /**
+     * Save user participant data
+     * 
+     * @param array $data Participant data
+     * @return int|bool Participant ID on success, FALSE on failure
+     */
+    public function save_participant($data) {
+        $this->db->insert('user_participant', $data);
+        return ($this->db->affected_rows() > 0) ? $this->db->insert_id() : FALSE;
+    }
+    
+    /**
+     * Save tenant data
+     * 
+     * @param array $data Tenant data
+     * @return int|bool Tenant ID on success, FALSE on failure
+     */
+    public function save_tenant($data) {
+        $this->db->insert('tenant', $data);
+        return ($this->db->affected_rows() > 0) ? $this->db->insert_id() : FALSE;
+    }
+    
+    /**
+     * Get user participants by user ID
+     * 
+     * @param int $user_id User ID
+     * @return array List of participants
+     */
+    public function get_user_participants($user_id) {
+        $this->db->where('user_id', $user_id);
+        $this->db->order_by('created_at', 'DESC');
+        $query = $this->db->get('user_participant');
+        return $query->result();
+    }
+    
+    /**
+     * Get user tenants by user ID
+     * 
+     * @param int $user_id User ID
+     * @return array List of tenants
+     */
+    public function get_user_tenants($user_id) {
+        $this->db->where('user_id', $user_id);
+        $this->db->order_by('created_at', 'DESC');
+        $query = $this->db->get('tenant');
+        return $query->result();
+    }
 }

@@ -211,20 +211,6 @@
                     $('body').removeClass('registration-open');
                 }
             });
-            
-            //Animation for page transition
-            $('#main-page').addClass('page-loaded');
-
-            $('a').not('[target="_blank"]').click(function (e) {
-                const link = $(this).attr('href');
-                if (link && !link.startsWith('#') && !link.startsWith('javascript')) {
-                    e.preventDefault();
-                    $('#main-page').removeClass('page-loaded').addClass('page-leave');
-                    setTimeout(() => {
-                        window.location.href = link;
-                    }, 500);
-                }
-            });
         });
     </script>
 

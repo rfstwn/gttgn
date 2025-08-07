@@ -54,11 +54,25 @@ $menu = [
         <?php endforeach; ?>
 
         <?php if (!isset($isSticky)) : ?>
-            <li class="nav-item">
-                <button class="button botton-login-on-nav" id="loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
-                    <i class="fa fa-circle-user"></i>Login Peserta
-                </button>
-            </li>
+            <?php if ($this->session->userdata('logged_in')) : ?>
+                <li class="nav-item">
+                    <a class="nav-link <?php if ($menu_segments == 'user') echo 'active'; ?>" href="<?= base_url('user/dashboard') ?>">
+                        <i class="fa fa-tachometer-alt nav-icon"></i>
+                        <span>Dashboard PIC</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('user/logout') ?>" class="button botton-login-on-nav" style="background-color: #dc3545; margin-left: 10px;">
+                        <i class="fa fa-sign-out-alt"></i>Logout
+                    </a>
+                </li>
+            <?php else : ?>
+                <li class="nav-item">
+                    <button class="button botton-login-on-nav" id="loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="fa fa-circle-user"></i>Login Peserta
+                    </button>
+                </li>
+            <?php endif; ?>
         <?php endif; ?>
     </ul>
 </nav>
@@ -88,12 +102,27 @@ $menu = [
                         </a>
                     </li>
                 <?php endforeach; ?>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">
-                        <i class="fa fa-circle-user nav-icon"></i>
-                        <span>Login</span>
-                    </a>
-                </li>
+                <?php if ($this->session->userdata('logged_in')) : ?>
+                    <li class="nav-item">
+                        <a href="<?= base_url('user/dashboard') ?>" class="nav-link <?php if ($menu_segments == 'user') echo 'active'; ?>">
+                            <i class="fa fa-tachometer-alt nav-icon"></i>
+                            <span>Dashboard PIC</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('user/logout') ?>" class="nav-link" style="color: #dc3545;">
+                            <i class="fa fa-sign-out-alt nav-icon"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                <?php else : ?>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="fa fa-circle-user nav-icon"></i>
+                            <span>Login</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

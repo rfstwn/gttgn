@@ -69,4 +69,152 @@ class User extends CI_Controller {
         }
         return TRUE;
     }
+    
+    /**
+     * User login processing
+     */
+    public function login() {
+        // Set validation rules
+        $this->form_validation->set_error_delimiters('', '');
+        $this->form_validation->set_rules('no_whatsapp', 'No Whatsapp', 'required|trim|numeric');
+        $this->form_validation->set_rules('password', 'Password', 'required|trim');
+        
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', 'No. WhatsApp dan password harus diisi dengan benar.');
+            redirect(base_url());
+        } else {
+            $no_whatsapp = $this->input->post('no_whatsapp');
+            $password = $this->input->post('password');
+            
+            // Authenticate user
+            $user = $this->user_model->authenticate($no_whatsapp, $password);
+            
+            if ($user) {
+                // Set session data
+                $session_data = array(
+                    'user_id' => $user->id,
+                    'nama_lengkap' => $user->nama_lengkap,
+                    'no_whatsapp' => $user->no_whatsapp,
+                    'logged_in' => TRUE
+                );
+                $this->session->set_userdata($session_data);
+                
+                $this->session->set_flashdata('success', 'Login berhasil! Selamat datang, ' . $user->nama_lengkap);
+                redirect('user/dashboard');
+            } else {
+                $this->session->set_flashdata('error', 'No. WhatsApp atau password salah.');
+                redirect(base_url());
+            }
+        }
+    }
+    
+    /**
+     * User logout
+     */
+    public function logout() {
+        // Destroy session
+        $this->session->sess_destroy();
+        $this->session->set_flashdata('success', 'Anda telah berhasil logout.');
+        redirect(base_url());
+    }
+    
+    /**
+     * User dashboard - protected page
+     */
+    public function dashboard() {
+        // Check if user is logged in
+        if (!$this->session->userdata('logged_in')) {
+            $this->session->set_flashdata('error', 'Anda harus login terlebih dahulu.');
+            redirect(base_url());
+        }
+        
+        $data['title'] = 'Dashboard PIC User';
+        $data['user'] = (object) array(
+            'id' => $this->session->userdata('user_id'),
+            'nama_lengkap' => $this->session->userdata('nama_lengkap'),
+            'no_whatsapp' => $this->session->userdata('no_whatsapp')
+        );
+        
+        // Get user's participants and tenants
+        $data['participants'] = $this->user_model->get_user_participants($data['user']->id);
+        $data['tenants'] = $this->user_model->get_user_tenants($data['user']->id);
+        $data['menu_segments'] = $this->uri->segment(1);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/nav'); 
+        $this->load->view('user/dashboard', $data);
+        $this->load->view('templates/footer');
+    }
+    
+    /**
+     * Add participant
+     */
+    public function add_participant() {
+        // Check if user is logged in
+        if (!$this->session->userdata('logged_in')) {
+            $this->session->set_flashdata('error', 'Anda harus login terlebih dahulu.');
+            redirect(base_url());
+        }
+        
+        // Set validation rules
+        $this->form_validation->set_error_delimiters('', '');
+        $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required|trim');
+        $this->form_validation->set_rules('no_whatsapp', 'No Whatsapp', 'required|trim|numeric');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required|trim');
+        
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', trim(preg_replace('/\s+/', ' ', validation_errors())));
+        } else {
+            $data = array(
+                'user_id' => $this->session->userdata('user_id'),
+                'nama_lengkap' => $this->input->post('nama_lengkap'),
+                'no_whatsapp' => $this->input->post('no_whatsapp'),
+                'jabatan' => $this->input->post('jabatan')
+            );
+            
+            $result = $this->user_model->save_participant($data);
+            
+            if ($result) {
+                $this->session->set_flashdata('success', 'Participant berhasil ditambahkan.');
+            } else {
+                $this->session->set_flashdata('error', 'Gagal menambahkan participant.');
+            }
+        }
+        
+        redirect('user/dashboard');
+    }
+    
+    /**
+     * Add tenant
+     */
+    public function add_tenant() {
+        // Check if user is logged in
+        if (!$this->session->userdata('logged_in')) {
+            $this->session->set_flashdata('error', 'Anda harus login terlebih dahulu.');
+            redirect(base_url());
+        }
+        
+        // Set validation rules
+        $this->form_validation->set_error_delimiters('', '');
+        $this->form_validation->set_rules('nama_tenant', 'Nama Tenant', 'required|trim');
+        
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', trim(preg_replace('/\s+/', ' ', validation_errors())));
+        } else {
+            $data = array(
+                'user_id' => $this->session->userdata('user_id'),
+                'nama_tenant' => $this->input->post('nama_tenant')
+            );
+            
+            $result = $this->user_model->save_tenant($data);
+            
+            if ($result) {
+                $this->session->set_flashdata('success', 'Tenant berhasil ditambahkan.');
+            } else {
+                $this->session->set_flashdata('error', 'Gagal menambahkan tenant.');
+            }
+        }
+        
+        redirect('user/dashboard');
+    }
 }
