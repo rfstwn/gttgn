@@ -18,7 +18,9 @@ class User extends CI_Controller {
         $this->form_validation->set_error_delimiters('', '');
         $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required|trim');
         $this->form_validation->set_rules('no_whatsapp', 'No Whatsapp', 'required|trim|numeric');
-        $this->form_validation->set_rules('asal_daerah', 'Asal Daerah', 'required|trim');
+        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[6]');
+        $this->form_validation->set_rules('province_id', 'Provinsi', 'required|numeric');
+        $this->form_validation->set_rules('city_id', 'Kota/Kabupaten', 'required|numeric');
         $this->form_validation->set_rules('kode_unik', 'Kode Unik', 'required|trim|callback_validate_kode_unik');
         
         // Check if validation fails
@@ -29,10 +31,12 @@ class User extends CI_Controller {
         } else {
             // Prepare data for database insertion
             $data = array(
-                'registration_type' => $this->input->post('registrationType'),
+                'registration_type' => $this->input->post('registrationType') ?: 1,
                 'nama_lengkap' => $this->input->post('nama_lengkap'),
                 'no_whatsapp' => $this->input->post('no_whatsapp'),
-                'asal_daerah' => $this->input->post('asal_daerah'),
+                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                'prov_id' => $this->input->post('province_id'),
+                'city_id' => $this->input->post('city_id'),
                 'kode_unik' => $this->input->post('kode_unik')
             );
             

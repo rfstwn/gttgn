@@ -6,6 +6,8 @@ class Pic extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('user_model');
+        $this->load->model('province_model');
+        $this->load->model('city_model');
         $this->load->helper('download');
     }
     
@@ -14,7 +16,12 @@ class Pic extends MY_Controller {
      */
     public function index() {
         $data['title'] = 'User PIC';
-        $data['users'] = $this->user_model->get_all_users();
+        $data_pic = $this->user_model->get_all_users();
+        foreach ($data_pic as $pic) {
+            $pic->prov_id = $this->province_model->get_province_by_id($pic->prov_id);
+            $pic->city_id = $this->city_model->get_city_by_id($pic->city_id);
+        }
+        $data['users'] = $data_pic;
         $data['button_title'] = [
             'url' => base_url('admin-gttgn/pic/export'),
             'title' => 'Export Data'
@@ -40,7 +47,8 @@ class Pic extends MY_Controller {
             'Tipe Registrasi',
             'Nama Lengkap',
             'No Whatsapp',
-            'Asal Daerah',
+            'Provinsi',
+            'Kota/Kabupaten',
             'Tanggal Registrasi'
         );
         
@@ -55,7 +63,8 @@ class Pic extends MY_Controller {
                 $registration_type,
                 $user->nama_lengkap,
                 $user->no_whatsapp,
-                $user->asal_daerah,
+                $this->province_model->get_province_by_id($user->prov_id)->prov_name,
+                $this->city_model->get_city_by_id($user->city_id)->city_name,
                 date('d-m-Y H:i', strtotime($user->created_at))
             );
         }

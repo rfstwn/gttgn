@@ -8,6 +8,7 @@ class Home extends MY_Controller
         parent::__construct();
         $this->load->model('rundown_model');
         $this->load->model('faq_model');
+        $this->load->model('province_model');
     }
     
     public function index()
@@ -56,6 +57,7 @@ class Home extends MY_Controller
         ];
 
         $data['menu_segments'] = $this->uri->segment(1);
+        
         $this->load->view('home/index', $data);
     }
 }

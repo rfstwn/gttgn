@@ -9,7 +9,8 @@
                             <th>Tipe Registrasi</th>
                             <th>Nama Lengkap</th>
                             <th>No Whatsapp</th>
-                            <th>Asal Daerah</th>
+                            <th>Provinsi</th>
+                            <th>Kota/Kabupaten</th>
                             <th>Tanggal Registrasi</th>
                         </tr>
                     </thead>
@@ -29,13 +30,14 @@
                                     </td>
                                     <td><?php echo $user->nama_lengkap; ?></td>
                                     <td><?php echo $user->no_whatsapp; ?></td>
-                                    <td><?php echo $user->asal_daerah; ?></td>
+                                    <td><?php echo $user->prov_id->prov_name; ?></td>
+                                    <td><?php echo $user->city_id->city_name; ?></td>
                                     <td><?php echo date('d-m-Y H:i', strtotime($user->created_at)); ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="6" class="text-center">Tidak ada data user</td>
+                                <td colspan="7" class="text-center">Tidak ada data user</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>
