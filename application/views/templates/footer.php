@@ -211,6 +211,38 @@
                     $('body').removeClass('registration-open');
                 }
             });
+            
+            // Page transition and loading animation
+            $('#main-page').addClass('page-loaded');
+            
+            // Handle page transitions with loading animation
+            $('a').not('[target="_blank"]').not('[data-bs-toggle]').not('[href^="#"]').not('[href^="javascript"]').not('.no-transition').click(function (e) {
+                const link = $(this).attr('href');
+                if (link && link !== '#' && !link.startsWith('javascript') && !link.includes('modal')) {
+                    e.preventDefault();
+                    
+                    // Show loading overlay
+                    $('#loadingOverlay').css('display', 'flex');
+                    
+                    // Start page leave animation
+                    $('#main-page').removeClass('page-loaded').addClass('page-leave');
+                    
+                    // Navigate after animation
+                    setTimeout(() => {
+                        window.location.href = link;
+                    }, 300);
+                }
+            });
+            
+            // Hide loading overlay when page loads
+            $(window).on('load', function() {
+                $('#loadingOverlay').fadeOut(300);
+            });
+            
+            // Also hide loading on document ready (fallback)
+            setTimeout(() => {
+                $('#loadingOverlay').fadeOut(300);
+            }, 500);
         });
     </script>
 

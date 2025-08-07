@@ -1,93 +1,98 @@
-<div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Dashboard PIC</h2>
-        <span class="me-3">Selamat datang, <strong><?= $user->nama_lengkap ?></strong></span>
-    </div>
+<?php 
+    ci()->load->view('templates/header', ['title' => 'Dashboard PIC']); 
+    ci()->load->view('templates/nav'); 
+?>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Dashboard PIC</h2>
+            <span class="me-3">Selamat datang, <strong><?= $user->nama_lengkap ?></strong></span>
+        </div>
 
-    <div class="row">
-        <!-- User Participants Section -->
-        <div class="col-md-6 mb-4">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Paserta</h5>
-                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addParticipantModal">
-                        <i class="fas fa-plus"></i> Tambah Participant
-                    </button>
-                </div>
-                <div class="card-body">
-                    <?php if(empty($participants)): ?>
-                        <p class="text-muted">Belum ada participant yang ditambahkan.</p>
-                    <?php else: ?>
-                        <div class="table-responsive">
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>Nama Lengkap</th>
-                                        <th>No. WhatsApp</th>
-                                        <th>Jabatan</th>
-                                        <th>Status</th>
-                                        <th>Tanggal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach($participants as $participant): ?>
+        <div class="row">
+            <!-- User Participants Section -->
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Paserta</h5>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addParticipantModal">
+                            <i class="fas fa-plus"></i> Tambah Participant
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <?php if(empty($participants)): ?>
+                            <p class="text-muted">Belum ada participant yang ditambahkan.</p>
+                        <?php else: ?>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
                                         <tr>
-                                            <td><?= htmlspecialchars($participant->nama_lengkap) ?></td>
-                                            <td><?= htmlspecialchars($participant->no_whatsapp) ?></td>
-                                            <td><?= htmlspecialchars($participant->jabatan) ?></td>
-                                            <td>
-                                                <span class="badge <?= $participant->is_present ? 'bg-success' : 'bg-secondary' ?>">
-                                                    <?= $participant->is_present ? 'Hadir' : 'Tidak Hadir' ?>
-                                                </span>
-                                            </td>
-                                            <td><?= date('d/m/Y H:i', strtotime($participant->created_at)) ?></td>
+                                            <th>Nama Lengkap</th>
+                                            <th>No. WhatsApp</th>
+                                            <th>Jabatan</th>
+                                            <th>Status</th>
+                                            <th>Tanggal</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    <?php endif; ?>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($participants as $participant): ?>
+                                            <tr>
+                                                <td><?= htmlspecialchars($participant->nama_lengkap) ?></td>
+                                                <td><?= htmlspecialchars($participant->no_whatsapp) ?></td>
+                                                <td><?= htmlspecialchars($participant->jabatan) ?></td>
+                                                <td>
+                                                    <span class="badge <?= $participant->is_present ? 'bg-success' : 'bg-secondary' ?>">
+                                                        <?= $participant->is_present ? 'Hadir' : 'Tidak Hadir' ?>
+                                                    </span>
+                                                </td>
+                                                <td><?= date('d/m/Y H:i', strtotime($participant->created_at)) ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Tenants Section -->
-        <div class="col-md-6 mb-4">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">List Tenant</h5>
-                    <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addTenantModal">
-                        <i class="fas fa-plus"></i> Tambah Tenant
-                    </button>
-                </div>
-                <div class="card-body">
-                    <?php if(empty($tenants)): ?>
-                        <p class="text-muted">Belum ada tenant yang ditambahkan.</p>
-                    <?php else: ?>
-                        <div class="table-responsive">
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>Nama Tenant</th>
-                                        <th>Tanggal Dibuat</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach($tenants as $tenant): ?>
+            
+            <!-- Tenants Section -->
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">List Tenant</h5>
+                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addTenantModal">
+                            <i class="fas fa-plus"></i> Tambah Tenant
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <?php if(empty($tenants)): ?>
+                            <p class="text-muted">Belum ada tenant yang ditambahkan.</p>
+                        <?php else: ?>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
                                         <tr>
-                                            <td><?= htmlspecialchars($tenant->nama_tenant) ?></td>
-                                            <td><?= date('d/m/Y H:i', strtotime($tenant->created_at)) ?></td>
+                                            <th>Nama Tenant</th>
+                                            <th>Tanggal Dibuat</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    <?php endif; ?>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($tenants as $tenant): ?>
+                                            <tr>
+                                                <td><?= htmlspecialchars($tenant->nama_tenant) ?></td>
+                                                <td><?= date('d/m/Y H:i', strtotime($tenant->created_at)) ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+<?php $this->load->view('templates/footer'); ?>
 
 <!-- Add Participant Modal -->
 <div class="modal fade" id="addParticipantModal" tabindex="-1">

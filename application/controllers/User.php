@@ -140,10 +140,7 @@ class User extends CI_Controller {
         $data['tenants'] = $this->user_model->get_user_tenants($data['user']->id);
         $data['menu_segments'] = $this->uri->segment(1);
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/nav'); 
         $this->load->view('user/dashboard', $data);
-        $this->load->view('templates/footer');
     }
     
     /**
