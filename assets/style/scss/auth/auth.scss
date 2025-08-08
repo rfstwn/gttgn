@@ -7,6 +7,22 @@
 	}
 	.modal-body {
 		padding: 1.5rem;
+
+		.cta_daftar {
+			display: flex;
+			align-items: end;
+			justify-content: center;
+			small {
+				font-size: 12px;
+			}
+			a {
+				font-family: "Maison Neue Bold";
+				font-weight: bold;
+				text-decoration: none;
+				font-size: 15px;
+				color: $green;
+			}
+		}
 	}
 }
 

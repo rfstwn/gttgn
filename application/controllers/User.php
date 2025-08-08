@@ -141,6 +141,24 @@ class User extends CI_Controller {
         $data['products'] = $this->user_model->get_user_products($data['user']->id);
         $data['menu_segments'] = $this->uri->segment(1);
 
+        $data['jabatan'] = [
+            "Gubernur",
+            "Wakil Gubernur",
+            "Sekda Provinsi",
+            "Kepada Dinas",
+            "Ajudan Gubernur",
+            "Ajudan Wakil Gubernur",
+            "Ketua DPRD Provinsi",
+            "Wakil Ketua DPRD Provinsi",
+            "Bupati/Walikota",
+            "Wakil Bupati/Wakil Wali kota",
+            "Sekda Kab/Kota",
+            "Ketua DPRD Kab/Kota",
+            "Wakil Ketua DPRD Kab/Kota",
+            "Ajudan Bupati/Wali Kota",
+            "Ajudan Wakil Bupati/Wakil Walikota"
+        ];
+
         $this->load->view('user/dashboard', $data);
     }
     

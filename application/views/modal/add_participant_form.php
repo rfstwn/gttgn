@@ -18,7 +18,12 @@
                     </div>
                     <div class="mb-3">
                         <label for="participant_jabatan" class="form-label">Jabatan</label>
-                        <input type="text" class="form-control" id="participant_jabatan" name="jabatan" required>
+                        <select name="jabatan" id="participant_jabatan" class="form-select" required>
+                            <option value="">-- Pilih Jabatan --</option>
+                            <?php foreach($jabatan as $jabatan): ?>
+                                <option value="<?= $jabatan ?>"><?= $jabatan ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">

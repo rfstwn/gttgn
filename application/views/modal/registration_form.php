@@ -34,7 +34,12 @@
             
             <div class="form-group">
                 <label for="password">Password <span class="text-danger">*</span></label>
-                <input type="password" class="form-control" id="password" name="password" minlength="6" required>
+                <div class="password-wrapper">
+                    <input type="password" class="form-control" id="password" name="password" minlength="6" required>
+                    <button class="btn btn-outline-secondary toggle-password" type="button" tabindex="-1">
+                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                    </button>
+                </div>
                 <small class="form-text text-muted">Minimal 6 karakter</small>
                 <div class="text-danger"><?= form_error('password') ?></div>
             </div>

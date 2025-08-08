@@ -73,6 +73,21 @@
                 }
             });
 
+            // Password Toggle Functionality
+            // =========================================
+            $(".toggle-password").click(function() {
+                var input = $(this).closest('.password-wrapper').find('input');
+                var icon = $(this).find('i');
+                
+                if (input.attr("type") === "password") {
+                    input.attr("type", "text");
+                    icon.removeClass("fa-eye-slash").addClass("fa-eye");
+                } else {
+                    input.attr("type", "password");
+                    icon.removeClass("fa-eye").addClass("fa-eye-slash");
+                }
+            });
+            
             // Counter number when scroll on view
             // ! ===> Use at homepage on Peserta Sections
             // =========================================

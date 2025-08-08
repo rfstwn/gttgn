@@ -14,11 +14,16 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" placeholder="Password" class="form-control" id="password" name="password" required>
+                        <div class="password-wrapper">
+                            <input type="password" placeholder="Password" class="form-control" id="password" name="password" required>
+                            <button class="btn btn-outline-secondary toggle-password" type="button" tabindex="-1">
+                                <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                            </button>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">Login</button>
-                    <div class="text-center">
-                        <span><small>Belum punya akun? <a href="#" id="openRegistration" class="text-decoration-none">Daftar disini</a></small></span>
+                    <div class="cta_daftar">
+                        <span><small>Belum punya akun?</small> <a href="#" id="openRegistration">Daftar disini</a></span>
                     </div>
                 </form>
             </div>

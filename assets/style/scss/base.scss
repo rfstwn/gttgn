@@ -288,3 +288,15 @@ span {
 		}
 	}
 }
+
+.password-wrapper {
+	position: relative;
+	button {
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 10;
+		border: 1px solid $grey-light;
+	}
+}

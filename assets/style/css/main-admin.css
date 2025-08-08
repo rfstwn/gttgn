@@ -287,6 +287,18 @@ span {
   color: #fff;
 }
 
+.password-wrapper {
+  position: relative;
+}
+.password-wrapper button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  border: 1px solid #e4e4e4;
+}
+
 .sidebar {
   min-height: 100vh;
   background-color: #343a40;
