@@ -9,6 +9,7 @@ class Home extends MY_Controller
         $this->load->model('rundown_model');
         $this->load->model('faq_model');
         $this->load->model('province_model');
+        $this->load->model('product_model');
     }
     
     public function index()
@@ -19,33 +20,12 @@ class Home extends MY_Controller
         // Get dynamic schedule/rundown data from database
         $data['schedule'] = $this->rundown_model->get_formatted_rundown();
 
-        $data['products'] = [
-            [
-                'title' => 'Kabel Listrik',
-                'image' =>  base_url('assets/image/product/kabel.jpg'),
-                'description' => 'Kabel listrik low voltage, kabel listrik medium voltage, kabel listrik oil & gas, kabel fiber optik, kabel fire resistance dan kabel telekomunikasi.',
-            ],
-            [
-                'title' => 'Lampu LED',
-                'image' => base_url('assets/image/product/lampu.jpg'),
-                'description' => 'Kabel listrik low voltage, kabel listrik medium voltage, kabel listrik oil & gas, kabel fiber optik, kabel fire resistance dan kabel telekomunikasi.',
-            ],
-            [
-                'title' => 'Panel Surya',
-                'image' => base_url('assets/image/product/panel-surya.jpeg'),
-                'description' => 'Kabel listrik low voltage, kabel listrik medium voltage, kabel listrik oil & gas, kabel fiber optik, kabel fire resistance dan kabel telekomunikasi.',
-            ],
-            [
-                'title' => 'Pemanas Air',
-                'image' => base_url('assets/image/product/pemanas-air.jpg'),
-                'description' => 'Pemanas Air low voltage, kabel listrik medium voltage, kabel listrik oil & gas, kabel fiber optik, kabel fire resistance dan kabel telekomunikasi.',
-            ],
-            [
-                'title' => 'Kompor Listrik',
-                'image' => base_url('assets/image/product/kompor.jpg'),
-                'description' => 'Pemanas Air low voltage, kabel listrik medium voltage, kabel listrik oil & gas, kabel fiber optik, kabel fire resistance dan kabel telekomunikasi.',
-            ]
-        ];
+        // Get random products from database for homepage
+        $products_data = $this->product_model->get_random_products(5);
+        $data['products'] = array();
+        foreach ($products_data as $product) {
+            $data['products'][] = $this->product_model->format_product_for_display($product);
+        }
 
 
         $data['audiences'] = [

@@ -11,9 +11,11 @@
                         <h5 class="card-title"><?php echo $shortcut['title']; ?></h5>
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="card-text"><?php echo $shortcut['count']; ?> <small><?php echo $shortcut['description']; ?></small></span>
+                            <?php if(isset($shortcut['link'])): ?>
                             <a href="<?php echo $shortcut['link']; ?>" class="btn btn-primary btn-sm">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

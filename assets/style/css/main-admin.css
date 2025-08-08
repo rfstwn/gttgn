@@ -136,6 +136,13 @@ span {
   height: 100%;
 }
 
+.btn {
+  border-radius: 7.5px;
+}
+.btn-light {
+  border: 1px solid #e4e4e4;
+}
+
 @keyframes float {
   0% {
     transform: translateY(0px);

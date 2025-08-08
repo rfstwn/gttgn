@@ -18,7 +18,9 @@
                                 <p><?= truncate($product['description'], 100) ?></p>
                             </div>
                             <div class="product-item--footer">
-                                <button><i class="fa fa-plus"></i></button>
+                                <a href="<?= base_url('produk/detail/' . $product['id']) ?>" class="text-decoration-none">
+                                    <button><i class="fa fa-plus"></i></button>
+                                </a>
                             </div>
                         </div>
                     <?php $duration += 500;

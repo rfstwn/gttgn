@@ -16,12 +16,8 @@ class Pic extends MY_Controller {
      */
     public function index() {
         $data['title'] = 'User PIC';
-        $data_pic = $this->user_model->get_all_users();
-        foreach ($data_pic as $pic) {
-            $pic->prov_id = $this->province_model->get_province_by_id($pic->prov_id);
-            $pic->city_id = $this->city_model->get_city_by_id($pic->city_id);
-        }
-        $data['users'] = $data_pic;
+        // Use the enhanced method that includes participant, tenant, and product counts
+        $data['users'] = $this->user_model->get_all_users_with_details();
         $data['button_title'] = [
             'url' => base_url('admin-gttgn/pic/export'),
             'title' => 'Export Data'
@@ -74,5 +70,151 @@ class Pic extends MY_Controller {
         
         // Export to CSV
         $this->excel_export->export_csv($filename, $headers, $data);
+    }
+    
+    /**
+     * Get user participants via AJAX
+     */
+    public function get_participants() {
+        $user_id = $this->input->post('user_id');
+        
+        if (!$user_id) {
+            echo '<div class="alert alert-danger">Invalid user ID</div>';
+            return;
+        }
+        
+        $participants = $this->user_model->get_user_participants($user_id);
+        
+        if (empty($participants)) {
+            echo '<div class="alert alert-info">No participants found</div>';
+            return;
+        }
+        
+        echo '<div class="table-responsive">';
+        echo '<table class="table table-striped">';
+        echo '<thead><tr><th>Nama Lengkap</th><th>No. WhatsApp</th><th>Jabatan</th><th>Status</th><th>Tanggal</th></tr></thead>';
+        echo '<tbody>';
+        
+        foreach ($participants as $participant) {
+            $status_badge = $participant->is_present ? 'bg-success' : 'bg-secondary';
+            $status_text = $participant->is_present ? 'Hadir' : 'Tidak Hadir';
+            
+            echo '<tr>';
+            echo '<td>' . htmlspecialchars($participant->nama_lengkap) . '</td>';
+            echo '<td>' . htmlspecialchars($participant->no_whatsapp) . '</td>';
+            echo '<td>' . htmlspecialchars($participant->jabatan) . '</td>';
+            echo '<td><span class="badge ' . $status_badge . '">' . $status_text . '</span></td>';
+            echo '<td>' . date('d/m/Y H:i', strtotime($participant->created_at)) . '</td>';
+            echo '</tr>';
+        }
+        
+        echo '</tbody></table></div>';
+    }
+    
+    /**
+     * Get user tenants via AJAX
+     */
+    public function get_tenants() {
+        $user_id = $this->input->post('user_id');
+        
+        if (!$user_id) {
+            echo '<div class="alert alert-danger">Invalid user ID</div>';
+            return;
+        }
+        
+        $tenants = $this->user_model->get_user_tenants($user_id);
+        
+        if (empty($tenants)) {
+            echo '<div class="alert alert-info">No tenants found</div>';
+            return;
+        }
+        
+        echo '<div class="table-responsive">';
+        echo '<table class="table table-striped">';
+        echo '<thead><tr><th>Nama Tenant</th><th>Tanggal Dibuat</th></tr></thead>';
+        echo '<tbody>';
+        
+        foreach ($tenants as $tenant) {
+            echo '<tr>';
+            echo '<td>' . htmlspecialchars($tenant->nama_tenant) . '</td>';
+            echo '<td>' . date('d/m/Y H:i', strtotime($tenant->created_at)) . '</td>';
+            echo '</tr>';
+        }
+        
+        echo '</tbody></table></div>';
+    }
+    
+    /**
+     * Get user products via AJAX
+     */
+    public function get_products() {
+        $user_id = $this->input->post('user_id');
+        
+        if (!$user_id) {
+            echo '<div class="alert alert-danger">Invalid user ID</div>';
+            return;
+        }
+        
+        $products = $this->user_model->get_user_products($user_id);
+        
+        if (empty($products)) {
+            echo '<div class="alert alert-info">No products found</div>';
+            return;
+        }
+        
+        echo '<div class="table-responsive">';
+        echo '<table class="table table-striped">';
+        echo '<thead><tr><th>Gambar</th><th>Nama Produk</th><th>Tenant</th><th style="width: 250px;">Deskripsi</th><th>Video</th><th>Katalog</th><th>Tanggal</th></tr></thead>';
+        echo '<tbody>';
+        
+        foreach ($products as $product) {
+            echo '<tr>';
+            
+            // Image
+            echo '<td>';
+            if ($product->image_1) {
+                echo '<img src="' . base_url('assets/image/produk/' . $product->image_1) . '" alt="' . htmlspecialchars($product->name) . '" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;">';
+            } else {
+                echo '<span class="text-muted">No Image</span>';
+            }
+            echo '</td>';
+            
+            // Product name
+            echo '<td>' . htmlspecialchars($product->name) . '</td>';
+            
+            // Tenant
+            echo '<td>' . htmlspecialchars($product->nama_tenant) . '</td>';
+            
+            // Description
+            $description = htmlspecialchars(substr($product->description, 0, 100));
+            if (strlen($product->description) > 100) {
+                $description .= '...';
+            }
+            echo '<td>' . $description . '</td>';
+            
+            // Video
+            echo '<td>';
+            if ($product->video) {
+                echo '<a href="' . htmlspecialchars($product->video) . '" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fas fa-play"></i></a>';
+            } else {
+                echo '<span class="text-muted">-</span>';
+            }
+            echo '</td>';
+            
+            // Katalog
+            echo '<td>';
+            if ($product->katalog) {
+                echo '<a href="' . base_url('assets/image/produk/' . $product->katalog) . '" target="_blank" class="btn btn-sm btn-outline-success"><i class="fas fa-file-pdf"></i></a>';
+            } else {
+                echo '<span class="text-muted">-</span>';
+            }
+            echo '</td>';
+            
+            // Date
+            echo '<td>' . date('d/m/Y H:i', strtotime($product->created_at)) . '</td>';
+            echo '</tr>';
+        }
+        
+        echo '</tbody></table></div>';
     }
 }

@@ -135,9 +135,10 @@ class User extends CI_Controller {
             'no_whatsapp' => $this->session->userdata('no_whatsapp')
         );
         
-        // Get user's participants and tenants
+        // Get user's participants, tenants, and products
         $data['participants'] = $this->user_model->get_user_participants($data['user']->id);
         $data['tenants'] = $this->user_model->get_user_tenants($data['user']->id);
+        $data['products'] = $this->user_model->get_user_products($data['user']->id);
         $data['menu_segments'] = $this->uri->segment(1);
 
         $this->load->view('user/dashboard', $data);
@@ -210,6 +211,268 @@ class User extends CI_Controller {
             } else {
                 $this->session->set_flashdata('error', 'Gagal menambahkan tenant.');
             }
+        }
+        
+        redirect('user/dashboard');
+    }
+    
+    /**
+     * Add product
+     */
+    public function add_product() {
+        // Check if user is logged in
+        if (!$this->session->userdata('logged_in')) {
+            $this->session->set_flashdata('error', 'Anda harus login terlebih dahulu.');
+            redirect(base_url());
+        }
+        
+        // Set validation rules
+        $this->form_validation->set_error_delimiters('', '');
+        $this->form_validation->set_rules('tenant_id', 'Tenant', 'required|numeric');
+        $this->form_validation->set_rules('name', 'Nama Produk', 'required|trim');
+        $this->form_validation->set_rules('description', 'Deskripsi', 'trim');
+        $this->form_validation->set_rules('video', 'Video URL', 'trim');
+        
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', trim(preg_replace('/\s+/', ' ', validation_errors())));
+        } else {
+            // Handle file uploads
+            $this->load->library('upload');
+            $uploaded_files = array();
+            
+            // Configure upload
+            $config['upload_path'] = './assets/image/produk/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = 2048; // 2MB
+            $config['encrypt_name'] = TRUE;
+            
+            // Create directory if not exists
+            if (!is_dir($config['upload_path'])) {
+                mkdir($config['upload_path'], 0755, true);
+            }
+            
+            // Upload images (image_1 to image_5)
+            for ($i = 1; $i <= 5; $i++) {
+                if (!empty($_FILES['image_' . $i]['name'])) {
+                    $config['file_name'] = 'produk_' . time() . '_' . $i;
+                    $this->upload->initialize($config);
+                    
+                    if ($this->upload->do_upload('image_' . $i)) {
+                        $upload_data = $this->upload->data();
+                        $uploaded_files['image_' . $i] = $upload_data['file_name'];
+                    }
+                }
+            }
+            
+            // Upload katalog
+            if (!empty($_FILES['katalog']['name'])) {
+                $config['allowed_types'] = 'pdf|doc|docx';
+                $config['file_name'] = 'katalog_' . time();
+                $this->upload->initialize($config);
+                
+                if ($this->upload->do_upload('katalog')) {
+                    $upload_data = $this->upload->data();
+                    $uploaded_files['katalog'] = $upload_data['file_name'];
+                }
+            }
+            
+            $data = array(
+                'user_id' => $this->session->userdata('user_id'),
+                'tenant_id' => $this->input->post('tenant_id'),
+                'name' => $this->input->post('name'),
+                'description' => $this->input->post('description'),
+                'video' => $this->input->post('video')
+            );
+            
+            // Add uploaded files to data
+            foreach ($uploaded_files as $key => $filename) {
+                $data[$key] = $filename;
+            }
+            
+            // Ensure image_1 is required
+            if (empty($data['image_1'])) {
+                $this->session->set_flashdata('error', 'Gambar utama (Image 1) wajib diupload.');
+                redirect('user/dashboard');
+                return;
+            }
+            
+            $result = $this->user_model->save_product($data);
+            
+            if ($result) {
+                $this->session->set_flashdata('success', 'Produk berhasil ditambahkan.');
+            } else {
+                $this->session->set_flashdata('error', 'Gagal menambahkan produk.');
+            }
+        }
+        
+        redirect('user/dashboard');
+    }
+    
+    /**
+     * Edit product form
+     */
+    public function edit_product($id) {
+        // Check if user is logged in
+        if (!$this->session->userdata('logged_in')) {
+            $this->session->set_flashdata('error', 'Anda harus login terlebih dahulu.');
+            redirect(base_url());
+        }
+        
+        $product = $this->user_model->get_product_by_id($id);
+        
+        // Check if product exists and belongs to current user
+        if (!$product || $product->user_id != $this->session->userdata('user_id')) {
+            $this->session->set_flashdata('error', 'Produk tidak ditemukan.');
+            redirect('user/dashboard');
+        }
+        
+        $data['title'] = 'Edit Produk';
+        $data['product'] = $product;
+        $data['tenants'] = $this->user_model->get_user_tenants($this->session->userdata('user_id'));
+        $data['menu_segments'] = $this->uri->segment(1);
+        
+        $this->load->view('user/edit_product', $data);
+    }
+    
+    /**
+     * Update product
+     */
+    public function update_product($id) {
+        // Check if user is logged in
+        if (!$this->session->userdata('logged_in')) {
+            $this->session->set_flashdata('error', 'Anda harus login terlebih dahulu.');
+            redirect(base_url());
+        }
+        
+        $product = $this->user_model->get_product_by_id($id);
+        
+        // Check if product exists and belongs to current user
+        if (!$product || $product->user_id != $this->session->userdata('user_id')) {
+            $this->session->set_flashdata('error', 'Produk tidak ditemukan.');
+            redirect('user/dashboard');
+        }
+        
+        // Set validation rules
+        $this->form_validation->set_error_delimiters('', '');
+        $this->form_validation->set_rules('tenant_id', 'Tenant', 'required|numeric');
+        $this->form_validation->set_rules('name', 'Nama Produk', 'required|trim');
+        $this->form_validation->set_rules('description', 'Deskripsi', 'trim');
+        $this->form_validation->set_rules('video', 'Video URL', 'trim');
+        
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', trim(preg_replace('/\s+/', ' ', validation_errors())));
+        } else {
+            // Handle file uploads
+            $this->load->library('upload');
+            $uploaded_files = array();
+            
+            // Configure upload
+            $config['upload_path'] = './assets/image/produk/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = 2048; // 2MB
+            $config['encrypt_name'] = TRUE;
+            
+            // Create directory if not exists
+            if (!is_dir($config['upload_path'])) {
+                mkdir($config['upload_path'], 0755, true);
+            }
+            
+            // Upload images (image_1 to image_5)
+            for ($i = 1; $i <= 5; $i++) {
+                if (!empty($_FILES['image_' . $i]['name'])) {
+                    $config['file_name'] = 'produk_' . time() . '_' . $i;
+                    $this->upload->initialize($config);
+                    
+                    if ($this->upload->do_upload('image_' . $i)) {
+                        $upload_data = $this->upload->data();
+                        $uploaded_files['image_' . $i] = $upload_data['file_name'];
+                        
+                        // Delete old image if exists
+                        $old_image = $product->{'image_' . $i};
+                        if ($old_image && file_exists('./assets/image/produk/' . $old_image)) {
+                            unlink('./assets/image/produk/' . $old_image);
+                        }
+                    }
+                }
+            }
+            
+            // Upload katalog
+            if (!empty($_FILES['katalog']['name'])) {
+                $config['allowed_types'] = 'pdf|doc|docx';
+                $config['file_name'] = 'katalog_' . time();
+                $this->upload->initialize($config);
+                
+                if ($this->upload->do_upload('katalog')) {
+                    $upload_data = $this->upload->data();
+                    $uploaded_files['katalog'] = $upload_data['file_name'];
+                    
+                    // Delete old katalog if exists
+                    if ($product->katalog && file_exists('./assets/image/produk/' . $product->katalog)) {
+                        unlink('./assets/image/produk/' . $product->katalog);
+                    }
+                }
+            }
+            
+            $data = array(
+                'tenant_id' => $this->input->post('tenant_id'),
+                'name' => $this->input->post('name'),
+                'description' => $this->input->post('description'),
+                'video' => $this->input->post('video')
+            );
+            
+            // Add uploaded files to data
+            foreach ($uploaded_files as $key => $filename) {
+                $data[$key] = $filename;
+            }
+            
+            $result = $this->user_model->update_product($id, $data);
+            
+            if ($result) {
+                $this->session->set_flashdata('success', 'Produk berhasil diupdate.');
+            } else {
+                $this->session->set_flashdata('error', 'Gagal mengupdate produk.');
+            }
+        }
+        
+        redirect('user/dashboard');
+    }
+    
+    /**
+     * Delete product
+     */
+    public function delete_product($id) {
+        // Check if user is logged in
+        if (!$this->session->userdata('logged_in')) {
+            $this->session->set_flashdata('error', 'Anda harus login terlebih dahulu.');
+            redirect(base_url());
+        }
+        
+        $product = $this->user_model->get_product_by_id($id);
+        
+        // Check if product exists and belongs to current user
+        if (!$product || $product->user_id != $this->session->userdata('user_id')) {
+            $this->session->set_flashdata('error', 'Produk tidak ditemukan.');
+            redirect('user/dashboard');
+        }
+        
+        // Delete associated files
+        for ($i = 1; $i <= 5; $i++) {
+            $image = $product->{'image_' . $i};
+            if ($image && file_exists('./assets/image/produk/' . $image)) {
+                unlink('./assets/image/produk/' . $image);
+            }
+        }
+        
+        if ($product->katalog && file_exists('./assets/image/produk/' . $product->katalog)) {
+            unlink('./assets/image/produk/' . $product->katalog);
+        }
+        
+        $result = $this->user_model->delete_product($id);
+        
+        if ($result) {
+            $this->session->set_flashdata('success', 'Produk berhasil dihapus.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menghapus produk.');
         }
         
         redirect('user/dashboard');

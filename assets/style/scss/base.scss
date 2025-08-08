@@ -122,6 +122,13 @@ span {
 	}
 }
 
+.btn {
+	border-radius: 7.5px;
+	&-light {
+		border: 1px solid $grey-light;
+	}
+}
+
 @keyframes float {
 	0% {
 		transform: translateY(0px);

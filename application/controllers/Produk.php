@@ -3,91 +3,60 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Produk extends MY_Controller
 {
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('product_model');
+    }
+    
     public function index()
     {
-        $data['products'] = [
-            [
-
-                'id' => 1,
-                'title' => 'Kabel Listrik',
-                'image' =>  base_url('assets/image/product/kabel.jpg'),
-                'locations' => 'Cilegon - Banten',
-                'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec finibus eget libero ut vehicula. Nulla eget magna eros. Nam sit amet convallis odio, non bibendum mi. Vestibulum bibendum dapibus ultricies'
-            ],
-            [
-                'id' => 2,
-                'title' => 'Lampu LED',
-                'image' => base_url('assets/image/product/lampu.jpg'),
-                'locations' => 'Cilegon - Banten',
-                'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec finibus eget libero ut vehicula. Nulla eget magna eros. Nam sit amet convallis odio, non bibendum mi. Vestibulum bibendum dapibus ultricies'
-            ],
-            [
-                'id' => 3,
-                'title' => 'Panel Surya',
-                'image' => base_url('assets/image/product/panel-surya.jpeg'),
-                'locations' => 'Cilegon - Banten',
-                'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec finibus eget libero ut vehicula. Nulla eget magna eros. Nam sit amet convallis odio, non bibendum mi. Vestibulum bibendum dapibus ultricies'
-            ],
-            [
-                'id' => 4,
-                'title' => 'Pemanas Air',
-                'image' => base_url('assets/image/product/pemanas-air.jpg'),
-                'locations' => 'Cilegon - Banten',
-                'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec finibus eget libero ut vehicula. Nulla eget magna eros. Nam sit amet convallis odio, non bibendum mi. Vestibulum bibendum dapibus ultricies'
-            ],
-            [
-                'id' => 5,
-                'title' => 'Kompor Listrik',
-                'image' => base_url('assets/image/product/kompor.jpg'),
-                'locations' => 'Cilegon - Banten',
-                'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec finibus eget libero ut vehicula. Nulla eget magna eros. Nam sit amet convallis odio, non bibendum mi. Vestibulum bibendum dapibus ultricies'
-            ],
-            [
-                'id' => 6,
-                'title' => 'Lampu LED',
-                'image' => base_url('assets/image/product/lampu.jpg'),
-                'locations' => 'Cilegon - Banten',
-                'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec finibus eget libero ut vehicula. Nulla eget magna eros. Nam sit amet convallis odio, non bibendum mi. Vestibulum bibendum dapibus ultricies'
-            ],
-        ];
+        // Get products from database
+        $products_data = $this->product_model->get_all_products();
+        
+        // Format products for display
+        $data['products'] = array();
+        foreach ($products_data as $product) {
+            $data['products'][] = $this->product_model->format_product_for_display($product);
+        }
+        
         $data['menu_segments'] = $this->uri->segment(1);
         $this->load->view('produk/index', $data);
     }
 
-    public function detail()
+    public function detail($id = null)
     {
-
-        $data['detail_photo'] = [
-            base_url('assets/image/product/kabel.jpg'),
-            base_url('assets/image/product/lampu.jpg'),
-            base_url('assets/image/product/panel-surya.jpeg'),
-            base_url('assets/image/product/pemanas-air.jpg'),
-            base_url('assets/image/product/kompor.jpg'),
-            base_url('assets/image/product/kabel.jpg'),
-            base_url('assets/image/product/lampu.jpg'),
-            base_url('assets/image/product/panel-surya.jpeg'),
-            base_url('assets/image/product/pemanas-air.jpg'),
-            base_url('assets/image/product/kompor.jpg'),
-        ];
+        // Get product ID from URL segment if not provided
+        if (!$id) {
+            $id = $this->uri->segment(3);
+        }
+        
+        if (!$id) {
+            show_404();
+            return;
+        }
+        
+        // Get product details from database
+        $product = $this->product_model->get_product_by_id($id);
+        
+        if (!$product) {
+            show_404();
+            return;
+        }
+        
+        // Format product data
+        $data['product'] = $this->product_model->format_product_for_display($product);
+        
+        // Get product images
+        $data['detail_photo'] = $this->product_model->get_product_images($product);
+        
+        // Get other products (excluding current one)
+        $other_products_data = $this->product_model->get_other_products($id, 4);
+        $data['other_products'] = array();
+        foreach ($other_products_data as $other_product) {
+            $data['other_products'][] = $this->product_model->format_product_for_display($other_product);
+        }
+        
         $data['menu_segments'] = $this->uri->segment(1);
-        $data['other_products'] = [
-            [
-
-                'id' => 1,
-                'title' => 'Kabel Listrik',
-                'image' =>  base_url('assets/image/product/kabel.jpg'),
-                'locations' => 'Cilegon - Banten',
-                'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec finibus eget libero ut vehicula. Nulla eget magna eros. Nam sit amet convallis odio, non bibendum mi. Vestibulum bibendum dapibus ultricies'
-
-            ],
-            [
-                'id' => 2,
-                'title' => 'Lampu LED',
-                'image' => base_url('assets/image/product/lampu.jpg'),
-                'locations' => 'Cilegon - Banten',
-                'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec finibus eget libero ut vehicula. Nulla eget magna eros. Nam sit amet convallis odio, non bibendum mi. Vestibulum bibendum dapibus ultricies'
-            ]
-        ];
         $this->load->view('produk/detail/index', $data);
     }
 }
