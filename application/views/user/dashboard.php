@@ -40,9 +40,12 @@
                                             <td><?= htmlspecialchars($participant->no_whatsapp) ?></td>
                                             <td><?= htmlspecialchars($participant->jabatan) ?></td>
                                             <td>
-                                                <span class="badge <?= $participant->is_present ? 'bg-success' : 'bg-secondary' ?>">
+                                                <a href="<?= base_url('user/toggle_participant_presence/' . $participant->id) ?>" 
+                                                   class="badge <?= $participant->is_present ? 'bg-success' : 'bg-secondary' ?> text-decoration-none"
+                                                   onclick="return confirm('Apakah Anda yakin ingin mengubah status kehadiran?')"
+                                                   title="Klik untuk mengubah status kehadiran">
                                                     <?= $participant->is_present ? 'Hadir' : 'Tidak Hadir' ?>
-                                                </span>
+                                                </a>
                                             </td>
                                             <td><?= date('d/m/Y H:i', strtotime($participant->created_at)) ?></td>
                                         </tr>
@@ -74,6 +77,7 @@
                                     <tr>
                                         <th>Nama Tenant</th>
                                         <th>Tanggal Dibuat</th>
+                                        <th width="100px">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -81,6 +85,14 @@
                                         <tr>
                                             <td><?= htmlspecialchars($tenant->nama_tenant) ?></td>
                                             <td><?= date('d/m/Y H:i', strtotime($tenant->created_at)) ?></td>
+                                            <td>
+                                                <a type="button" class="badge bg-primary text-decoration-none" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#tenantDetailModal"
+                                                        onclick="loadTenantDetail(<?= $tenant->id ?>)">
+                                                    <i class="fa fa-eye"></i> Detail
+                                                </a>
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -177,3 +189,4 @@
 <?php ci()->load->view('modal/add_tenant_form'); ?>
 <?php ci()->load->view('modal/add_participant_form'); ?>
 <?php ci()->load->view('modal/add_product_form'); ?>
+<?php ci()->load->view('modal/tenant_detail_modal'); ?>

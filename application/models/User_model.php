@@ -128,6 +128,36 @@ class User_model extends CI_Model {
     }
     
     /**
+     * Get participant by ID
+     * 
+     * @param int $id Participant ID
+     * @return object|bool Participant object if found, FALSE otherwise
+     */
+    public function get_participant_by_id($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get('user_participant');
+        
+        if ($query->num_rows() == 1) {
+            return $query->row();
+        }
+        
+        return FALSE;
+    }
+    
+    /**
+     * Update participant presence status
+     * 
+     * @param int $id Participant ID
+     * @param int $is_present Presence status (0 or 1)
+     * @return bool TRUE on success, FALSE on failure
+     */
+    public function update_participant_presence($id, $is_present) {
+        $this->db->where('id', $id);
+        $this->db->update('user_participant', array('is_present' => $is_present));
+        return ($this->db->affected_rows() > 0);
+    }
+    
+    /**
      * Get user tenants by user ID
      * 
      * @param int $user_id User ID
@@ -137,6 +167,57 @@ class User_model extends CI_Model {
         $this->db->where('user_id', $user_id);
         $this->db->order_by('created_at', 'DESC');
         $query = $this->db->get('tenant');
+        return $query->result();
+    }
+    
+    /**
+     * Get tenant by ID
+     * 
+     * @param int $id Tenant ID
+     * @return object|bool Tenant object if found, FALSE otherwise
+     */
+    public function get_tenant_by_id($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get('tenant');
+        
+        if ($query->num_rows() == 1) {
+            return $query->row();
+        }
+        
+        return FALSE;
+    }
+    
+    /**
+     * Get all tenants with user information for admin
+     * 
+     * @return array List of tenants with user details
+     */
+    public function get_all_tenants_with_user_info() {
+        $this->db->select('t.*, u.nama_lengkap as user_name, u.no_whatsapp as user_whatsapp, 
+                          prov.prov_name, city.city_name');
+        $this->db->from('tenant t');
+        $this->db->join('user u', 'u.id = t.user_id', 'left');
+        $this->db->join('provinces prov', 'prov.prov_id = u.prov_id', 'left');
+        $this->db->join('cities city', 'city.city_id = u.city_id', 'left');
+        $this->db->order_by('t.created_at', 'DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
+    /**
+     * Get all participants with user information for admin
+     * 
+     * @return array List of participants with user details
+     */
+    public function get_all_participants_with_user_info() {
+        $this->db->select('p.*, u.nama_lengkap as user_name, u.no_whatsapp as user_whatsapp, 
+                          prov.prov_name, city.city_name');
+        $this->db->from('user_participant p');
+        $this->db->join('user u', 'u.id = p.user_id', 'left');
+        $this->db->join('provinces prov', 'prov.prov_id = u.prov_id', 'left');
+        $this->db->join('cities city', 'city.city_id = u.city_id', 'left');
+        $this->db->order_by('p.created_at', 'DESC');
+        $query = $this->db->get();
         return $query->result();
     }
 

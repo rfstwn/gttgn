@@ -30,7 +30,7 @@
 					}
 					td:first-child {
 						font-weight: bold;
-						@include flex(row, flex-start, center);
+						width: 170px;
 						i {
 							width: 25px;
 						}

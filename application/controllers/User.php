@@ -213,13 +213,51 @@ class User extends CI_Controller {
         // Set validation rules
         $this->form_validation->set_error_delimiters('', '');
         $this->form_validation->set_rules('nama_tenant', 'Nama Tenant', 'required|trim');
+        $this->form_validation->set_rules('produk_utama', 'Produk Utama', 'trim');
+        $this->form_validation->set_rules('no_telp', 'No. Telepon', 'trim');
+        $this->form_validation->set_rules('email', 'Email', 'trim|valid_email');
+        $this->form_validation->set_rules('youtube', 'YouTube URL', 'trim|valid_url');
+        $this->form_validation->set_rules('address', 'Alamat', 'trim');
+        $this->form_validation->set_rules('description', 'Deskripsi', 'trim');
         
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('error', trim(preg_replace('/\s+/', ' ', validation_errors())));
         } else {
+            // Handle photo upload
+            $photo_filename = null;
+            if (!empty($_FILES['photo_profile']['name'])) {
+                $config['upload_path'] = './assets/image/tenant/';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config['max_size'] = 2048; // 2MB
+                $config['encrypt_name'] = TRUE;
+                
+                // Create directory if it doesn't exist
+                if (!is_dir($config['upload_path'])) {
+                    mkdir($config['upload_path'], 0755, true);
+                }
+                
+                $this->load->library('upload', $config);
+                
+                if ($this->upload->do_upload('photo_profile')) {
+                    $upload_data = $this->upload->data();
+                    $photo_filename = $upload_data['file_name'];
+                } else {
+                    $this->session->set_flashdata('error', 'Error uploading photo: ' . $this->upload->display_errors());
+                    redirect('user/dashboard');
+                    return;
+                }
+            }
+            
             $data = array(
                 'user_id' => $this->session->userdata('user_id'),
-                'nama_tenant' => $this->input->post('nama_tenant')
+                'nama_tenant' => $this->input->post('nama_tenant'),
+                'produk_utama' => $this->input->post('produk_utama'),
+                'no_telp' => $this->input->post('no_telp'),
+                'email' => $this->input->post('email'),
+                'youtube' => $this->input->post('youtube'),
+                'address' => $this->input->post('address'),
+                'photo_profile' => $photo_filename,
+                'description' => $this->input->post('description')
             );
             
             $result = $this->user_model->save_tenant($data);
@@ -494,5 +532,60 @@ class User extends CI_Controller {
         }
         
         redirect('user/dashboard');
+    }
+    
+    /**
+     * Toggle participant presence status
+     */
+    public function toggle_participant_presence($participant_id) {
+        // Check if user is logged in
+        if (!$this->session->userdata('logged_in')) {
+            $this->session->set_flashdata('error', 'Anda harus login terlebih dahulu.');
+            redirect(base_url());
+        }
+        
+        // Get participant data to verify ownership
+        $participant = $this->user_model->get_participant_by_id($participant_id);
+        
+        if (!$participant || $participant->user_id != $this->session->userdata('user_id')) {
+            $this->session->set_flashdata('error', 'Participant tidak ditemukan.');
+            redirect('user/dashboard');
+            return;
+        }
+        
+        // Toggle the is_present status
+        $new_status = $participant->is_present ? 0 : 1;
+        $result = $this->user_model->update_participant_presence($participant_id, $new_status);
+        
+        if ($result) {
+            $status_text = $new_status ? 'Hadir' : 'Tidak Hadir';
+            $this->session->set_flashdata('success', 'Status kehadiran berhasil diubah menjadi: ' . $status_text);
+        } else {
+            $this->session->set_flashdata('error', 'Gagal mengubah status kehadiran.');
+        }
+        
+        redirect('user/dashboard');
+    }
+    
+    public function get_tenant_detail($tenant_id) {
+        // Check if user is logged in
+        if (!$this->session->userdata('logged_in')) {
+            echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+            return;
+        }
+        
+        // Get tenant data
+        $tenant = $this->user_model->get_tenant_by_id($tenant_id);
+        
+        // Check if tenant exists and belongs to current user
+        if (!$tenant || $tenant->user_id != $this->session->userdata('user_id')) {
+            echo json_encode(['success' => false, 'message' => 'Tenant tidak ditemukan']);
+            return;
+        }
+        
+        echo json_encode([
+            'success' => true,
+            'tenant' => $tenant
+        ]);
     }
 }

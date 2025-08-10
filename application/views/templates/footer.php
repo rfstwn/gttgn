@@ -1,15 +1,14 @@
-        <!-- Footer -->
-        <footer class="container-fluid">
-            <div class="container">
-                <div class="footer-wrapper">
-                    <img src="<?= base_url('assets/image/bappeda-logo.png') ?>" alt="Logo-Bappeda">
-                    <h4>Bappeda Kota Cilegon</h4>
-                    <p>JL. Maulana Yusuf RT. 06 RW. 01, Citangkil, Cilegon, Banten, <br />Jl. Maulana Yusuf, Citangkil, Cilegon, Banten 42441</p>
-                    <span>Copyright &copy; Perencanaan Pembangunan Penelitian dan Pengembangan Kota Cilegon Kota Cilegon - All Right Reserved.</span>
-                </div>
+    <!-- Footer -->
+    <footer class="container-fluid">
+        <div class="container">
+            <div class="footer-wrapper">
+                <img src="<?= base_url('assets/image/bappeda-logo.png') ?>" alt="Logo-Bappeda">
+                <h4>Bappeda Kota Cilegon</h4>
+                <p>JL. Maulana Yusuf RT. 06 RW. 01, Citangkil, Cilegon, Banten, <br />Jl. Maulana Yusuf, Citangkil, Cilegon, Banten 42441</p>
+                <span>Copyright &copy; Perencanaan Pembangunan Penelitian dan Pengembangan Kota Cilegon Kota Cilegon - All Right Reserved.</span>
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
     
     <?php ci()->load->view('/modal/registration_form'); ?>
     <?php ci()->load->view('/modal/login_form'); ?>
@@ -18,13 +17,11 @@
     <!-- Script of Library JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 
     <script>
         <?php if($this->session->flashdata('success')): ?>
@@ -37,17 +34,6 @@
 
         $(document).ready(function() {
             AOS.init();
-
-            // Popup Video
-            // ! ===> Use at homepage on Welcome section
-            // =========================================
-            $('.popup-youtube').magnificPopup({
-                type: 'iframe',
-                mainClass: 'mfp-fade',
-                removalDelay: 160,
-                preloader: false,
-                fixedContentPos: false
-            });
 
             // Carousel Item
             // ! ===> Use at homepage on Produk Sections
@@ -129,17 +115,8 @@
                 loop: true,
                 autoplay: {
                     delay: 3000
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev'
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true
                 }
             });
-
 
 
             // Navbar classs sticky manager
@@ -167,6 +144,7 @@
 
             observer.observe(body);
         });
+
         // Registration panel functionality
         $(document).ready(function() {
             // Open registration panel when clicking on registration menu item
@@ -201,38 +179,6 @@
                     $('body').removeClass('registration-open');
                 }
             });
-            
-            // Page transition and loading animation
-            $('#main-page').addClass('page-loaded');
-            
-            // Handle page transitions with loading animation
-            $('a').not('[target="_blank"]').not('[data-bs-toggle]').not('[href^="#"]').not('[href^="javascript"]').not('.no-transition').click(function (e) {
-                const link = $(this).attr('href');
-                if (link && link !== '#' && !link.startsWith('javascript') && !link.includes('modal')) {
-                    e.preventDefault();
-                    
-                    // Show loading overlay
-                    $('#loadingOverlay').css('display', 'flex');
-                    
-                    // Start page leave animation
-                    $('#main-page').removeClass('page-loaded').addClass('page-leave');
-                    
-                    // Navigate after animation
-                    setTimeout(() => {
-                        window.location.href = link;
-                    }, 300);
-                }
-            });
-            
-            // Hide loading overlay when page loads
-            $(window).on('load', function() {
-                $('#loadingOverlay').fadeOut(300);
-            });
-            
-            // Also hide loading on document ready (fallback)
-            setTimeout(() => {
-                $('#loadingOverlay').fadeOut(300);
-            }, 500);
         });
     </script>
 

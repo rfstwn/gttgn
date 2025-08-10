@@ -40,10 +40,9 @@ class Product_model extends CI_Model {
      * @return object|bool Product object if found, FALSE otherwise
      */
     public function get_product_by_id($id) {
-        $this->db->select('p.*, t.nama_tenant, u.nama_lengkap as user_name, u.no_whatsapp, 
+        $this->db->select('p.*, u.nama_lengkap as user_name, u.no_whatsapp, 
                           prov.prov_name, city.city_name');
         $this->db->from('produk p');
-        $this->db->join('tenant t', 't.id = p.tenant_id', 'left');
         $this->db->join('user u', 'u.id = p.user_id', 'left');
         $this->db->join('provinces prov', 'prov.prov_id = u.prov_id', 'left');
         $this->db->join('cities city', 'city.city_id = u.city_id', 'left');
@@ -157,7 +156,6 @@ class Product_model extends CI_Model {
             'locations' => $location,
             'desc' => $product->description,
             'description' => $product->description,
-            'tenant' => $product->nama_tenant,
             'user_name' => $product->user_name,
             'user_phone' => $product->no_whatsapp,
             'video' => $product->video,

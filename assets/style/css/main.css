@@ -1031,11 +1031,7 @@ footer .footer-wrapper span {
 }
 .product-detail .profile-wrapper--info table tr td:first-child {
   font-weight: bold;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: nowrap;
+  width: 170px;
 }
 .product-detail .profile-wrapper--info table tr td:first-child i {
   width: 25px;

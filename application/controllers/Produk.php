@@ -6,6 +6,7 @@ class Produk extends MY_Controller
     public function __construct() {
         parent::__construct();
         $this->load->model('product_model');
+        $this->load->model('user_model');
     }
     
     public function index()
@@ -89,8 +90,10 @@ class Produk extends MY_Controller
         // Get product images
         $data['detail_photo'] = $this->product_model->get_product_images($product);
         
+        $data['tenant'] = $this->user_model->get_tenant_by_id($product->tenant_id);
+
         // Get other products (excluding current one)
-        $other_products_data = $this->product_model->get_other_products($id, 4);
+        $other_products_data = $this->product_model->get_other_products($id, 3);
         $data['other_products'] = array();
         foreach ($other_products_data as $other_product) {
             $data['other_products'][] = $this->product_model->format_product_for_display($other_product);

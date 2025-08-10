@@ -5,34 +5,66 @@ ci()->load->view('templates/nav');
 
 <div class="container page-wrapper product-detail">
     <div class="row justify-space-between">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-9">
             <div class="profile-wrapper">
                 <div class="profile-wrapper--image">
-                    <img src="<?= base_url('assets/image/profile-pic.jpg') ?>" alt="profile-pic" />
+                    <?php if($tenant->photo_profile): ?>
+                        <img src="<?= base_url('assets/image/tenant/' . $tenant->photo_profile) ?>" alt="profile-pic" />
+                    <?php else: ?>
+                        <img src="<?= base_url('assets/image/profile-pic.jpg') ?>" alt="profile-pic" />
+                    <?php endif; ?>
                 </div>
                 <div class="profile-wrapper--info">
-                    <table spacing="0">
-                        <tr>
-                            <td><i class="fa-solid fa-user"></i> Inovator</td>
-                            <td>: <?= htmlspecialchars($product['user_name']) ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-building"></i> Tenant</td>
-                            <td>: <?= htmlspecialchars($product['tenant']) ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-location-dot"></i> Lokasi</td>
-                            <td>: <?= htmlspecialchars($product['locations']) ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-phone"></i> No. Telp / Whatsapp</td>
-                            <td>: <?= htmlspecialchars($product['user_phone']) ?></td>
-                        </tr>
-                    </table>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <table spacing="0">
+                                <tr>
+                                    <td><i class="fa-solid fa-user"></i> Inovator</td>
+                                    <td>: <?= $tenant->nama_tenant ? htmlspecialchars($tenant->nama_tenant) : '-' ?></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa-solid fa-location-dot"></i> Lokasi</td>
+                                    <td>: <?= $tenant->address ? htmlspecialchars($tenant->address) : '-' ?></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa-solid fa-phone"></i> No. Telp / Whatsapp</td>
+                                    <td>: <?= $tenant->no_telp ? htmlspecialchars($tenant->no_telp) : '-' ?></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa-solid fa-envelope"></i> Email</td>
+                                    <td>: <?= $tenant->email ? htmlspecialchars($tenant->email) : '-' ?></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa-solid fa-box"></i> Produk Utama</td>
+                                    <td>: <?= $tenant->produk_utama ? htmlspecialchars($tenant->produk_utama) : '-' ?></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-12 col-md-6">
+                        <table spacing="0">
+                               
+                                <?php if($tenant->youtube): ?>
+                                    <tr>
+                                        <td colspan="2">
+                                            <a href="<?= $tenant->youtube ?>" target="_blank" class="text-decoration-none text-danger">
+                                                <i class="fa-brands fa-youtube"></i> Lihat Channel YouTube
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                                </table>   
+                                <?php if($tenant->description): ?>
+                                    <p class="d-block text-muted">
+                                        <small><?= htmlspecialchars($tenant->description) ?></small>
+                                    </p>
+                                <?php endif; ?>                     
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6">
+        <!--
+        <div class="col-12 col-md-3">
             <div class="visitor-wrapper">
                 <div class="visitor-wrapper--content">
                     <span>Pengunjung</span>
@@ -40,6 +72,7 @@ ci()->load->view('templates/nav');
                 </div>
             </div>
         </div>
+        -->
     </div>
 
     <div class="row mt-5">
@@ -70,7 +103,7 @@ ci()->load->view('templates/nav');
                     <?php endif; ?>
 
                     <?php if($product['video']): ?>
-                        <a class="popup-youtube button" href="<?= htmlspecialchars($product['video']) ?>">
+                        <a class="button" data-fancybox href="<?= htmlspecialchars($product['video']) ?>">
                             <i class="fa fa-video"></i> Lihat Video
                         </a>
                     <?php endif; ?>
@@ -97,7 +130,7 @@ ci()->load->view('templates/nav');
             <h2 class="title text-green page-sub-title">Produk Inovasi Lainnya</h2>
             <div class="row">
                 <?php foreach ($other_products as $p) : ?>
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-4">
                         <div class="card-product">
                             <div class="card-product--image">
                                 <img src="<?= $p['image'] ?>" alt="<?= $p['title'] ?>" />
@@ -142,14 +175,8 @@ ci()->load->view('templates/nav');
         // Initialize Swiper
         var swiper = new Swiper(".image-detail-wrapper--thumb", {
             loop: false,
-            slidesPerView: 4,
+            slidesPerView: 5,
             spaceBetween: 10
         });
-
-        // Initialize Fancybox
-        $("[data-fancybox]").fancybox();
-
-        // Initialize Zoom
-        $('#mainImage').zoom();
     });
 </script>

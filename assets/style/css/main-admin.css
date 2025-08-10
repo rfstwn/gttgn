@@ -341,7 +341,7 @@ span {
   align-items: center;
 }
 .sidebar__menu li a i {
-  width: 20px;
+  width: 30px;
   text-align: left;
 }
 .sidebar__menu li:hover, .sidebar__menu li.active {
@@ -442,7 +442,8 @@ span {
   line-height: 1;
 }
 .shortcut-dashboard .card .card-body span small {
-  font-size: 16px;
+  font-size: 14px;
+  color: #b4b4b4;
   font-family: "Maison Neue Reguler";
 }
 

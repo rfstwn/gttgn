@@ -8,7 +8,7 @@
                 <p>Gelar Teknologi Terpadu Nusantara (GTTGN) adalah sebuah acara atau pameran yang bertujuan untuk mempromosikan dan memperkenalkan perkembangan teknologi terkini, inovasi, serta produk-produk berbasis teknologi dari berbagai sektor. Acara ini biasanya diadakan di berbagai kota di Indonesia, sebagai upaya untuk mendorong pertumbuhan ekonomi, industri, dan daya saing nasional melalui pemanfaatan teknologi.</p>
                 <p>Kota Cilegon, yang terletak di Provinsi Banten, dikenal sebagai salah satu pusat industri berat di Indonesia, khususnya di sektor manufaktur, baja, dan energi. Dengan adanya Gelar Teknologi Terpadu Nasional di Cilegon, diharapkan dapat memperkuat peran kota tersebut sebagai hub industri dan teknologi, serta menarik minat investor dan pelaku industri untuk mengembangkan inovasi dan bisnis di wilayah tersebut.</p>
                 <div class="video-container" data-aos="zoom-in">
-                    <a class="popup-youtube" href="https://www.youtube.com/embed/pb7zOhkA9jg?si=nT6GWvW6zNkTt8ME">
+                    <a data-fancybox href="https://www.youtube.com/embed/pb7zOhkA9jg?si=nT6GWvW6zNkTt8ME" >
                         <i class="fa-solid fa-play"></i>
                         <img src="<?= base_url("assets/image/thumb-video.png") ?>" alt="video preview">
                     </a>

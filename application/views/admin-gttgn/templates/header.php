@@ -19,13 +19,16 @@
         <ul class="sidebar__menu">
             <li <?php if ($this->uri->segment(2) == 'dashboard') echo 'class="active"'; ?>><a href="<?php echo base_url('admin-gttgn/dashboard'); ?>"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a></li>
             <li <?php if ($this->uri->segment(2) == 'administrator') echo 'class="active"'; ?>><a href="<?php echo base_url('admin-gttgn/administrator'); ?>"><i class="fas fa-users-cog mr-2"></i>User Administrator</a></li>
-            <li <?php if ($this->uri->segment(2) == 'pic') echo 'class="active"'; ?>><a href="<?php echo base_url('admin-gttgn/pic'); ?>"><i class="fas fa-users mr-2"></i>User PIC</a></li>
-            <li <?php if ($this->uri->segment(2) == 'hotel') echo 'class="active"'; ?>><a href="<?php echo base_url('admin-gttgn/hotel'); ?>"><i class="fas fa-hotel mr-2"></i>Hotel</a></li>
+            <li <?php if ($this->uri->segment(2) == 'pic') echo 'class="active"'; ?>><a href="<?= base_url('admin-gttgn/pic') ?>"><i class="fas fa-users mr-2"></i>User PIC</a></li>
+            <li <?php if ($this->uri->segment(2) == 'tenant') echo 'class="active"'; ?>><a href="<?= base_url('admin-gttgn/tenant') ?>"><i class="fa-solid fa-city mr-2"></i>Data Tenant</a></li>
+            <li <?php if ($this->uri->segment(2) == 'participant') echo 'class="active"'; ?>><a href="<?= base_url('admin-gttgn/participant') ?>"><i class="fas fa-user-friends mr-2"></i>Data Participant</a></li>
+            <li <?php if ($this->uri->segment(2) == 'hotel') echo 'class="active"'; ?>><a href="<?= base_url('admin-gttgn/hotel') ?>"><i class="fas fa-hotel mr-2"></i>Hotel</a></li>
             <li <?php if ($this->uri->segment(2) == 'informasi') echo 'class="active"'; ?>><a href="<?php echo base_url('admin-gttgn/informasi'); ?>"><i class="fas fa-train mr-2"></i>Informasi</a></li>
             <li <?php if ($this->uri->segment(2) == 'rundown') echo 'class="active"'; ?>><a href="<?php echo base_url('admin-gttgn/rundown'); ?>"><i class="fas fa-calendar-alt mr-2"></i>Rundown</a></li>
             <li <?php if ($this->uri->segment(2) == 'faq') echo 'class="active"'; ?>><a href="<?php echo base_url('admin-gttgn/faq'); ?>"><i class="fas fa-question-circle mr-2"></i>FAQ</a></li>
             <li <?php if ($this->uri->segment(2) == 'kontak' && $this->uri->segment(3) == '') echo 'class="active"'; ?>><a href="<?php echo base_url('admin-gttgn/kontak'); ?>"><i class="fas fa-info-circle mr-2"></i>Kontak</a></li>
             <li <?php if ($this->uri->segment(2) == 'kontak' && strpos($this->uri->segment(3), 'submission') !== false) echo 'class="active"'; ?>><a href="<?php echo base_url('admin-gttgn/kontak/submission'); ?>"><i class="fas fa-envelope mr-2"></i>Pesan Kontak</a></li>
+            <li <?php if ($this->uri->segment(2) == 'whatsapp') echo 'class="active"'; ?>><a href="<?php echo base_url('admin-gttgn/whatsapp'); ?>"><i class="fa-brands fa-whatsapp mr-2"></i>WhatsApp Blast</a></li>
         </ul>
         <a class="sidebar__logout" href="<?php echo base_url('admin-gttgn/auth/logout'); ?>"><i class="fas fa-sign-out-alt mr-2"></i> Logout</a>
     </div>
