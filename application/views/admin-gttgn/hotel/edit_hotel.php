@@ -7,7 +7,7 @@
                 </div>
             <?php endif; ?>
             
-            <form action="<?= base_url('admin-gttgn/hotel/update/' . $hotel->id) ?>" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url('admin-gttgn/hotel/edit_process/' . $hotel->id) ?>" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">

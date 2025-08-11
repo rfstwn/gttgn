@@ -37,7 +37,7 @@ class Hotel extends MY_Controller {
     /**
      * Save new hotel
      */
-    public function save() {
+    public function add_process() {
         // Set validation rules
         $this->form_validation->set_rules('name', 'Nama Hotel', 'required|trim');
         $this->form_validation->set_rules('address', 'Alamat', 'required|trim');
@@ -111,7 +111,7 @@ class Hotel extends MY_Controller {
     /**
      * Update hotel
      */
-    public function update($id) {
+    public function edit_process($id) {
         // Set validation rules
         $this->form_validation->set_rules('name', 'Nama Hotel', 'required|trim');
         $this->form_validation->set_rules('address', 'Alamat', 'required|trim');
