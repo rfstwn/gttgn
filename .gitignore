@@ -31,3 +31,8 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/tests/
 /tests/results/
 sql/*
+
+assets/image/hotel/
+assets/image/transportation/*
+assets/image/produk/*
+assets/image/tenant/*
