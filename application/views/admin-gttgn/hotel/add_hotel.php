@@ -7,7 +7,7 @@
                 </div>
             <?php endif; ?>
             
-            <form method="post" action="<?= base_url('admin-gttgn/hotel/add_process') ?>">
+            <form method="post" action="<?= base_url('admin-gttgn/hotel/add_process') ?>" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
